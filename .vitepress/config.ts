@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "smithaulait",
-  description: 'nyan~',
+  description: 'The Team',
   lastUpdated: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -26,10 +26,6 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/smithaulait' }
-    ],
-
-    footer: {
-      message: 'From 🇻🇳 with 💝'
-    }
+    ]
   }
 })
