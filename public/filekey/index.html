@@ -1,0 +1,5908 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5">
+
+<link id=favicon rel="icon" href="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAA5pJREFUSImtlFtoXFUUhr+155yTjtKQMDOhKdrW2Kp47YNifVEaC1WQPojWvIooLd6qYmZGKW2aykxCC4L1kj764KUWahV8qab6UnxIKZUKVihYoRZ6ZibemmTOzOzlw5lJJpPMpcUf9mGxz7/+f6919lmiqtRDRnDis8F2FR5DpZ92UHs8P971viraiib1Rj1vzt3iRMxx4J62BotlTlbKlWenD6y42NYoNkK3zAangfUg36racccp/1S0NwbLJUakfIdYewqoABFQX9Vsy4+5Py7Hd2qBmQteV1gvcCQ35g6FrehqWkMsZf+uhl8JclFhl4h+l0gVh/xs19eNfFMLVHkmPGp5V7t+hwmVv6rRTX7WfU2QHYCnyBeJ4fIjTY2AAeB3/50bLrc1AQrj0UvAJeC+VenigJ91J0CeAzw19svYW8GdzYw84J9OTACqVR8CvLLKJ4m3Z/pzWfdjEfYDPUb5dMMrC703TZU6QH7aOwhyAnhQK865eLL4oSoz4cXg3kI0GK1xnRY6S9A3XNqoxm4BKGNO6IR7VkbcJ2KzwSjwMiI7QqaET+FVYPiajGLJYLcY9oIYgAhaiaeCvZr19oOX7Bth1M4VNynSCyCWgwg31/Ln/6N4KlDg51zWu3tJJanywxb7PXBZRXZjERHdB/SLNZv9ceeHxpx4KjgH3JXLetJxRRXVbSIIwkv5jHsMIJYO/hTlqEplCJYaNaKjy2BE1wCo8uv8pvILgIjEOtG4psuAMd09aXoBIsZ0Y23nqe0IiXTpBYWtAGLtKUeDgqNBoTrnUNiaSJWeb6fTsqJ4uvQAqh8BRZCThAO0HhHQhxSdSCRLZ/wxd+q6jEAHAUHljdyY+8Gyh0kVXwQ5pEYfBZoatWydQBRAjfpNjyJypZ57XUb/J1oahXMLRCXejCNWElX21VZa9d8oAFYuElGZVFELeiCeKj0FNN5ng+imcN9MNrzrAooLxAVcANYkkjOraxv+mDslIjvDQ+gg6JaGNQgEIrLTz7ina3l9w1dXAeuqmouNVPk8LMN5V6Q6fgE/4x7OR72Yxa51RG+tXxa7Nh/1Yn7GPTzfBUGscd8DHFU+W+hOdagmkqxUCaaA20AmLbKnyzjnZ5UyHSAqOEVbvt2g+0A3A+dN1Lv/yh7+XWQE0JueW2fUHBPY2Il4C5ypiH1yOrPityUVzW9sJxIfCJ5WeBxkdaNCa+gfKnxTuOAd1SOLp8h/6kV3evzpxxIAAAAASUVORK5CYII=" >
+
+<title>FileKey</title>
+<meta content="Encrypt and share files securely with passkeys. Fully offline, easy-to-use, and zero-knowledge for ultimate file protection." name="description">
+<meta content="FileKey" property="og:title">
+
+<meta content="Encrypt and share files securely with passkeys. Fully offline, easy-to-use, and zero-knowledge for ultimate file protection." property="og:description">
+<meta content="/imgs/main_card.png" property="og:image">
+<meta content="website" property="og:type">
+
+<meta content="FileKey" property="twitter:title">
+<meta content="Encrypt and share files securely with passkeys. Fully offline, easy-to-use, and zero-knowledge for ultimate file protection." property="twitter:description">
+<meta content="/imgs/main_card.png" property="twitter:image">
+
+<meta content="summary_large_image" name="twitter:card">
+
+
+<style>
+
+html{background-color:#fff;color:#000;height:100vh;box-sizing: border-box;font-family:'inter_variable', system-ui;}
+body{margin:0;}
+*, *:before, *:after {box-sizing: inherit;}
+
+#drag_window{width:100%;height:100vh;position:fixed;top:0;left:0;display:none;z-index: 110000001;}
+#file_drag_zone{position:fixed;background-color:#c0f0ff33;width:80%;height:88vh;margin:8vh 10% 4vh;display:none;}
+
+
+#main_window{display:flex;margin:0;flex-direction:row;}
+
+
+#main_container{width:100%;display:flex;background-color:#fff;height:100vh;flex-grow:1;padding:15vh 25% 0;flex-direction: column;}
+#main_inner{display:flex;flex-direction: column;flex-direction: column;flex-grow:1;padding-bottom:22vh;}
+
+
+.std_msg{border-radius:10px;margin:0;color:#000;width:100%;}
+.std_status{margin:0;color:#00000080;}
+.std_uploaded, .std_download{border:1px solid #0000001a;padding:16px;border-radius:10px;margin:10px 0;color:#000;display: flex;flex-direction: row;overflow:hidden;}
+
+
+.std_outer, .std_dl_outer, .std_upload_outer, .std_status_outer{display:flex;width:50%;margin-left: 50px;}
+.std_upload_outer{justify-content:flex-end;align-self:flex-end}
+.std_uploaded{background-color: #f4f4f4;border:none;max-width:100%;}
+
+.std_outer{margin-top:22px;margin-bottom:22px;line-height:145%}
+.std_inner_flex{display:flex;align-items: center;max-width:100%;}
+.std_msg_inner, .std_status_inner{position:relative;display:flex;width:100%}
+
+.std_status_outer{margin-top:20px;}
+
+#pub_key_textarea{width:100%;resize:none;outline:none;border: 1px solid #0000001a;border-radius: 10px;margin:10px 0;padding:16px;overflow:hidden;line-height:1;font-size:16px;color:#0d0d0d;font-family: 'inter_variable';}
+#pub_key_textarea:focus{outline:none;}
+#confirm_pub_key, #edit_pub_key, .copy_button{cursor:pointer;color: #1377F9;font-weight: 500;display:flex;align-items:center;line-height:1;}
+#confirm_pub_key, #edit_pub_key{justify-content:flex-end;margin-bottom:15px;}
+#edit_pub_key{display:none;}
+
+.pub_key_textarea_cont{width:50%;}
+
+.flex_item{}
+
+.set_right{align-self: flex-end;}
+
+#chiz_container, #logo_container{height:10vh;display:flex;align-items:center;justify-content:center;position:fixed;width:25%;flex-direction: column;}
+#logo_container{}
+#chiz_container{right:0;}
+
+
+#chiz_hidden_click_container{display:none;position:fixed;top:0;height:100vh;z-index:1000;}
+#chiz_hidden_click_container{width:100vw;right:0;}
+
+#logo_bar{display:flex;cursor:pointer;}
+#logo_txt{color:#000;font-size:26px;font-family:sans-serif;margin-left:8px;}
+
+#outer_drop_container{position:fixed;bottom:0;left:0;width:100%;background-color:#fff;display:flex;justify-content:center;}
+#drop_container{
+	background-color:#1377f91a;
+	display: none;
+	flex-direction: row;
+	position:relative;
+	width:50%;
+	padding:16px;
+	border-radius:10px;
+	margin:1vh 0 5vh;
+	color:#000;
+}
+
+.dc_txt_container{display: flex;flex-direction: column;justify-content: center;}
+
+
+#file_input{display:none;}
+
+.icon_container{display: flex;align-items: center;width: 50px;height:50px;background-color:#fff;padding:10px;border-radius:10px;font-size:12px;margin-right:10px;justify-content: center;}
+.some_background{background-color:#f2f0ed;}
+.dc_icon_container{display: flex;align-items: center;width: 50px;height:50px;padding:10px;font-size:12px;margin-right:10px;}
+
+
+.icon_container, .action_icon_container{flex-shrink:0}
+
+.action_icon_container{margin-left:15px;cursor:pointer;}
+.special_action{transform: rotate(270deg);display:none;}
+
+
+
+.std_file_container{flex-direction: column;display: flex;justify-content: center;white-space: normal;padding:0 8px;overflow:hidden;}
+.file_title{display:block;font-weight:600;word-wrap:break-word;line-height:1;}
+.file_sub_title{display:block;}
+.file_status{display:block;opacity:0.5;margin:4px 0 8px 0;}
+
+.download_icon_container{line-height:1;}
+
+.dl_action{display:inline-flex;align-items:center;color:#1377F9;cursor:pointer;font-weight:500}
+.slight_vert_padding{padding:1px 0;}
+
+
+.bolded_text{font-weight:700;}
+
+
+.std_dp, .failed_dp, .warning_dp{position:absolute;left:-48px;top:-5px;border-radius:20px;padding:7px 8.5px; border-radius:70px;line-height:0;}
+.std_dp{border:1px #1377F921 solid;}
+.failed_dp{border:1px #F9131321 solid;}
+.warning_dp{border:1px #e99a3221 solid;}
+
+.filekey_icon, .failed_filekey_icon, .warning_filekey_icon{height:16px;width:13px;}
+.filekey_icon{fill:#1377F9}
+.failed_filekey_icon{fill:#F91313;}
+.warning_filekey_icon{fill:#e99a32;}
+
+.filekey_logo_icon{fill:#1377F9;width:22px;height:27px}
+.file_icon{fill:#1377F9;width:25px;height:30px}
+.plus_icon{width:34px;height:33px;fill:#1377F9;}
+.dl_icon{width:19px;height:19px;fill:#1377F9;margin-right:4px;}
+.confirm_icon, .edit_icon, .copy_icon{width:18px;height:19px;fill:#1377F9;margin-right:4px;}
+.confirm_icon{padding:2px;}
+.copy_icon{padding:1px;}
+.edit_icon{padding:0;}
+.save_icon{width:18px;height:19px;fill:#1377F9;margin-right:4px;padding:2px;}
+
+
+
+
+
+
+#chiz_icon_container{cursor:pointer;opacity:0.6;line-height:0;z-index:10001}
+#chiz_icon_container:hover{cursor:pointer;opacity:1;}
+#chiz_open_icon, #chiz_close_icon{width:38px;height:38px;color:#000;}
+#chiz_close_icon{display:none;padding:10px}
+
+#chiz_menu_container{position:relative;display:none;z-index:1010;}
+
+#chiz_menu_inner{border-radius:10px;border:#0000001A 1px solid;background-color:#f4f4f4;padding:16px 16px 6px 12px;position:absolute;right:-12px;white-space: nowrap;}
+#chiz_list{display: flex;flex-direction: column;}
+.chiz_item{color:#0000009a;font-size:16px;font-weight:500;line-height:1.25;margin:6px 0;}
+.chiz_item:hover{color:#000000;}
+
+.msg_clickable, .msg_link{color:#1377F9;cursor:pointer;font-weight: 450;border-bottom:solid 1.5px #1377F9;padding-bottom: 0px;}
+.borderless{border:none;}
+
+.msg_menu_heading{margin:0;font-size:17px;font-weight:600}
+.msg_number_heading{margin:15px 0 0 0;font-size:16px;font-weight:600}
+
+.no_class_yet{font-size:15px;margin-bottom:10px}
+
+.msg_no_margin_cont{margin:0;}
+.msg_line_break{}
+.msg_bp_msg{margin-left:40px}
+.msg_bullet_point{position:absolute;left:15px;font-size:20px;}
+
+.msg_link{text-decoration:none;}
+.msg_spacer{height:20px;}
+
+
+#drop_container, .chiz_item{cursor:pointer;}
+
+#chiz_icon_container, #logo_container, .chiz_item{user-select: none;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;}
+.no_select{user-select: none;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;}
+
+
+.hidden_horzon_bars{width:100%;position:fixed;left:0;z-index:10001001}
+#top_hhb{top:0;height:calc((10vh - 27px) / 2);}
+#bottom_hhb{bottom:0;height:1vh;}
+
+
+.word_broken{word-break:break-all;}
+
+
+#copy_pub{cursor:pointer;color:#1377F9}
+
+
+#version_container{display: flex;justify-content: center;padding-top:8px;}
+#version_number_ele{font-size:12px;opacity:.25;cursor:pointer;}
+
+
+@media screen and (max-width:1080px){
+	#main_window{flex-direction:column;}
+	
+	
+	#main_container{padding:15vh 5vw;width:100%;}
+	#logo_container{width: auto;padding-left:5vw;}
+	
+	
+	
+
+	#drop_container{width:80%;margin-top:.5vh}
+	
+	.std_outer, .std_dl_outer, .std_status_outer, .std_upload_outer{width:calc(100% - 70px)}
+	
+	
+
+	
+	#logo_container{align-items:baseline;width:100vw;background-color:#fff;z-index:1100}
+	#chiz_container{z-index:1101}
+
+
+	
+
+
+	.pub_key_textarea_cont{width:85%}
+
+}
+
+
+	
+
+
+
+.topbar_ns_container{position:fixed;width:100%;left:0;z-index:2139002000}
+.std_notification_bar{position:relative;background-color:#ffdb01;display:flex;align-items: center;padding:20px 40px}
+.std_notification_msg{color:#000;font-size:20px;font-weight:500;flex-grow:1;line-height:20px;}
+.std_notfication_close{color:#000;right:10px;cursor:pointer;}
+.std_close_container{}
+.std_close_icon{right:10px;cursor:pointer;z-index:2100000004;fill:#fff;width:15px;height:15px;margin-left:10px;}
+
+.std_icon_container{margin-right:10px;font-size:0}
+.std_icon{fill:#fff;width:24px;height:24px;}
+
+
+@media(orientation: portrait) and (max-width: 800px) {
+	.std_notification_msg{font-size:16px;}
+	.std_notification_bar{flex-direction: row;align-items:center;padding:20px 15px}
+	.std_notfication_close{position:unset;margin:0 0 0 auto;padding:0 5px}
+}
+</style>
+</head>
+<body>
+
+<div id=drag_window>
+	<div id=file_drag_zone></div>
+</div>
+
+<div id=main_window>
+	
+
+	<div id=logo_container><div id=logo_bar></div></div>
+	<div id=chiz_container>
+		<div id=chiz_hidden_click_container></div>
+		<div id=chiz_icon_container></div>
+		<div id=chiz_menu_container>	
+			<div id=chiz_menu_inner>
+				<div id=chiz_list>
+					<span class=chiz_item id=chiz_get_public_key>Your Share Key</span>
+					<span class=chiz_item id=chiz_how_it_works>How it Works</span>
+					<span class=chiz_item id=chiz_contact_us>Contact us</span>
+					<span class=chiz_item id=chiz_source_code>Source Code</span>
+					<span class=chiz_item id=chiz_terms>Terms</span>
+					<span class=chiz_item id=chiz_privacy>Privacy</span>
+					<span class=chiz_item id=chiz_license>License</span>
+					
+					<span class=chiz_item id=chiz_clear_all>Clear All</span>
+					
+					
+				</div>
+				<div id=version_container>
+					<span id=version_number_ele></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div id=main_container>
+		<div id=main_inner>
+		</div>
+		<div id=outer_drop_container>
+			<div id=drop_container>
+				<input type="file" id="file_input">
+				<div class=dc_icon_container></div>
+				<div class=dc_txt_container>
+					<span class=file_title>Drag and Drop Files</span>
+					<span class=file_sub_title>or tap to select files to encrypt/decrypt</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<script>
+"use strict";
+
+let local_version_number = "v 1.03";
+
+let ww_h;
+let ww_script = null;
+let bh = new buffer_helper();
+
+let kh = new keccak_handler();
+let last_active_account = null;
+
+let current_active_file_array = [];
+
+
+
+let seed_bag = {};
+let active_prf = null;
+let active_send_pub = null;
+let active_share_prompt = null;
+
+let file_as_text = true;
+
+
+let dl_obj = {};
+
+
+let hb = new html_builder();
+
+let file_counter = 0;
+let misc_msg_counter = 0;
+
+let main_inner;
+let drop_border_obj;
+
+let db_h;
+
+let tb_h = new topbar_ns_handler({z_index:2139002000});
+
+let webauthn_h;
+
+let swc = null;
+
+
+let aes_auth_tag_byte_len = 16;
+
+
+window.addEventListener("DOMContentLoaded", domInit);
+
+function domInit(){
+	main_inner = document.getElementById("main_inner");
+	
+	
+	initWorkers();
+	initDB();
+	registerBasicSw();
+
+	webauthn_h = new webauthn_handler({name:"Filekey", id:"aulait.org"});
+	
+	initImportOptions();
+	initMessage();
+	initLogo();
+	initDropContainer();
+	initChizMenu();
+	
+
+	memTest();
+	
+	
+	
+	var font_h = new font_handler();
+	font_h.fontLoader(['inter_variable.ttf', ], {
+		font_display: "block"
+	});
+
+
+	initVersionChecks();
+
+}
+
+function initVersionChecks(){
+	setVersionNumber();
+	version_number_ele.addEventListener("click", checkSwVersion);
+
+}
+
+function initQueryChecks(){
+	 var temp_qs = get_query_strings(false);
+	 if(checkForProperty(temp_qs.pub))
+		confirmAndAttachPub(temp_qs.pub, function(ret){
+			
+		});
+	 
+}
+
+function confirmAndAttachPub(hex_pub, cb){
+
+	
+	if(hex_pub.length === 266){
+		 attachSendAddress(hex_pub, cb);
+	}
+	else
+		cb(null)
+}
+
+function attachSendAddress(hex_pub, cb){
+	active_send_pub = hex_pub;
+
+	var pub_buff = bh.hexToArrayBuffer(hex_pub, Uint8Array).buffer;
+	var msg_param = {msg_type: "set_shared_pub", pub_buff};
+	ww_h.sendMessageToWorker(msg_param, [pub_buff], function(ret){
+		if(ret){
+			htmlWriter({char_speed:4}, "<span>Share key set.</span>", main_inner);
+			scrollToBottom();
+			cb(ret);
+		}
+		else
+			cb(null);
+	});
+}
+
+function checkSwVersion(){
+	if(swc != null){
+		sendSwMessage({type: "check_change_variable"}, function(ret) {
+			if(ret != null && checkForProperty(ret.data) && checkForProperty(ret.data.change_variable))
+				changeVersionIfChanged(ret.data.change_variable);
+		});
+	}
+}
+
+function setVersionNumber(){
+	document.getElementById("version_number_ele").innerText = local_version_number;	
+}
+
+
+function sendSwMessage(data, cb) {
+    var msg_channel = new MessageChannel();
+	
+	if(swc == null){
+		console.log("no sw yet");
+		return;
+	}
+	
+    if (swc.state === 'activated') {
+        msg_channel.port1.onmessage = cb;
+        swc.postMessage(data, [msg_channel.port2]);
+    } else if (swc.state === 'redundant' && navigator.serviceWorker.controller.state != 'redundant') {
+        swc = navigator.serviceWorker.controller;
+        sendSwMessage(data, cb);
+    } else
+        console.log(swc.state);
+}
+
+
+function memTest(){
+	
+	if (performance.memory){
+		const memoryInfo = performance.memory;
+		console.log('JS Heap used: ' + memoryInfo.usedJSHeapSize);
+		console.log('JS Heap total: ' + memoryInfo.totalJSHeapSize);
+		console.log('JS Heap limit: ' + memoryInfo.jsHeapSizeLimit);
+	} 
+	else
+		console.log('Memory info is not available in this browser.');
+}
+
+function initLogo(){
+
+	var logo_bar = document.getElementById("logo_bar");
+	var new_html = hb.getSvg("filekey_logo_icon", {class_string: "filekey_logo_icon"});
+	new_html += "<span id=logo_txt>FileKey</span>";
+	logo_bar.innerHTML = new_html;
+	logo_bar.addEventListener("click", function(){
+		window.location.reload();
+	});
+}
+
+function initMessage(){
+
+	
+	var html_string = "<strong>Files need protection. FileKey secures them</strong><span>. Works with passkeys. Drop files in. They lock. Drop them again. They unlock. Your data stays on your device, and only you hold the key. Open source and powered by AES-256 encryption—the same standard trusted by the US government for top-secret information. For the latest updates, join our </span><a class='borderless msg_link' href='https://signal.group/#CjQKIDpdakX0nr1V00ciNv3dsWCFZgUwm_NylulFJz4VOUJ_EhBtY-bq759RNExzcCWMUGIB' target=_blank>Signal</a><span> group or </span><a class='borderless msg_link' href='https://filekey.substack.com/' target=_blank>Substack</a><span>.</span></span>";
+	 
+	
+
+	
+	
+		
+	htmlWriter({char_speed:8}, html_string, main_inner, {}, function(){
+		
+		
+		
+		var html_string = "<span>To start, </span><span class=msg_clickable id=int_msg_clickable_gen_passkey>generate</span><span> a new filekey or </span><span class=msg_clickable id=clickable_load_seckey>authenticate</span><span> your existing filekey.</span>";
+
+		
+
+		var events_obj = {
+			int_msg_clickable_gen_passkey: {target:genNewPasskey},
+			clickable_load_seckey: {target:loadSecKey},
+		};
+		htmlWriter({char_speed:8}, html_string, main_inner, events_obj, initQueryChecks);
+
+
+
+		
+		
+	});
+}
+
+function registerBasicSw(){
+	if ('serviceWorker' in navigator) {
+	  window.addEventListener('load', () => {
+		navigator.serviceWorker.register('sw.js').then((registration) => {
+			
+			
+			console.log('Service Worker registered with scope:', registration.scope);
+			
+			swc = navigator.serviceWorker.controller;
+			
+			
+			registration.onupdatefound = () => {
+				const newSW = registration.installing;
+				newSW.onstatechange = () => {
+					if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+						
+						
+						updateSwc();
+						sendNewUpdateAlert();						
+					}
+
+					if (newSW.state === 'activated' && navigator.serviceWorker.controller){
+						updateSwc();
+					}
+
+				};
+			};
+		}).catch((error) => {
+
+		  console.log('Service Worker registration failed:', error);
+		});
+	  });
+	}
+
+	function sendNewUpdateAlert(){
+		var html_string = "<span>A new version of FileKey is available. Please refresh the page to update.</span>";
+		htmlWriter(getWarningParams(), html_string, main_inner);
+		
+
+		
+		
+	}
+
+	function updateSwc(){
+		
+			swc = navigator.serviceWorker.controller;
+			checkSwVersion();
+		
+	}
+		
+}
+
+
+function initWorkers(){
+	ww_h = new blobWorkersHandler();
+
+	
+	ww_h.loadWorkerFromText(ww_js_script, storeAndWaitForWorker);
+
+}
+
+function initDB(){
+	db_h = new fk_db_handler(function(ret){
+		var qq =22;
+	});
+}
+
+
+function initChizMenu(){
+	var chiz_menu_status = false;
+	var chiz_icon_container = document.getElementById("chiz_icon_container");
+	var chiz_hidden_click_container = document.getElementById("chiz_hidden_click_container");
+	var chiz_menu_container = document.getElementById("chiz_menu_container");
+	var chiz_list = document.getElementById("chiz_list");
+
+	var new_svgs = hb.getSvg("chiz_icon", {id: "chiz_open_icon"});
+	new_svgs += hb.getSvg("x_icon", {id: "chiz_close_icon"});
+	chiz_icon_container.innerHTML = new_svgs;
+
+	chiz_icon_container.addEventListener("click", toggleChizMenu);
+	chiz_hidden_click_container.addEventListener("click", closeChizMenu);
+	document.getElementById("chiz_close_icon").addEventListener("click", closeChizMenu);
+
+	for(var i = 0; i < chiz_list.children.length; i++)
+		chiz_list.children[i].addEventListener("click", displayMenuMessage);
+
+	function toggleChizMenu(set_to){
+		chiz_menu_status = (checkForProperty(set_to)) ? set_to : !chiz_menu_status;
+		if(chiz_menu_status){
+			chiz_menu_container.style.display = "block";
+			chiz_icon_container.children[0].style.display = "none";
+			chiz_icon_container.children[1].style.display = "block";
+			chiz_hidden_click_container.style.display = "block";
+		}
+		else{
+			chiz_menu_container.style.display = "none";
+			chiz_icon_container.children[0].style.display = "block";
+			chiz_icon_container.children[1].style.display = "none";
+			chiz_hidden_click_container.style.display = "none";
+		}
+	}
+
+	function closeChizMenu(e = null){
+		toggleChizMenu(false);
+		if(e != null)
+			e.stopPropagation();
+	}
+
+		
+	function displayMenuMessage(e){
+
+		var display_speed = 10;
+		var html_string = "";
+		var events_obj = {};
+
+		closeChizMenu();
+
+
+		switch(e.currentTarget.id){
+
+			case "chiz_clear_all":
+				clearAll();
+				return;
+
+			case "chiz_how_it_works":
+
+				display_speed = 16;
+
+				html_string = `
+					<h2 class=msg_menu_heading>How FileKey Works</h2>
+					<h3 class=msg_number_heading>General Overview</h3>
+					<p>FileKey is a web app that lets you quickly encrypt, decrypt, and share files using passkeys—no accounts, no tracking, no backend servers. Just local, offline security powered by passkeys.</p>
+					<p>Here's how it works:</p>
+					<ol class=msg_no_margin_cont>
+						<li>Create your FileKey: generate a unique passkey that's stored securely in your password manager or on your security key (like a YubiKey).</li>
+						<li>Drop files to encrypt: simply drag and drop any file into the app. FileKey instantly encrypts it using military-grade encryption (AES-256).</li>
+						<li>Drop encrypted files to decrypt: when you need to access your encrypted files, just drop them back into FileKey. With your passkey, they'll be decrypted almost instantly.</li>
+						<li>Share encrypted files securely: need to share a sensitive file? Use the recipient's Share Key to create a version only they can decrypt.</li>
+					</ol>
+
+					<h4 class=no_class_yet>Key Benefits</h4>
+					<ul class=msg_no_margin_cont>
+						<li>Use passkeys to encrypt files securely and easily</li>
+						<li>Works with your existing password manager or hardware security key</li>
+						<li>Free and open source</li>
+						<li>Your files and encryption keys never leave your device</li>
+						<li>Share files securely</li>
+						<li>AES-256 encryption ("Military-grade")</li>
+						<li>Offline capable</li>
+						<li>Can be locally installed (progressive web app)</li>
+						<li>Fast, ultra-secure encryption and decryption</li>
+						<li>Private by design: No tracking, analytics, or data collection</li>
+					</ul>
+
+					<h3 class=msg_number_heading>Encryption Process</h3>
+					<p>FileKey first requires the generation of a passkey, that will be stored on either your password manager or security key device, using the app’s domain as the relying party. Once a passkey has been created, it can then pass a static message through WebAuthn which interacts with a PRF in order to generate a deterministic random value.</p>
+					<p>Using this deterministic random value, an HKDF with 256 bits of entropy is generated. The HKDF and a random salt is then used to derive a key to be used with AES-GCM. The derived key is then used to encrypt and decrypt the file. A new derived key is used for each additional file.</p>
+					<p>All low-level cryptographic functions performed within this process are using the web’s built-in SubtleCrypto interface of the Web Crypto API. All encrypted files use a unique randomly generated salt, composed of a 16 byte hash.</p>
+
+					<h3 class=msg_number_heading>Share Keys</h3>
+					<p>Every FileKey user has a unique "Share Key" – a long string of characters that works like a public address. You can find yours in the menu under "Your Share Key."</p>
+
+					<h4 class=no_class_yet>Sharing a File</h4>
+					
+
+					<ol class=msg_no_margin_cont>
+						<li>Click the "Share" button next to any file</li>
+						<li>Enter the recipient's Share Key (they'll need to share this with you first)</li>
+						<li>FileKey creates a special encrypted version that only the recipient can unlock</li>
+						<li>Save and send the file (ending in ".shared_filekey") to the recipient through any method you prefer – email, messaging, file transfer, etc.</li>
+					</ol>
+					<h4 class=no_class_yet>Receiving a Shared File</h4>
+
+					<p>When someone sends you a shared file:</p>
+					<ol class=msg_no_margin_cont>
+						<li>Save the file to your device</li>
+						<li>Drag and drop it into FileKey</li>
+						<li>Authenticate with your passkey</li>
+						<li>FileKey automatically detects it's a shared file and unlocks it using your unique keys</li>
+					</ol>
+
+					<h4 class=no_class_yet>Security Details</h4>
+
+
+					<ul class=msg_no_margin_cont>
+						<li>Your private keys never leave your device</li>
+						<li>Each shared file can only be opened by the specific recipient</li>
+						<li>The encryption happens entirely on your device – no servers involved</li>
+						<li>Files are secured with military-grade encryption (AES-256)</li>
+					</ul>
+					
+					<p>Share files with confidence, knowing only your intended recipient can access them!</p>
+
+
+					<h4 class=no_class_yet>Share Key Encryption Process</h4>
+
+					<ol class=msg_no_margin_cont>
+						<li>WebAuthn PRF: the process starts by getting a PRF (Pseudorandom Function) output from the user's WebAuthn passkey.</li>
+						<li>HKDF Generation: this PRF output is used to create an HKDF (HMAC-based Key Derivation Function), which serves as a seed.</li>
+						<li>Deterministic ECDH Key Pair: using this seed, the app deterministically generates an ECDH (Elliptic Curve Diffie-Hellman) key pair on the P-521 curve.</li>
+						<li>
+							<span>Key Formatting:</span>
+							<ul class=msg_no_margin_cont>
+								<li>The private key is encoded in PKCS#8 format</li>
+								<li>The public key is encoded in raw format</li>
+							</ul>
+						</li>
+						<li>Import to SubtleCrypto: both keys are imported into the browser's SubtleCrypto API for cryptographic operations.</li>
+						<li>
+							<span>Shared Secret Derivation: when sharing a file, the app derives an AES-GCM key using:</span>
+							<ul class=msg_no_margin_cont>
+								<li>Your private ECDH key</li>
+								<li>The recipient's public ECDH key</li>
+								<li>A randomly generated salt</li>
+							</ul>
+						</li>
+						<li>Encryption: the derived AES-GCM key is used to encrypt the file content.</li>
+					</ol>
+
+					<p>The resulting encrypted file includes:</p>
+
+
+					<ul class=msg_no_margin_cont>
+						<li>The sender's public key (so the recipient knows which key was used)</li>
+						<li>The random salt (needed for key derivation)</li>
+						<li>The encrypted file content</li>
+					</ul>
+
+					<p>The major advantage of this approach is that it doesn't require storing the ECDH key pair anywhere, making it more resistant to extraction from device storage. Users can regenerate the exact same key pair on any device just by authenticating with their passkey.</p>
+
+					<h4 class=no_class_yet>FileKey Requirements</h4>
+
+					<ul class=msg_no_margin_cont>
+						<li>A compatible password manager (iCloud, Google, etc) or a hardware security key that supports FIDO2 and PRF (like the YubiKey 5 and Bio Series)</li>
+						<li>For hardware security keys, your browser and operating system needs to support WebAuthn and the PRF extension.</li>
+					</ul>
+				`;
+
+
+				
+			break;
+
+			case "chiz_contact_us":
+				html_string = "<h2 class=msg_menu_heading>Contact Us</h2><span>You can email us at </span><a class=msg_link href=mailto:contact@filekey.app>contact@filekey.app</a><span>, or join our </span><a class=msg_link href=https://signal.group/#CjQKIDpdakX0nr1V00ciNv3dsWCFZgUwm_NylulFJz4VOUJ_EhBtY-bq759RNExzcCWMUGIB>Signal group</a><span> to chat.</span>";
+			break;
+
+
+			
+			case "chiz_source_code":
+				html_string = `
+					<h2 class=msg_menu_heading>Source code</h2>
+					<span><span>Inspect the source code directly, or download a </span><a class=msg_link href=/source.txt target=_blank>more readable version</a><span>.</span></span>
+				`;
+			break;
+
+
+			case "chiz_terms":
+
+				html_string = `
+					<h2 class=msg_menu_heading>Terms of Service</h2>
+					<ol>
+						<li>
+							<h3 class=msg_number_heading>Acceptance of Terms</h3>
+							<span>By using FileKey, you agree to these Terms of Service. If you do not agree, please do not use our site or services.</span>
+						</li>
+						<li>
+							<h3 class=msg_number_heading>Intended Use</h3>
+							<span>FileKey is designed to help you encrypt and decrypt files locally with your own hardware. You are responsible for using FileKey in compliance with all applicable laws and regulations.</span>
+						</li>
+						<li>
+							<h3 class=msg_number_heading>No Guarantees</h3>
+							<span>We provide FileKey "as is", without warranties of any kind. We do not guarantee that FileKey will be error-free, secure, or meet all your needs.</span>
+						</li>
+						<li>
+							<h3 class=msg_number_heading>Your Responsibility</h3>
+							<span>You must ensure that your hardware security key and devices remain secure. We are not responsible for lost keys, corrupted files, or unauthorized access resulting from your own actions.</span>
+						</li>
+						<li>
+							<h3 class=msg_number_heading>Liability Limitations</h3>
+							<span>To the fullest extent allowed by law, we will not be liable for any direct, indirect, incidental, or consequential damages arising from your use of-or inability to use-FileKey.</span>
+						</li>
+						<li>
+							<h3 class=msg_number_heading>No Third-Party Services</h3>
+							<span>FileKey does not rely on external services or third parties. You are solely responsible for managing your keys and files.</span>
+						</li>
+						<li>
+							<h3 class=msg_number_heading>Changes to Terms</h3>
+							<span>If we update these Terms of Service, we will post the changes here. Your continued use of FileKey after changes means you accept the updated terms.</span>
+						</li>
+						<li>
+							<h3 class=msg_number_heading>Contact Us</h3>
+							<span>If you have questions or concerns, please email us at contact@filekey.app.</span><br /><span>By using FileKey, you acknowledge and agree to these Terms of Service.</span>
+						</li>
+					</ol>
+				`;
+
+			break;
+
+
+			case "chiz_privacy":
+			
+				html_string = `
+					<h2 class=msg_menu_heading>Privacy Policy</h2>
+					<h3 class=msg_number_heading>No Data Collection:</h3>
+					<span>We do not collect, store, or process any personal information on the website—no names, emails, or accounts. We do not track you, and we do not use analytics.</span>
+
+					<h3 class=msg_number_heading>Local-Only File Handling:</h3>
+					<span>All file encryption and decryption happens entirely on your device. We never send your files or keys to our servers. You remain in full control of your data at all times.</span>
+
+					<h3 class=msg_number_heading>Local Storage:</h3>
+					<span>We may use local storage on your device to remember your settings or key references. This information never leaves your device.</span>
+
+					<h3 class=msg_number_heading>No Third Parties:</h3>
+					<span>We do not share any data with third parties. There are no hidden integrations or external services.</span>
+
+					<h3 class=msg_number_heading>Changes to This Policy:</h3>
+					<span>If we make changes, we will update this page. Your continued use of FileKey means you accept the updated terms.</span>
+
+					<h3 class=msg_number_heading>Contact Us:</h3>
+					<span>If you have questions or concerns, please email us at contact@filekey.app.</span><br /><span>By using FileKey, you agree to this policy.</span>
+				`;
+
+			break;
+
+			case "chiz_license":
+				display_speed = 16;
+
+
+				html_string = `
+					<h2 class=msg_menu_heading>License</h2>
+					<p>FileKey version 1 is released under the GNU General Public License v3.0 (GPLv3).</p>
+					<p>This means that you are free to use, modify, and distribute FileKey under the terms of the GPLv3 license. However, any modifications or derivative works must also be released under the same open-source license.</p>
+					<p><span>You can read the </span><a class=msg_link href=https://www.gnu.org/licenses/gpl-3.0.en.html target=_blank>full license text here.</a></p>
+					<p>By using FileKey, you agree to the terms of this license. If you contribute to the project, you also acknowledge that your contributions will be made available under GPLv3.</p>
+				`;
+
+				
+				
+			break;
+
+			case "chiz_get_public_key":
+				displayPublicKey(main_inner);
+			return;
+			
+			
+
+		}
+
+		(function writeMenuMessage(){
+			
+			
+			htmlWriter({char_speed:display_speed}, html_string, main_inner, events_obj);
+			scrollToBottom();
+		})();
+
+	}
+}
+
+
+
+
+function displayPublicKey(main_inner){
+	var html_string = "";
+	var temp_pub = "";
+	var rand_copy_id = null;
+	var rand_svg_id = null;
+	var rand_pub_id = null;
+	var rand_id = getRandomInclusive(1,100000000);
+
+	getDetEcdhPublicKey(function(ret){
+
+		var events_obj = {};
+		
+		if(ret == null)
+			html_string = `<span>Authentication required to generate share key.</span>`;
+		else{
+			temp_pub = bh.bufferToHex(ret);
+
+			rand_copy_id = "copy_button_" + rand_id;
+			rand_svg_id = "copy_svg_cont_" + rand_id;
+			rand_pub_id = "copy_pub_" + rand_id;
+			
+
+			
+			var copy_icon = hb.getSvg("copy_icon", {class_string: "copy_icon"});
+			html_string = `
+					<span>Your share key is a public key that allows others to encrypt data that only you can decrypt:</span>
+					<p class=word_broken>${temp_pub}</p>
+					<div class=copy_button id=${rand_copy_id} class=no_select>
+						<span id=${rand_svg_id}></span><span id=${rand_pub_id}>Copy</span>
+					</div>`;
+		}
+		htmlWriter({char_speed:8}, html_string, main_inner, events_obj,function(ret){
+			
+			
+			
+			
+			
+			
+			if(rand_copy_id != null){
+				var copy_svg_cont = document.getElementById(rand_svg_id);
+				copy_svg_cont.innerHTML = copy_icon;
+				var copy_button = document.getElementById(rand_copy_id);
+				copy_button.addEventListener("click", copyPub);
+				
+			}
+			
+		});
+		scrollToBottom();
+	});
+
+
+	function copyPub(){
+		copy_to_clipboard(temp_pub, function(res){
+			if(res){
+				var copy_pub = document.getElementById(rand_pub_id);
+				copy_pub.innerText = "Copied!";
+				window.setTimeout(function(){
+					copy_pub.innerText = "Copy";
+				}, 1000);
+			}
+		});
+	}
+
+}
+
+function getDetEcdhPublicKey(cb){
+	var msg_param = {msg_type: "get_det_public_ecdh"};
+	ww_h.sendMessageToWorker(msg_param, [], cb);
+}
+
+
+function clearAll(){
+	tempTest();
+
+	
+	active_share_prompt = null;
+	
+	main_inner.innerHTML = "";
+	db_h.clearDbStore();
+
+
+	function tempTest(){
+		
+	}
+}
+
+function genNewPasskey(){
+	var prf_obj = {key_name:"Filekey", username:"default_user"};
+	webauthn_h.createCredential(prf_obj, function(ret){
+		
+		if(ret === null)
+			htmlWriter(getErrorParams(), "<span>Failed to generate new filekey. Please try again.</span>", main_inner);
+			
+			
+		else{
+
+			
+			
+
+			var html_string = "<span>Filekey created. </span><span class=msg_clickable id=clickable_load_seckey_from_gen_pk>Now tap to authenticate</span><span>.</span>";
+
+			var events_obj = {
+				clickable_load_seckey_from_gen_pk: {target:loadSecKey},
+			};
+
+			htmlWriter({char_speed:4}, html_string, main_inner, events_obj);
+
+		}
+
+
+
+
+	});
+}
+
+
+function getRandomEleId(){
+	return ("misc_msg_" + misc_msg_counter++);
+}
+
+function loadSecKey(){
+	setPrfIfNot(function(ret){
+		var qq = 22;
+	});
+}
+
+
+function shareEnc(data, cb){
+	var msg_buff = data;
+	var msg_param = {msg_type: "shared_ecdh_enc", msg_buff};
+	ww_h.sendMessageToWorker(msg_param, [msg_buff], function(ret){
+		
+		cb(ret);
+	});
+}
+
+function shareDec(data, cb){
+	var msg_buff = data;
+	
+	var pub_buff = msg_buff.slice(0, 133);
+	msg_buff = msg_buff.slice(133);
+	
+	var msg_param = {msg_type: "shared_ecdh_dec", msg_buff, pub_buff};
+	ww_h.sendMessageToWorker(msg_param, [msg_buff, pub_buff], function(ret){
+		
+		cb(ret);
+	});
+}
+
+
+
+
+
+function storeAndWaitForWorker(valid, external_script){
+	ww_script = external_script;
+	waitForWebWorker(valid);
+}
+
+function waitForWebWorker(valid = true){
+	if(valid && ww_h.scriptReady()){
+		ww_h.initWorkers(function(worker_version){
+			changeVersionIfChanged(worker_version);
+			checkSwVersion();
+			
+			var qq = 22;
+		});
+	}
+
+}
+
+
+function changeVersionIfChanged(new_addition){
+	var new_version = local_version_number + new_addition;
+	if(local_version_number !== new_version){
+		local_version_number += "" + new_addition;
+		setVersionNumber();
+	}
+}
+
+
+function initPrf(cb){
+	if(active_prf)
+		cb(true);
+	else{
+		var prf_obj = getPrfObject(null);
+		
+		
+		webauthn_h.webAuthnClick(prf_obj, function(prf_buff, cred){
+			
+
+			if(prf_buff == null){
+				
+				cb(null);
+			}
+			else if(prf_buff.byteLength > 0){
+				
+				prfToWebWorkerKey(prf_buff, function(){
+					genDefaultSeed(cb);
+					active_prf = true;
+
+
+					
+					
+					
+					
+					var html_string = "<span>Filekey authenticated. Now drag and drop files to encrypt or decrypt them!</span>";
+					htmlWriter({char_speed:8}, html_string, main_inner);
+					document.getElementById("drop_container").style.display = "flex";
+					scrollToBottom();
+					
+
+
+				});
+
+
+
+			}
+
+		});
+
+		
+	}
+		
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function initImportOptions(){
+	setFileImport();
+}
+
+function initDropContainer(){
+	document.getElementsByClassName("dc_icon_container")[0].innerHTML = hb.getSvg("plus_icon", {class_string: "plus_icon"});
+	drop_border_obj = new createAnimatedBorder(document.getElementById("drop_container"), ex_params[0]);
+	drop_border_obj.toggleAnimation(false);
+	
+}
+
+
+function createDownloadEle(dl_obj){
+	std_newDownload(dl_obj);
+	var file_id = "file_id_" + dl_obj.file_id;
+	var ele = document.getElementById(file_id);
+	ele.addEventListener("click", triggerDownload);
+
+
+	displayIfShare(file_id);
+
+	
+
+	function displayIfShare(file_id){
+		
+		document.getElementById(file_id + "_share").addEventListener("click", triggerShare);
+	}
+
+	
+	function triggerShare(e){
+		let new_filename = "";
+		let id = e.currentTarget.id;
+
+		(function(){
+			if(active_share_prompt === null){
+				if(active_send_pub === null){
+					active_share_prompt = true;
+					setPubkeyPrompt(function(){
+						initNewShare();
+					});
+				}
+				else
+					initNewShare();
+			}
+			else{
+				if(active_send_pub === null)
+					goToExistingSharePrompt();
+				else
+					initNewShare();
+			}
+		})();
+
+
+		function goToExistingSharePrompt(){
+			var pub_key_textarea = document.getElementById("pub_key_textarea");
+			scroll(0, (pub_key_textarea.offsetTop - 20));
+		}
+
+		function initNewShare(){
+			id = id.replace("file_id_", "");
+			id = id.replace("_share", "");
+
+			getFileData(id, function(ret){
+				new_filename = ret.filename;
+
+				if(dl_obj.shared_file){
+					new_filename += ".shared_filekey";
+					handleShare(dl_obj.data);
+				}
+				else{
+					
+					new_filename = new_filename.replace(".filekey", ".shared_filekey");
+					preShareDec(ret.data, handleShare);
+				}
+
+
+			});
+		}
+
+		function handleShare(ps_data){
+			shareEnc(ps_data, function(res){
+
+				
+				getDetEcdhPublicKey(function(pub){
+					var combined_buff = combineArrayBuffers(res.salt,res.encrypted_buff);
+					combined_buff = combineArrayBuffers(pub, combined_buff);
+					download_ab(new_filename, combined_buff);
+				});
+				
+			});
+		}
+	}
+
+
+
+
+
+	function setPubkeyPrompt(cb){
+		let confirm_pub_key, text_area, edit_pub_key;
+		var html_string = "<span>Enter recipient's share key:</span>";
+
+		
+
+		htmlWriter({char_speed:4}, html_string, main_inner, {}, function(ret){
+			setPubTextArea();
+		});
+
+
+		function setPubTextArea(){
+
+
+			var new_html = hb.html_newTextarea({placeholder:"Enter recipient's share key"});
+			var outer_ele = document.createElement("div");
+			main_inner.appendChild(outer_ele);
+			outer_ele.outerHTML = new_html;
+			
+			text_area = document.getElementById("pub_key_textarea");
+			text_area.setAttribute("rows", 1);
+			text_area.style.height = (text_area.scrollHeight) + 'px';
+
+			scrollToBottom();
+
+
+			confirm_pub_key = document.getElementById("confirm_pub_key");
+			edit_pub_key = document.getElementById("edit_pub_key");
+			confirm_pub_key.addEventListener("click", confirmPubKey);
+
+
+
+			
+			text_area.addEventListener('input', function() {
+				
+				this.style.height = 'auto';
+				this.style.height = (this.scrollHeight) + 'px';
+				
+			});
+
+
+
+			function confirmPubKey(){
+				if(text_area.value.trim() != ""){
+					confirmAndAttachPub(text_area.value.trim(), function(ret){
+						if(ret != null){
+							text_area.setAttribute("readonly", true);
+							text_area.style.backgroundColor = "#f4f4f4";
+							singleCb();
+
+
+							confirm_pub_key.style.display = "none";
+							confirm_pub_key.removeEventListener("click", confirmPubKey);
+
+							edit_pub_key.style.display = "flex";
+							edit_pub_key.addEventListener("click", editPubKey);
+							
+						}
+						else
+							invalidPubKey();
+					});
+				}
+			}
+
+			function singleCb(){
+				if(cb != null)
+					cb();
+				cb = null;
+			}
+
+			function editPubKey(){
+				active_send_pub = null;
+				
+				confirm_pub_key.style.display = "flex";
+				confirm_pub_key.addEventListener("click", confirmPubKey);
+
+				edit_pub_key.style.display = "none";
+				edit_pub_key.removeEventListener("click", editPubKey);
+
+				text_area.removeAttribute("readonly");
+				text_area.style.backgroundColor = "#fff";
+			}
+
+
+		}
+
+
+		
+		function invalidPubKey(){
+			var html_string = "<span>Invalid share key.</span>";
+			htmlWriter({char_speed:8}, html_string, main_inner);
+			scrollToBottom();
+		}
+
+	}
+
+
+
+
+
+	function triggerDownload(e){
+		var id = e.currentTarget.id;
+		id = id.replace("file_id_", "");
+
+
+		
+
+		getFileData(id, function(ret){
+			download_ab(ret.filename, ret.data);
+		});
+
+	}
+
+	function getFileData(file_id, cb){
+		db_h.getFileStore("f" + file_id, function(ret){
+			if(ret != null && ret.response != null)
+				cb(ret.response);
+		});
+	}
+
+
+	function preShareDec(file_contents, cb){
+		decMsg(file_contents, function(ret){
+			
+
+			if(ret === null){
+				var params = getErrorParams();
+				var html_string = "<span>Failed to share file. Please try again.</span>";
+				htmlWriter(params, html_string, main_inner);
+				cb(null);
+			}
+			else
+				cb(ret.decrypted_buff);
+
+		});
+	}
+
+
+}
+
+
+
+let status_count = 0;
+function setStatusMsg(encrypted = true){
+	var ret = std_newStatus(encrypted, status_count++);
+	scrollToBottom();
+	return ret;
+}
+
+
+function std_newStatus(encrypted_status, status_count){
+	var status_msg = (encrypted_status) ? "Encrypting" : "Decrypting";
+	var ele_id = "status_" + status_count;
+
+	var new_html = hb.html_newStatus({status_msg, ele_id});
+	var outer_ele = document.createElement("div");
+	main_inner.appendChild(outer_ele);
+	outer_ele.outerHTML = new_html;
+	
+	
+	
+	
+
+	return {ele_id, ts:performance.now(), status_msg};
+	
+	
+}
+
+
+function fk_db_handler(cb){
+	
+	
+  let main_handler;
+    var db_obj, db_name, version_number;
+    (function init(){
+		version_number = 1;
+		db_name = "filekey_temp_db";
+		db_obj = {
+			data_store: {
+				name: "data_store",
+				params: {
+					keyPath: "file_id"
+				}
+			},
+		};
+        main_handler = new database(db_name,[db_obj.data_store],version_number,function(valid){
+            if (!valid)
+                setPersistentWarning;
+            else {
+                main_handler.getPersist(function(result) {
+                    if (result)
+                        console.log("Persistent storage granted");
+                    else
+                        setPersistentWarning();
+                    cb();
+					clearDbStore();
+                });
+            }
+        });
+    })();
+
+	this.clearDbStore = clearDbStore;
+	function clearDbStore(){
+		main_handler.clearStore(db_obj.data_store.name);
+	}
+
+    function setPersistentWarning() {
+        console.log("Unable to obtain persistent storage, use with caution. Bookmark page to resolve");
+    }
+
+    this.deleteKey = deleteKey;
+    function deleteKey(key, cb) {
+        main_handler.getKey([db_obj.data_store.name], key, function(ret) {
+            if (ret != null)
+                cb(ret.store.delete(key));
+            else
+                cb(null);
+        });
+    }
+    this.getStore = getStore;
+    function getStore(key, cb) {
+        var store = main_handler.getStore(db_obj.data_store.name);
+        if (key != null)
+            var req = store.get(key);
+        else
+            var req = store.getAll();
+        req.onsuccess = callbackStore;
+        req.onerror = function(e) {
+            cb(null)
+        }
+        ;
+        function callbackStore(e) {
+            cb(e.target.result);
+        }
+    }
+
+    this.getFileStore = getFileStore;
+    function getFileStore(file_id, cb) {
+        var store_obj = main_handler.getWriteableStore(db_obj.data_store.name);
+        main_handler.getKeyWithStore(store_obj, file_id, cb);
+    }
+
+	
+    this.saveNewFile = saveNewFile;
+    function saveNewFile(file_id, file_obj, cb) {
+        getFileStore(file_id, function(ret) {
+            if (ret != null) {
+                if (checkForProperty(ret.response)) {
+                    ret.response.file_id = file_obj.file_id;
+                    ret.response.data = file_obj.data;
+                    ret.response.filename = file_obj.filename;
+                    ret.response.ts = file_obj.ts;
+                    ret.response.file_type = file_obj.file_type;
+					ret.store.put(ret.response);
+                    cb();
+                } else {
+                    var tc = {
+						file_id,
+						data: file_obj.data,
+						filename: file_obj.filename,
+						ts: file_obj.ts,
+						file_type: file_obj.file_type,
+					};
+                    ret.store.add(tc);
+                    cb();
+                }
+            } else
+                console.log("Warning", "Failed to set biometrics for: " + file_id);
+        });
+		
+    }
+
+
+	this.cursorDataToFcn = cursorDataToFcn;
+	function cursorDataToFcn(params, cursor_cb = null){
+		var store = main_handler.getStore(db_obj.data_store.name);
+		const request = store.openCursor();
+
+		request.onsuccess = (event) => {
+			const cursor = event.target.result;
+			if(cursor){
+				cursor_cb(cursor);
+				cursor.continue();
+			}
+			else{
+				if(cursor_cb != null)
+					cursor_cb(null);
+			}
+		};
+	}
+
+	this.openDbCursorWithKey = openDbCursorWithKey;
+	function openDbCursorWithKey(key){
+		var store = main_handler.getStore(db_obj.data_store.name);
+		
+		const request = store.openKeyCursor();
+
+		request.onsuccess = (event) => {
+		  const cursor = event.target.result;
+		  if (cursor) {
+			
+			
+			
+			cursor.continue();
+		  } else {
+			
+		  }
+		};
+	}
+
+
+	
+}
+
+
+
+function createWebmLink(id, data){
+	
+	
+
+	
+	const blob = new Blob([data], { type: 'video/webm' });
+
+	
+	const url = URL.createObjectURL(blob);
+
+	var file_ele = document.getElementById("file_id_" + id + "_blob");
+	file_ele.style.display = "block";
+	file_ele.addEventListener("click", function(){
+		var newTab = window.open(url, '_blank');
+	});
+
+
+	
+	
+
+	
+	
+	
+
+}
+
+function newDownloadObj(filename, data, params = {encrypted_status: true}, cb){
+	
+	
+	
+	
+
+	
+	var file_id = genIdConfirmHash(data);
+	
+	var new_dl_obj = {filename, data, ts: Date.now(),file_id};
+	new_dl_obj = Object.assign(new_dl_obj, params);
+	
+
+	db_h.saveNewFile("f" + new_dl_obj.file_id, new_dl_obj, function(ret){
+		
+		createDownloadEle(new_dl_obj);
+
+		
+
+		cb();
+	});
+	
+	
+}
+
+
+
+
+function checkIfViewableType(filename){
+	var ext_slice = filename.slice(-4);
+	if((ext_slice === "webm" || ext_slice === ".mp4"))
+		return true;
+	else
+		return false;
+}
+
+
+function handleSharedFile(file_obj){
+	
+	
+	
+	
+	
+	var file_array = current_active_file_array;
+
+	if(file_array.length > 0){
+		let fc = 0;
+		let encrypt_status = false;
+		let status_obj;
+
+		status_obj = setStatusMsg(encrypt_status);
+		status_obj.animator = new set3dotStatusAnimation(status_obj);
+
+		(function nextFile(file){
+			getFlatFile(file, function(file_contents, filename){
+				
+
+				
+				shareDec(file_contents, function(ret){
+
+
+					if(ret === null){
+						status_obj.animator.clearStatus();
+						var params = getErrorParams();
+						var html_string = "<span>Failed to unlock file with this key. Please try again.</span>";
+						htmlWriter(params, html_string, main_inner);
+						
+						
+						
+					}
+					else{
+						
+						var new_filename = filename.replace(".shared_filekey", "");
+						newDownloadObj(new_filename, decodeData(ret.decrypted_buff), {encrypt_status, shared_file:true}, function(ret){
+
+							scrollForFirstFile(fc);
+
+							if(fc < file_array.length)
+								nextFile(file_array[fc++]);
+							else
+								status_obj.animator.triggerStatusFinish(status_obj);
+						});
+					}
+
+
+				});
+			});
+		})(file_array[fc++]);
+	}
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+}
+
+
+
+function undoStuff(){
+	var file_array = current_active_file_array;
+	if(file_array.length > 0){
+		let fc = 0;
+		let encrypt_status = false;
+		let status_obj;
+
+
+		status_obj = setStatusMsg(encrypt_status);
+		status_obj.animator = new set3dotStatusAnimation(status_obj);
+
+		(function nextFile(file){
+			parseFilekeyFile(file, function(file_contents, filename){
+
+				decMsg(file_contents, function(ret){
+					
+
+					if(ret === null){
+						status_obj.animator.clearStatus();
+						var params = getErrorParams();
+						var html_string = "<span>Failed to unlock file with this key. Please try again.</span>";
+						htmlWriter(params, html_string, main_inner);
+						
+						
+						
+					}
+					else{
+						
+						var new_filename = filename.replace(".filekey", "");
+						
+						newDownloadObj(new_filename, decodeData(ret.decrypted_buff), {encrypt_status}, function(ret){
+
+							scrollForFirstFile(fc);
+
+							if(fc < file_array.length)
+								nextFile(file_array[fc++]);
+							else
+								status_obj.animator.triggerStatusFinish(status_obj);						
+						});
+					}
+
+					
+
+				});
+			});
+		})(file_array[fc++]);
+	}
+}
+
+function getWarningParams(){
+	return {char_speed:2,dp_class_string:"warning_dp", failed_filekey_icon:"warning_filekey_icon"};
+}
+
+function getErrorParams(){
+	return {char_speed:4,dp_class_string:"failed_dp", failed_filekey_icon:"failed_filekey_icon"};
+}
+
+
+function set3dotStatusAnimation(status_obj){
+	let active_animation = true;
+	let status_ele = document.getElementById(status_obj.ele_id);
+	
+	let start_ts = performance.now();
+
+	(function startAnimation(){
+		if(active_animation){
+			status_ele.innerText = status_obj.status_msg + get3dotState();
+			requestAnimationFrame(startAnimation);
+		}
+	})();
+
+	function get3dotState(){
+		var pn = performance.now();
+		var elapsed_time = pn - start_ts;
+		elapsed_time = Math.round(elapsed_time/1000);
+		var state = elapsed_time % 3;
+		switch(state){
+			case 0:
+				return ".";
+			case 1:
+				return "..";
+			default:
+				return "...";
+		}
+	}
+
+	this.clearStatus = clearStatus;
+	function clearStatus(){
+		active_animation = false;
+		status_obj = null;
+		status_ele.parentNode.parentNode.remove();
+	}
+
+	this.triggerStatusFinish = triggerStatusFinish;
+	function triggerStatusFinish(){
+		if(status_obj != null){
+			endStatus();
+			
+			
+		}
+
+		function endStatus(){
+			active_animation = false;
+			status_ele.innerText = status_obj.status_msg + "... Done!";
+			status_obj = null;
+		}
+	}
+
+}
+
+function decodeData(decoded_data){
+	if(file_as_text){
+		
+		var ret = leaveItAlone(decoded_data);
+		return ret;
+	}
+	else{
+		
+		var ret = leaveItAlone(decoded_data);
+		return ret;
+	}
+}
+
+
+	
+function parseFilekeyFile(file, cb){
+	var filename = file.name;
+	if(checkForProperty(file.size)){
+		
+		readFile(file, function(ret){
+			cb(ret, filename);
+		});
+	}
+	else{
+		file.file(new_file => {
+			
+			readFile(new_file, function(ret){
+				cb(ret, filename);
+			});
+		});
+		
+	}
+
+
+	
+
+}
+
+
+	
+function doStuff(){
+	var file_array = current_active_file_array;
+
+	if(file_array.length > 0){
+		let fc = 0;
+		let encrypt_status = true;
+		let status_obj;
+
+		status_obj = setStatusMsg(encrypt_status);
+		status_obj.animator = new set3dotStatusAnimation(status_obj);
+
+		(function nextFile(file){
+			getFlatFile(file, function(file_contents, filename){
+				
+				
+				
+				encNewMsg(file_contents, function(ret){
+					var combined_buff = combineArrayBuffers(ret.salt,ret.encrypted_buff);
+
+					
+					var new_filename = filename + ".filekey";
+					newDownloadObj(new_filename, combined_buff, {encrypt_status}, function(ret){
+						
+						scrollForFirstFile(fc);
+						
+						
+						if(fc < file_array.length)
+							nextFile(file_array[fc++]);
+						else
+							status_obj.animator.triggerStatusFinish(status_obj);						
+					});
+
+				});
+			});
+		})(file_array[fc++]);
+	}
+}	
+
+function scrollForFirstFile(fc){
+	if(fc === 1)
+		scrollToBottom();
+}
+
+
+function getFlatFile(file, cb){
+	
+	var filename = file.name;
+	if(checkForProperty(file.size)){
+		readFile(file, retFile);
+	}
+	else{
+		file.file(new_file => {
+			readFile(new_file,retFile);
+		});
+	}
+
+
+	function retFile(ret){
+		cb(ret, filename);
+	}
+
+	
+}
+
+
+
+
+function readFile(file, inner_cb){
+	
+	const reader = new FileReader();
+	reader.onload = function(event) {
+	   inner_cb(event.target.result);
+	};
+	reader.readAsArrayBuffer(file);
+
+}
+
+
+
+
+
+function genDefaultSeed(cb){
+	let allow_gen = true;
+
+	(function generateAnotherOne(e){
+		
+		if(allow_gen){
+			
+			var suffix = "";
+			var new_seed_count = 0;
+			
+			allow_gen = false;
+			var seed_name = (suffix + "_" + new_seed_count++);
+			setNewSeed(seed_name, function(){
+				
+				
+				cb(true);
+			});
+		}
+	})();
+
+
+
+	function displayButtons(){
+		new_seed.style.display = "inline-block";
+		clear_all.style.display = "inline-block";
+		gen_prf_input.style.display = "inline-block";
+	}
+
+
+
+}
+
+
+function combineArrayBuffers(buffer1, buffer2){
+	const combinedBuffer = new ArrayBuffer(buffer1.byteLength + buffer2.byteLength);
+	const combinedView = new Uint8Array(combinedBuffer);
+	combinedView.set(new Uint8Array(buffer1), 0);
+	combinedView.set(new Uint8Array(buffer2), buffer1.byteLength);
+	return combinedBuffer;
+}
+
+
+function deselectLastActiveAccount(){
+	if(last_active_account != null)
+		last_active_account.style.opacity = "1";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function prfToWebWorkerKey(prf_buff, cb){
+	var msg_param = {msg_type: "prf_to_key", prf_buff};
+
+	ww_h.sendMessageToWorker(msg_param, [prf_buff], cb);
+}
+
+function setNewSeed(seed_name, cb){
+	
+	var msg_param = {msg_type: "set_seed", seed_name};
+	ww_h.sendMessageToWorker(msg_param, [], cb);
+	
+	
+}
+
+
+function encNewMsg(msg_data, cb){
+	var msg_buff;
+	if(file_as_text)
+		
+		msg_buff = msg_data;
+	else
+		msg_buff = stringToArrayBuffer(msg_data);
+	var msg_param = {msg_type: "new_enc", msg_buff};
+	ww_h.sendMessageToWorker(msg_param, [msg_buff], cb);
+}
+
+
+function stringToArrayBuffer(str) {
+    
+    const buffer = new Uint8Array(str.length);
+
+    
+    for (let i = 0; i < str.length; i++) {
+        buffer[i] = str.charCodeAt(i);
+    }
+
+    
+    return buffer.buffer;
+}
+
+function leaveItAlone(already_as_needed) {
+	return already_as_needed;
+}
+
+
+
+function decMsg(msg_buff, cb){
+	
+	var msg_param = {msg_type: "new_dec", msg_buff};
+	ww_h.sendMessageToWorker(msg_param, [msg_buff], cb);
+}
+
+
+
+
+
+
+
+
+function getPrfObject(id = null){
+	
+	
+
+	var first_data = "filekey_security_key_wallet_first";
+	var second_data = "filekey_security_key_wallet_second";
+
+	return {
+		id: (checkForProperty(id)) ? id : null,
+		first: bh.hexToArrayBuffer(kh.str_keccak256(first_data), Uint8Array).buffer,
+		second: bh.hexToArrayBuffer(kh.str_keccak256(second_data), Uint8Array).buffer,
+	};
+}
+
+
+
+function genIdConfirmHash(file_buff){
+	var confirm_hashes = [];
+	
+	
+	var buff_len = file_buff.byteLength;
+	var init_log_size = 20;
+	var max_hash_chunk = 2 ** init_log_size;
+	var max_confirm_length = max_hash_chunk/2;
+
+	
+	
+	if(buff_len < max_hash_chunk)
+		return kh.strict_hex_keccak256(bh.bufferToHex(file_buff));
+	else
+		return genSpecialConfirmHash(file_buff);
+
+
+	function genSpecialConfirmHash(file_buff){
+		var confirm_points_array = determineConfirmPoints(buff_len);
+
+		for(var i = 0; i < confirm_points_array.length; i++){
+			var hex_buff = new ArrayBuffer(max_confirm_length);
+			var start_point = confirm_points_array[i];
+			
+			hex_buff = new Uint8Array(file_buff, start_point, max_confirm_length);
+			hex_buff = kh.strict_hex_keccak256(bh.bufferToHex(hex_buff));
+			appendToConfirm(hex_buff);
+		}
+		
+		return computeConfirmStr();
+	}
+
+	function computeConfirmStr(){
+		var full_hex_str = "";
+		for(var i = 0; i < confirm_hashes.length; i++){
+			full_hex_str += confirm_hashes[i];
+		}
+		full_hex_str = kh.strict_hex_keccak256(full_hex_str);
+
+		return full_hex_str;
+	}
+
+
+	function determineConfirmPoints(buff_len){
+		var ret_points = [];
+		ret_points.push(0);
+		var last_point_end = ret_points[0] + max_confirm_length;
+		
+		var num_points = (floorLog2(buff_len) - (init_log_size - 2));
+
+		var spacer = calcSpacer();
+
+		for(var i = 1; i < (num_points - 1); i++){
+			var new_point = last_point_end + spacer;
+			ret_points.push(new_point);
+			last_point_end = new_point + max_confirm_length;
+		}
+
+		ret_points.push(getEndPoint());
+
+		return ret_points;
+
+		
+
+		function getEndPoint(){
+			return buff_len - max_confirm_length;
+		}
+
+		function calcSpacer(){
+			var spacer = (num_points*max_confirm_length)/buff_len;
+			spacer = (1 - spacer) * buff_len;
+			spacer = (spacer / (num_points-1));
+			spacer = Math.floor(spacer);
+			return spacer;
+			
+		}
+	}
+
+
+	function appendToConfirm(hash_chunk){
+		hash_chunk = hash_chunk.slice(2);
+		confirm_hashes.push(hash_chunk)
+	}
+
+	function floorLog2(x) {
+	  return Math.floor(Math.log(x) / Math.log(2));
+	}
+}
+
+
+
+
+function useBiometricsErrorHandler(error_value){
+	var error_obj;
+	
+	switch(error_value){
+		case "no_prf":
+			error_obj = {msg_html:"Invalid passkey, or unsupported device.", full_bar_target:true, self_remove_ms:8000, custom_bg_color: "#e93232", custom_color:"#fff", svg_icon:hb.getSvg("warning_w_border",  {class_string:"std_icon"}), close_icon:hb.getSvg("x",  {class_string:"std_close_icon"})};
+		break;
+		case "no_stored_pk":
+		default:
+			error_obj = {msg_html:"No account detected.",full_bar_target:true, self_remove_ms:8000, custom_bg_color: "#500202", custom_color:"#fff", svg_icon:hb.getSvg("warning_w_border",  {class_string:"std_icon"}), close_icon:hb.getSvg("x",  {class_string:"std_close_icon"})};
+		break;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function setFileImport(){
+	
+    
+    
+
+	const drag_window = document.getElementById('drag_window');
+	const file_drag_zone = document.getElementById('file_drag_zone');
+
+	var current_cursor = "";
+	
+	
+
+	
+	let file_array = [];
+	let active_border_animation = false;
+	
+	setImportButtons();
+	initDragContainer();
+
+    
+  
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+	
+
+	function initDragContainer(){
+
+
+		document.addEventListener('dragenter', setDragContainer);
+		document.addEventListener('drop', droppedFile);
+		document.addEventListener('dragover', doNothing);
+		
+		drag_window.addEventListener('dragleave', windowDragLeave);
+		
+
+		
+		
+		
+
+		function setDragContainer(e){
+			preventDefaults(e);
+			
+			setCurrentCursor(e, 'none');
+			
+			var qq = 22;
+			drag_window.style.display = "block";
+			file_drag_zone.style.display = "block";
+
+			file_drag_zone.addEventListener("dragenter", enteredFileDragZone);
+			file_drag_zone.addEventListener("dragleave", leftFileDragZone);
+		}
+
+		function enteredFileDragZone(e){
+			preventDefaults(e);
+			setCurrentCursor(e, 'link');
+			highlight(e);
+		}
+		function leftFileDragZone(e){
+			preventDefaults(e);
+			unhighlight(e);
+		}
+
+		function windowDragLeave(e){
+			if(e.fromElement == null)
+				removeDragContainer();
+				
+		}
+
+		function removeDragEvents(){
+			preventDefaults(e);
+			removeDragContainer();
+
+		}
+
+		function doNothing(e){
+			preventDefaults(e);
+			setCurrentCursor(e, current_cursor);
+			var qq = 22;
+		}
+
+		function setCurrentCursor(e, type = 'copy'){
+			
+				current_cursor = type;
+				e.dataTransfer.dropEffect = current_cursor;
+			
+
+			
+		}
+
+		function droppedFile(e){
+			preventDefaults(e);
+			var qq = 22;
+			removeDragContainer();
+			unhighlight(e);
+			
+			
+			
+			if(e.target === file_drag_zone)
+				handleDrop(e);
+		}
+
+		function removeDragContainer(){
+			var qq = 22;
+			drag_window.style.display = "none";
+			file_drag_zone.style.display = "none";
+
+			
+
+		}
+
+		function highlight(e) {
+			preventDefaults(e);
+			if(active_border_animation === false){
+				console.log("new highlight");
+
+				active_border_animation = true;
+				drop_border_obj.toggleAnimation(true);
+			}
+		}
+
+
+		
+
+
+		function unhighlight(e) {
+			drop_border_obj.toggleAnimation(false);
+			active_border_animation = false;
+			console.log("active_border_animation back to false");
+		}
+
+		function handleDropAnimation(e){
+			preventDefaults(e);
+			unhighlight(e);
+			handleDrop(e);
+		}
+
+	}
+
+    function handleDrop(e) {
+		
+		
+        const items = e.dataTransfer.items;
+		var items_remaining = items.length;
+
+        for (let i = 0; i < items.length; i++){
+            const item = items[i].webkitGetAsEntry(); 
+
+            if(item){
+                if(item.isFile){
+                    
+                    addFileToList(item);
+					items_remaining--;
+					if(items_remaining <= 0){
+						setFileArrayList();
+						handleNewFiles();
+						file_array = [];
+					}
+                }
+				else if(item.isDirectory){
+                    
+                    handleDirectory(item);
+                }
+            }
+        }
+    }
+
+    function handleDirectory(dirEntry) {
+        const dirReader = dirEntry.createReader();
+        
+        dirReader.readEntries((entries) => {
+            for (const entry of entries) {
+                if (entry.isFile) {
+                    addFileToList(entry);
+                } else if (entry.isDirectory) {
+                    handleDirectory(entry); 
+                }
+            }
+        }, (error) => {
+            console.error('Error reading directory:', error);
+        });
+    }
+
+	function addFileToList(new_file){
+		var qq_add = 22;
+		file_array.push(new_file);
+	}
+	
+	function setFileArrayList(){
+		
+		var qq_add = 22;
+		current_active_file_array = file_array;
+	}
+
+
+	
+	function setImportButtons(){
+
+		document.getElementById('drop_container').addEventListener('click', function(e) {
+			document.getElementById('file_input').click();
+		});
+
+		
+		document.getElementById('file_input').addEventListener('change', function(event) {
+			const files = event.target.files;
+			
+			setFileList(event.target.files);
+			handleNewFiles();
+		});
+		
+		
+
+		function setFileList(files){
+			current_active_file_array = files;
+			
+		}
+	}
+
+
+}
+
+
+
+function displayFiles(file_array){
+	for(var i = 0; i < file_array.length; i++)
+		std_newUpload(file_array[i].name, ((i === 0) ? true : false));
+
+	scrollToBottom();
+}
+
+function scrollToBottom(){
+	
+	var main_inner = document.getElementById("main_inner");
+
+	var three_quarters = (document.body.clientHeight*.75);
+	if(main_inner.clientHeight >= three_quarters){
+		var sh = document.body.scrollHeight + (document.body.scrollHeight/10);
+		scroll(0, sh);
+	}
+}
+
+function handleNewFiles(){
+	setPrfIfNot(function(ret){
+		if(ret != null){
+			displayFiles(current_active_file_array);
+
+			
+			basedOnFileType(current_active_file_array[0]);
+
+			
+			
+		}
+	});
+
+	function basedOnFileType(file_obj){
+		
+		var file_params = getFileParams(file_obj.name);
+		switch(file_params.file_type){
+			case "Encrypted File":
+				undoStuff();
+			break;
+			case "Shared File":
+				handleSharedFile(file_obj);
+			break;
+			default:
+				doStuff();
+		}
+	}
+
+
+	
+
+}
+
+function download_ab(file_name, array_buff) {
+	const blob = new Blob([array_buff], { type: "application/octet-stream" });
+	const link = document.createElement("a");
+	link.href = URL.createObjectURL(blob);
+	link.download = file_name;
+	link.click();
+	URL.revokeObjectURL(link.href);
+}
+
+
+
+
+
+
+
+
+function setPrfIfNot(cb){
+	initPrf(function(ret){
+		if(ret)
+			cb(ret);
+		else{
+			
+			
+			var html_string = "<span>Authentication failed. Please try again.</span>";
+			htmlWriter(getErrorParams(), html_string, main_inner);
+			cb(null);
+		}
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function std_newUpload(filename){
+	var file_params = getFileParams(filename);
+	
+	var new_html = hb.html_newFileUpload(file_params);
+	var outer_ele = document.createElement("div");
+	main_inner.appendChild(outer_ele);
+	outer_ele.outerHTML = new_html;
+}
+
+
+function getFileParams(filename){
+	var sliced = filename.slice(-8);
+	var file_type, file_icon;
+	if(sliced == ".filekey"){
+		file_type = "Encrypted File";
+		file_icon = hb.getSvg("filekey_logo_icon", {class_string: "file_icon"});
+	}
+	else if(filename.slice(-15) === ".shared_filekey"){
+		file_icon = hb.getSvg("file_icon", {class_string: "file_icon"});
+		file_type = "Shared File";
+	}
+	else{
+		file_icon = hb.getSvg("file_icon", {class_string: "file_icon"});
+		file_type = "File";
+	}
+
+	return {filename, file_type, file_icon};
+
+}
+
+
+function std_newDownload(params){
+	var file_params = getFileParams(params.filename);
+	params = Object.assign(params, file_params);
+	
+	var new_html = hb.html_newDownload(params);
+	var outer_ele = document.createElement("div");
+	main_inner.appendChild(outer_ele);
+
+	outer_ele.outerHTML = new_html;
+}
+
+
+function htmlWriter(params, html_string, print_to_ele, event_obj, cb){
+
+	var custom_html_array = [];
+
+	var doc = parseHTMLToObjects(html_string);
+	doc = doc.childNodes[0];
+	var body = doc.childNodes[1];
+	var starting_ele = body.childNodes[0];
+
+
+	params.msg_id = getRandomEleId();
+	var new_html = hb.html_newMessage(params);
+	var outer_ele = document.createElement("div");
+	print_to_ele.appendChild(outer_ele);
+	outer_ele.outerHTML = new_html;
+
+
+	var ele = document.getElementById(params.msg_id);
+
+	
+
+	(function printNext(current_ele, print_to, inner_cb = null){
+		let at_least_one_printed = false;
+		var next_child = current_ele.firstElementChild;
+		let next_sib = current_ele.nextElementSibling;
+
+		let new_ele = appendAndReturnNewEle(current_ele, print_to);
+
+		if(next_child == null){
+			
+			
+
+			if(checkForProperty(new_ele.id) && checkForProperty(event_obj[new_ele.id]))
+				addEventToEle(new_ele, event_obj[new_ele.id]);
+
+			std_fillTextBoxAnimation(params, new_ele, current_ele.innerText, custom_html_array, function(){
+				if(next_sib == null)
+					innerCbIfYouCan();
+				else
+					printNext(next_sib, print_to, inner_cb);
+			});
+			
+		}
+		else{
+			printNext(next_child, new_ele, function(){
+				if(next_sib == null)
+					innerCbIfYouCan();
+				else
+					printNext(next_sib, print_to, inner_cb);
+			});
+		}
+
+		function innerCbIfYouCan(ret = null){
+			if(checkForProperty(inner_cb))
+				inner_cb(ret);
+		}
+
+	})(starting_ele, ele, cb);
+
+	function addEventToEle(ele, event_obj){
+		var action = (checkForProperty(event_obj.action)) ? event_obj.action : "click";
+		ele.addEventListener(action, event_obj.target);
+	}
+
+	function appendAndReturnNewEle(current_ele, append_to){
+		var new_ele = document.createElement(current_ele.nodeName);
+		if(checkForProperty(current_ele.classList))
+			new_ele.classList = current_ele.classList;
+		if(checkForProperty(current_ele.id))
+			new_ele.id = current_ele.id;
+		if(checkForProperty(current_ele.href))
+			new_ele.href = current_ele.href;
+		if(checkForProperty(current_ele.target))
+			new_ele.target = current_ele.target;
+		if(checkForProperty(current_ele.title))
+			new_ele.title = current_ele.title;
+
+		var placeholder = current_ele.getAttribute('placeholder');
+		if(placeholder)
+			new_ele.setAttribute('placeholder', placeholder);
+			
+		append_to.append(new_ele);
+		return new_ele;
+	}
+
+	function parseHTMLToObjects(htmlString) {
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(htmlString, 'text/html');
+		return doc;
+	}
+
+}
+
+function std_fillTextBoxAnimation(params, main_ele, text, custom_html_array, cb){
+	var pointer = 0;
+	var max = text.length;
+	var custom_ele = null;
+	var trailing_space = "";
+
+	(function nextWrite(){
+		if(pointer <= max){
+			writeNewChars(nextChars(params.char_speed));
+			requestAnimationFrame(nextWrite);
+		}
+		else
+			cbIfYouCan(true);
+	})();
+
+	function writeNewChars(new_chars){
+		main_ele.innerText += trailing_space + new_chars;
+		if(new_chars.charAt(new_chars.length - 1) === " ")
+			trailing_space = " ";
+		else
+			trailing_space = "";
+	}
+
+	function cbIfYouCan(ret){
+		if(checkForProperty(cb))
+			cb(ret);
+	}
+
+	function nextChars(num_of_chars = 1){
+		var nc = "";
+		for(var i = 0; i < num_of_chars; i++)
+			nc += text.charAt(pointer++);
+		return nc;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function html_builder(){
+	
+
+	this.html_newFileUpload = html_newFileUpload;
+	function html_newFileUpload(params = {}){
+		return `
+			<div class=std_upload_outer>
+			<div class="std_uploaded set_right">
+				<div class=icon_container>
+					${params.file_icon}
+				</div>
+				<div class=std_file_container>
+					<span class=file_title title="${params.filename}">${params.filename}</span>
+					<span class=file_status>${params.file_type}</span>
+				</div>
+			</div>
+			</div>
+		`;
+	}
+
+	this.html_newTextarea = html_newTextarea;
+	function html_newTextarea(params = {}){
+		
+		var placeholder = (checkForProperty(params.placeholder)) ? params.placeholder : "";
+		var check_icon = hb.getSvg("check_icon", {class_string: "confirm_icon"});
+		var edit_icon = hb.getSvg("edit_icon", {class_string: "edit_icon"});
+		
+		return `
+			<div class="pub_key_textarea_cont set_right"><textarea id=pub_key_textarea placeholder='${placeholder}'></textarea><span id=confirm_pub_key class=no_select>${check_icon} <span>Confirm</span></span><span id=edit_pub_key class=no_select>${edit_icon} <span>Edit</span></span></div>
+		`;
+	}
+
+	this.html_newMessage = html_newMessage;
+	function html_newMessage(params = {}){
+		
+		var dp_class_string  = (checkForProperty(params.dp_class_string)) ? params.dp_class_string : "std_dp";
+		var filekey_icon_class = (checkForProperty(params.failed_filekey_icon)) ? params.failed_filekey_icon : "filekey_icon";
+		var filekey_msg_icon = hb.getSvg("filekey_icon", {class_string: filekey_icon_class});
+		
+		
+		return `
+			<div class=std_outer>
+				<div class=std_msg_inner>
+					<span class=${dp_class_string}>${filekey_msg_icon}</span>
+					<span class=std_msg id=${params.msg_id}></span>
+				</div>
+			</div>
+		`;
+	}
+
+	this.html_newStatus = html_newStatus;
+	function html_newStatus(params = {}){
+		params.class_string = (checkForProperty(params.class_string)) ? params.class_string : "filekey_icon";
+		var filekey_msg_icon = hb.getSvg("filekey_icon", {class_string: params.class_string});
+		
+		return `
+			<div class=std_status_outer>
+				<div class=std_status_inner>
+					<span class=std_dp>${filekey_msg_icon}</span>
+					<span class=std_status id=${params.ele_id}>${params.status_msg}</span>
+				</div>
+			</div>
+		`;
+	}
+
+
+	this.html_newDownload = html_newDownload;
+	function html_newDownload(params = {}){
+		var file_id = "file_id_" + params.file_id;
+		
+		
+		return `
+			<div class=std_dl_outer>
+				<div class=std_download>
+					<div class=std_inner_flex>
+						<div class="icon_container some_background">
+							${params.file_icon}
+						</div>
+						<div class=std_file_container>
+							<span class=file_title title="${params.filename}">${params.filename}</span>
+							<span class=file_status>${params.file_type}</span>
+							<div class=download_icon_container>
+								<span class=dl_action id=${file_id + "_share"}>${hb.getSvg("share_icon", {class_string: "dl_icon slight_vert_padding"})} Share</span>
+								&nbsp;
+								<span class=dl_action id=${file_id}>${hb.getSvg("save_icon", {class_string: "save_icon"})} Save</span>
+							</div>
+						</div>
+						
+						<div class="action_icon_container special_action" id=${file_id + "_blob"}>
+							${hb.getSvg("dl_icon", {class_string: "dl_icon"})}
+						</div>
+					</div>
+				</div>
+			</div>
+		`;
+	}
+
+
+	this.html_newShare = html_newShare;
+	function html_newShare(params = {}){
+		
+	}
+
+
+
+
+
+	this.getSvg = getSvg;
+	function getSvg(svg_name, params = {}){
+		var id = "";
+		var class_string = "";
+		var tabindex = "";
+		if(checkForProperty(params.id))
+			id += " id=" + params.id;
+
+		if(checkForProperty(params.class_string))
+			class_string += ' class="' + params.class_string + '"';
+
+		if(checkForProperty(params.tabindex)){
+			tabindex += " tabindex=" + params.tabindex;
+			if(checkForProperty(params.prevent_tabbed_enter) == false)
+				tabindex+= ' data-keyevent=default_key_event';
+		}
+
+		switch(svg_name){
+			case "filekey_logo_icon":
+				return `
+					<svg viewBox="0 0 22 27"${class_string}${id}${tabindex}>
+						<path d="M21.9873 8.81596C21.9827 8.75523 21.9678 8.69679 21.9506 8.63607C21.9334 8.57648 21.9174 8.51919 21.8899 8.46419C21.8807 8.44471 21.8796 8.42409 21.8693 8.40461C19.9924 5.27768 17.349 2.63298 14.2221 0.757408C14.2037 0.74595 14.182 0.74595 14.1625 0.735638C14.1086 0.708138 14.0525 0.692095 13.9929 0.674909C13.931 0.657721 13.8715 0.64168 13.8084 0.638242C13.7878 0.638242 13.7706 0.62793 13.75 0.62793H5.5C2.46693 0.62793 0 3.09492 0 6.12793V20.7946C0 23.8277 2.46699 26.2946 5.5 26.2946H16.5C19.5331 26.2946 22 23.8276 22 20.7946V8.87793C22 8.85616 21.9896 8.83773 21.9873 8.81596ZM19.3748 7.96116H18.3332C16.312 7.96116 14.6666 6.31573 14.6666 4.29449V3.25292C16.4793 4.55459 18.073 6.14839 19.3748 7.96116ZM16.4999 24.4612H5.49992C3.47867 24.4612 1.83325 22.8157 1.83325 20.7945V6.12783C1.83325 4.10658 3.47867 2.46116 5.49992 2.46116H12.8332V4.29449C12.8332 7.32756 15.3002 9.79449 18.3332 9.79449H20.1666V20.7945C20.1666 22.8157 18.5212 24.4612 16.4999 24.4612ZM14.6666 14.5462V12.5444C14.6666 10.5232 13.0212 8.87777 10.9999 8.87777C8.97867 8.87777 7.33325 10.5232 7.33325 12.5444V14.5462C6.26877 14.9266 5.49992 15.9338 5.49992 17.1278V19.8778C5.49992 21.3937 6.73397 22.6278 8.24992 22.6278H13.7499C15.2659 22.6278 16.4999 21.3937 16.4999 19.8778V17.1278C16.4999 15.9338 15.7311 14.9266 14.6666 14.5462ZM9.16658 12.5444C9.16658 11.5338 9.98929 10.7111 10.9999 10.7111C12.0105 10.7111 12.8332 11.5338 12.8332 12.5444V14.3778H9.16658V12.5444ZM14.6666 19.8778C14.6666 20.3831 14.2552 20.7944 13.7499 20.7944H8.24992C7.74459 20.7944 7.33325 20.3831 7.33325 19.8778V17.1278C7.33325 16.6224 7.74459 16.2111 8.24992 16.2111H13.7499C14.2552 16.2111 14.6666 16.6224 14.6666 17.1278V19.8778Z""/>
+					</svg>
+
+				`;
+			break;
+
+			case "filekey_icon":
+				return `
+					<svg viewBox="0 0 13 16"${class_string}${id}${tabindex}>
+						<path d="M10.4867 6.88902V4.77531C10.4867 2.64104 8.7493 0.903607 6.61503 0.903607C4.48076 0.903607 2.74332 2.64104 2.74332 4.77531V6.88902C1.61932 7.29072 0.807471 8.35423 0.807471 9.61495V12.5187C0.807471 14.1194 2.11053 15.4225 3.71125 15.4225H9.51881C11.1195 15.4225 12.4226 14.1194 12.4226 12.5187V9.61495C12.4226 8.35423 11.6107 7.29072 10.4867 6.88902ZM4.67918 4.77531C4.67918 3.70818 5.5479 2.83946 6.61503 2.83946C7.68217 2.83946 8.55088 3.70818 8.55088 4.77531V6.71117H4.67918V4.77531ZM10.4867 12.5187C10.4867 13.0523 10.0524 13.4867 9.51881 13.4867H3.71125C3.17767 13.4867 2.74332 13.0523 2.74332 12.5187V9.61495C2.74332 9.08137 3.17767 8.64702 3.71125 8.64702H9.51881C10.0524 8.64702 10.4867 9.08137 10.4867 9.61495V12.5187Z"/>
+					</svg>
+				`;
+			break;
+
+			case "file_icon":
+				return `
+					<svg viewBox="0 0 25 30"${class_string}${id}${tabindex}>
+					<path d="M24.9856 9.30458C24.9804 9.23557 24.9634 9.16916 24.9439 9.10015C24.9244 9.03245 24.9061 8.96734 24.8749 8.90484C24.8645 8.88271 24.8632 8.85927 24.8515 8.83714C22.7187 5.2838 19.7148 2.27847 16.1615 0.147133C16.1406 0.134112 16.1159 0.134113 16.0938 0.122395C16.0326 0.0911446 15.9688 0.0729129 15.901 0.0533829C15.8307 0.0338515 15.763 0.0156254 15.6914 0.0117188C15.668 0.0117188 15.6484 0 15.625 0H6.25C2.80333 0 0 2.8034 0 6.25V22.9167C0 26.3633 2.8034 29.1667 6.25 29.1667H18.75C22.1967 29.1667 25 26.3633 25 22.9167V9.375C25 9.35026 24.9882 9.32932 24.9856 9.30458ZM22.0168 8.33321H20.8332C18.5364 8.33321 16.6666 6.46342 16.6666 4.16655V2.98295C18.7265 4.46212 20.5375 6.27325 22.0168 8.33321ZM18.7499 27.0832H6.2499C3.95304 27.0832 2.08324 25.2134 2.08324 22.9165V6.24988C2.08324 3.95301 3.95304 2.08321 6.2499 2.08321H14.5832V4.16655C14.5832 7.61322 17.3866 10.4165 20.8332 10.4165H22.9166V22.9165C22.9166 25.2134 21.0468 27.0832 18.7499 27.0832Z"/>
+					<path d="M17.5457 16.1931C17.4066 16.0458 17.2306 15.9722 17.0178 15.9722H7.69971C7.47873 15.9722 7.29457 16.0458 7.14725 16.1931C6.99993 16.3323 6.92627 16.5083 6.92627 16.7211C6.92627 16.9339 6.99993 17.1139 7.14725 17.2612C7.29457 17.4086 7.47873 17.4822 7.69971 17.4822H17.0178C17.2306 17.4822 17.4066 17.4086 17.5457 17.2612C17.693 17.1139 17.7667 16.9339 17.7667 16.7211C17.7667 16.5083 17.693 16.3323 17.5457 16.1931Z"/>
+					<path d="M17.5457 20.4777C17.4066 20.3304 17.2306 20.2568 17.0178 20.2568H7.69971C7.47873 20.2568 7.29457 20.3304 7.14725 20.4777C6.99993 20.6251 6.92627 20.8092 6.92627 21.0302C6.92627 21.2348 6.99993 21.4108 7.14725 21.5581C7.29457 21.6972 7.47873 21.7668 7.69971 21.7668H17.0178C17.2306 21.7668 17.4066 21.6972 17.5457 21.5581C17.693 21.4108 17.7667 21.2348 17.7667 21.0302C17.7667 20.8092 17.693 20.6251 17.5457 20.4777Z"/>
+					</svg>
+				`;
+			break;
+			
+			case "plus_icon":
+				return `
+					<svg viewBox="0 0 34 33"${class_string}${id}${tabindex}>
+						<path d="M17 32.7086C14.7774 32.7086 12.6917 32.2873 10.7429 31.4446C8.79413 30.6124 7.08238 29.4589 5.60764 27.9842C4.1329 26.5095 2.97417 24.7977 2.13146 22.8489C1.29929 20.9002 0.883203 18.8145 0.883203 16.5918C0.883203 14.3692 1.29929 12.2835 2.13146 10.3347C2.97417 8.38596 4.1329 6.67421 5.60764 5.19947C7.08238 3.7142 8.79413 2.55547 10.7429 1.7233C12.6917 0.891126 14.7774 0.475039 17 0.475039C19.2226 0.475039 21.3083 0.891126 23.2571 1.7233C25.2059 2.55547 26.9176 3.7142 28.3924 5.19947C29.8671 6.67421 31.0206 8.38596 31.8527 10.3347C32.6954 12.2835 33.1168 14.3692 33.1168 16.5918C33.1168 18.8145 32.6954 20.9002 31.8527 22.8489C31.0206 24.7977 29.8671 26.5095 28.3924 27.9842C26.9176 29.4589 25.2059 30.6124 23.2571 31.4446C21.3083 32.2873 19.2226 32.7086 17 32.7086ZM17 30.0225C18.854 30.0225 20.592 29.6749 22.2143 28.9796C23.8365 28.2844 25.2638 27.3206 26.4963 26.0881C27.7287 24.8556 28.6926 23.4283 29.3878 21.8061C30.083 20.1839 30.4307 18.4458 30.4307 16.5918C30.4307 14.7379 30.083 12.9998 29.3878 11.3776C28.6926 9.74483 27.7287 8.31749 26.4963 7.09557C25.2638 5.86311 23.8365 4.89926 22.2143 4.20402C20.592 3.50879 18.854 3.16117 17 3.16117C15.146 3.16117 13.408 3.50879 11.7857 4.20402C10.1635 4.89926 8.73619 5.86311 7.50373 7.09557C6.27127 8.31749 5.30742 9.74483 4.61219 11.3776C3.91695 12.9998 3.56934 14.7379 3.56934 16.5918C3.56934 18.4458 3.91695 20.1839 4.61219 21.8061C5.30742 23.4283 6.27127 24.8556 7.50373 26.0881C8.73619 27.3206 10.1635 28.2844 11.7857 28.9796C13.408 29.6749 15.146 30.0225 17 30.0225ZM9.66844 16.5918C9.66844 16.1915 9.78958 15.8703 10.0319 15.628C10.2847 15.3752 10.6165 15.2488 11.0273 15.2488H15.6727V10.6033C15.6727 10.2031 15.7939 9.8765 16.0362 9.62369C16.2784 9.37088 16.5892 9.24447 16.9684 9.24447C17.3687 9.24447 17.69 9.37088 17.9322 9.62369C18.1851 9.86597 18.3115 10.1925 18.3115 10.6033V15.2488H22.9727C23.373 15.2488 23.6943 15.3752 23.9365 15.628C24.1894 15.8703 24.3158 16.1915 24.3158 16.5918C24.3158 16.9711 24.1894 17.2818 23.9365 17.5241C23.6943 17.7664 23.373 17.8875 22.9727 17.8875H18.3115V22.5487C18.3115 22.949 18.1851 23.2756 17.9322 23.5284C17.69 23.7707 17.3687 23.8918 16.9684 23.8918C16.5892 23.8918 16.2784 23.7707 16.0362 23.5284C15.7939 23.2756 15.6727 22.949 15.6727 22.5487V17.8875H11.0273C10.627 17.8875 10.3005 17.7664 10.0477 17.5241C9.79484 17.2818 9.66844 16.9711 9.66844 16.5918Z"/>
+					</svg>
+				`;
+			break;			
+
+			case "dl_icon":
+				return `
+					<svg viewBox="0 0 21 24"${class_string}${id}${tabindex}>
+					<path d="M10.6483 0.210997C10.9654 0.210997 11.2285 0.319102 11.4375 0.535313C11.6537 0.751524 11.7618 1.00737 11.7618 1.30286V12.0377L11.6753 13.6377L12.2159 12.9134L13.6537 11.3783C13.8483 11.1621 14.0933 11.054 14.3888 11.054C14.6482 11.054 14.8753 11.1405 15.0699 11.3134C15.2644 11.4864 15.3617 11.7098 15.3617 11.9837C15.3617 12.2431 15.2608 12.4738 15.059 12.6756L11.5132 16.0917C11.369 16.2358 11.2249 16.3367 11.0808 16.3944C10.9438 16.4448 10.7997 16.4701 10.6483 16.4701C10.5042 16.4701 10.3637 16.4448 10.2267 16.3944C10.0898 16.3367 9.94565 16.2358 9.79431 16.0917L6.24845 12.6756C6.04665 12.4738 5.94575 12.2431 5.94575 11.9837C5.94575 11.7098 6.03944 11.4864 6.22683 11.3134C6.42142 11.1405 6.64844 11.054 6.90789 11.054C7.20338 11.054 7.45202 11.1621 7.65382 11.3783L9.10243 12.9134L9.64296 13.6377L9.54566 12.0377V1.30286C9.54566 1.00737 9.65377 0.751524 9.86998 0.535313C10.0862 0.319102 10.3456 0.210997 10.6483 0.210997ZM4.42146 23.8104C3.2251 23.8104 2.31341 23.5005 1.6864 22.8807C1.06659 22.2609 0.756689 21.36 0.756689 20.1781V9.6486C0.756689 8.45944 1.06659 7.55856 1.6864 6.94597C2.31341 6.32616 3.2251 6.01626 4.42146 6.01626H7.50247V8.4162H4.61605C4.14039 8.4162 3.77644 8.53872 3.52419 8.78376C3.27915 9.02159 3.15663 9.38915 3.15663 9.88644V19.9294C3.15663 20.4267 3.27915 20.7943 3.52419 21.0321C3.77644 21.2771 4.14039 21.3997 4.61605 21.3997H16.6914C17.1599 21.3997 17.5202 21.2771 17.7725 21.0321C18.0247 20.7943 18.1509 20.4267 18.1509 19.9294V9.88644C18.1509 9.38915 18.0247 9.02159 17.7725 8.78376C17.5202 8.53872 17.1599 8.4162 16.6914 8.4162H13.805V6.01626H16.8968C18.0932 6.01626 19.0013 6.32616 19.6211 6.94597C20.2481 7.55856 20.5616 8.45944 20.5616 9.6486V20.1781C20.5616 21.36 20.2481 22.2609 19.6211 22.8807C19.0013 23.5005 18.0932 23.8104 16.8968 23.8104H4.42146Z"/>
+					<path d="M10.6483 0.210997C10.9654 0.210997 11.2285 0.319102 11.4375 0.535313C11.6537 0.751524 11.7618 1.00737 11.7618 1.30286V12.0377L11.6753 13.6377L12.2159 12.9134L13.6537 11.3783C13.8483 11.1621 14.0933 11.054 14.3888 11.054C14.6482 11.054 14.8753 11.1405 15.0699 11.3134C15.2644 11.4864 15.3617 11.7098 15.3617 11.9837C15.3617 12.2431 15.2608 12.4738 15.059 12.6756L11.5132 16.0917C11.369 16.2358 11.2249 16.3367 11.0808 16.3944C10.9438 16.4448 10.7997 16.4701 10.6483 16.4701C10.5042 16.4701 10.3637 16.4448 10.2267 16.3944C10.0898 16.3367 9.94565 16.2358 9.79431 16.0917L6.24845 12.6756C6.04665 12.4738 5.94575 12.2431 5.94575 11.9837C5.94575 11.7098 6.03944 11.4864 6.22683 11.3134C6.42142 11.1405 6.64844 11.054 6.90789 11.054C7.20338 11.054 7.45202 11.1621 7.65382 11.3783L9.10243 12.9134L9.64296 13.6377L9.54566 12.0377V1.30286C9.54566 1.00737 9.65377 0.751524 9.86998 0.535313C10.0862 0.319102 10.3456 0.210997 10.6483 0.210997ZM4.42146 23.8104C3.2251 23.8104 2.31341 23.5005 1.6864 22.8807C1.06659 22.2609 0.756689 21.36 0.756689 20.1781V9.6486C0.756689 8.45944 1.06659 7.55856 1.6864 6.94597C2.31341 6.32616 3.2251 6.01626 4.42146 6.01626H7.50247V8.4162H4.61605C4.14039 8.4162 3.77644 8.53872 3.52419 8.78376C3.27915 9.02159 3.15663 9.38915 3.15663 9.88644V19.9294C3.15663 20.4267 3.27915 20.7943 3.52419 21.0321C3.77644 21.2771 4.14039 21.3997 4.61605 21.3997H16.6914C17.1599 21.3997 17.5202 21.2771 17.7725 21.0321C18.0247 20.7943 18.1509 20.4267 18.1509 19.9294V9.88644C18.1509 9.38915 18.0247 9.02159 17.7725 8.78376C17.5202 8.53872 17.1599 8.4162 16.6914 8.4162H13.805V6.01626H16.8968C18.0932 6.01626 19.0013 6.32616 19.6211 6.94597C20.2481 7.55856 20.5616 8.45944 20.5616 9.6486V20.1781C20.5616 21.36 20.2481 22.2609 19.6211 22.8807C19.0013 23.5005 18.0932 23.8104 16.8968 23.8104H4.42146Z"/>
+					</svg>
+				`;
+			break;
+
+			case "chiz_icon":
+				return `
+					<svg viewBox="0 0 38 37" ${class_string}${id}${tabindex}>
+						<rect x="10" y="10.4614" width="18" height="2" rx="1"/>
+						<rect x="15.1428" y="17.4614" width="12.8571" height="2" rx="1"/>
+						<rect x="19" y="24.4614" width="9" height="2" rx="1"/>
+					</svg>
+
+					
+				`;
+			break;
+
+			case "x_icon":
+				return `
+					<svg viewBox="0 0 14 14"${class_string}${id}${tabindex}>
+						<path opacity="0.4" d="M1.28125 12.9067C1.15104 12.7765 1.0651 12.6255 1.02344 12.4536C0.981771 12.2817 0.981771 12.1099 1.02344 11.938C1.0651 11.7661 1.14844 11.6177 1.27344 11.4927L5.92969 6.82861L1.27344 2.17236C1.14844 2.05257 1.0651 1.90674 1.02344 1.73486C0.986979 1.55778 0.986979 1.3833 1.02344 1.21143C1.0651 1.03955 1.15104 0.888509 1.28125 0.758301C1.40625 0.628092 1.55469 0.542155 1.72656 0.500488C1.90365 0.458822 2.07812 0.458822 2.25 0.500488C2.42708 0.542155 2.57812 0.625488 2.70312 0.750488L7.35938 5.40674L12.0156 0.750488C12.1406 0.625488 12.2891 0.542155 12.4609 0.500488C12.6328 0.458822 12.8047 0.458822 12.9766 0.500488C13.1484 0.542155 13.2995 0.630697 13.4297 0.766113C13.5599 0.891113 13.6458 1.03955 13.6875 1.21143C13.7344 1.3833 13.7344 1.55518 13.6875 1.72705C13.6458 1.89893 13.5625 2.04736 13.4375 2.17236L8.78906 6.82861L13.4375 11.4927C13.5625 11.6177 13.6458 11.7661 13.6875 11.938C13.7292 12.1099 13.7292 12.2817 13.6875 12.4536C13.6458 12.6255 13.5599 12.7765 13.4297 12.9067C13.2995 13.0369 13.1484 13.1229 12.9766 13.1646C12.8047 13.2062 12.6328 13.2062 12.4609 13.1646C12.2891 13.1229 12.1406 13.0396 12.0156 12.9146L7.35938 8.2583L2.70312 12.9146C2.57812 13.0396 2.42969 13.1229 2.25781 13.1646C2.08594 13.2062 1.91146 13.2062 1.73438 13.1646C1.5625 13.1229 1.41146 13.0369 1.28125 12.9067Z"/>
+					</svg>
+				`;
+			break;
+
+			case "share_icon":
+				return `
+					<svg viewBox="0 0 15 19"${class_string}${id}${tabindex}>
+						<path d="M2.64062 18.3877C1.77604 18.3877 1.11719 18.1637 0.664062 17.7158C0.216146 17.2679 -0.0078125 16.6169 -0.0078125 15.7627V8.15332C-0.0078125 7.29395 0.216146 6.6429 0.664062 6.2002C1.11719 5.75228 1.77604 5.52832 2.64062 5.52832H4.86719V7.2627H2.78125C2.4375 7.2627 2.17448 7.35124 1.99219 7.52832C1.8151 7.7002 1.72656 7.96582 1.72656 8.3252V15.583C1.72656 15.9424 1.8151 16.208 1.99219 16.3799C2.17448 16.557 2.4375 16.6455 2.78125 16.6455H11.5078C11.8464 16.6455 12.1068 16.557 12.2891 16.3799C12.4714 16.208 12.5625 15.9424 12.5625 15.583V8.3252C12.5625 7.96582 12.4714 7.7002 12.2891 7.52832C12.1068 7.35124 11.8464 7.2627 11.5078 7.2627H9.42188V5.52832H11.6562C12.5208 5.52832 13.1771 5.75228 13.625 6.2002C14.0781 6.6429 14.3047 7.29395 14.3047 8.15332V15.7627C14.3047 16.6169 14.0781 17.2679 13.625 17.7158C13.1771 18.1637 12.5208 18.3877 11.6562 18.3877H2.64062ZM7.14062 11.958C6.92188 11.958 6.73438 11.8799 6.57812 11.7236C6.42188 11.5674 6.34375 11.3851 6.34375 11.1768V3.40332L6.41406 2.25488L6.02344 2.77832L4.97656 3.89551C4.83073 4.04655 4.65104 4.12207 4.4375 4.12207C4.25 4.12207 4.08594 4.05957 3.94531 3.93457C3.8099 3.80957 3.74219 3.64811 3.74219 3.4502C3.74219 3.2627 3.8151 3.09342 3.96094 2.94238L6.52344 0.481445C6.63281 0.377279 6.73698 0.306966 6.83594 0.270508C6.9349 0.228841 7.03646 0.208008 7.14062 0.208008C7.25 0.208008 7.35417 0.228841 7.45312 0.270508C7.55729 0.306966 7.66146 0.377279 7.76562 0.481445L10.3281 2.94238C10.474 3.09342 10.5469 3.2627 10.5469 3.4502C10.5469 3.64811 10.4766 3.80957 10.3359 3.93457C10.1953 4.05957 10.0312 4.12207 9.84375 4.12207C9.63021 4.12207 9.45312 4.04655 9.3125 3.89551L8.27344 2.77832L7.88281 2.25488L7.94531 3.40332V11.1768C7.94531 11.3851 7.86719 11.5674 7.71094 11.7236C7.5599 11.8799 7.36979 11.958 7.14062 11.958Z"/>
+					</svg>
+				`;
+			break;
+
+			case "copy_icon":
+				return `
+					<svg viewBox="0 0 17 21"${class_string}${id}${tabindex}>
+						<path d="M3.85938 5.22363V3.31738C3.85938 2.47363 4.07292 1.83561 4.5 1.40332C4.92708 0.96582 5.5599 0.74707 6.39844 0.74707H9.33594C9.78906 0.74707 10.1927 0.812174 10.5469 0.942383C10.9062 1.06738 11.2318 1.28092 11.5234 1.58301L15.4141 5.54395C15.7214 5.86165 15.9375 6.2002 16.0625 6.55957C16.1875 6.91374 16.25 7.34863 16.25 7.86426V14.0518C16.25 14.8955 16.0339 15.5335 15.6016 15.9658C15.1745 16.3981 14.5443 16.6143 13.7109 16.6143H12.1094V15.083H13.5703C13.9505 15.083 14.2344 14.9867 14.4219 14.7939C14.6146 14.596 14.7109 14.3174 14.7109 13.958V7.48926H11.2734C10.7891 7.48926 10.4219 7.36686 10.1719 7.12207C9.92188 6.87207 9.79688 6.50488 9.79688 6.02051V2.28613H6.52344C6.14844 2.28613 5.86458 2.38249 5.67188 2.5752C5.48438 2.7679 5.39062 3.04655 5.39062 3.41113V5.22363H3.85938ZM11.0781 5.8252C11.0781 5.96061 11.1068 6.05957 11.1641 6.12207C11.2266 6.17936 11.3229 6.20801 11.4531 6.20801H14.3125L11.0781 2.92676V5.8252ZM-0.0078125 18.0596V7.3252C-0.0078125 6.48145 0.205729 5.84342 0.632812 5.41113C1.0599 4.97363 1.69271 4.75488 2.53125 4.75488H5.25C5.72396 4.75488 6.11458 4.80697 6.42188 4.91113C6.73438 5.01009 7.04688 5.22103 7.35938 5.54395L11.5938 9.84082C11.8125 10.0648 11.9792 10.2783 12.0938 10.4814C12.2083 10.6846 12.2839 10.9111 12.3203 11.1611C12.362 11.4059 12.3828 11.7028 12.3828 12.0518V18.0596C12.3828 18.9033 12.1693 19.5413 11.7422 19.9736C11.3151 20.4059 10.6823 20.6221 9.84375 20.6221H2.53125C1.69271 20.6221 1.0599 20.4059 0.632812 19.9736C0.205729 19.5465 -0.0078125 18.9085 -0.0078125 18.0596ZM1.53125 17.9658C1.53125 18.3304 1.625 18.609 1.8125 18.8018C2 18.9945 2.28125 19.0908 2.65625 19.0908H9.71094C10.0859 19.0908 10.3672 18.9945 10.5547 18.8018C10.7474 18.609 10.8438 18.3304 10.8438 17.9658V12.2314H6.71875C6.16667 12.2314 5.7526 12.096 5.47656 11.8252C5.20052 11.5492 5.0625 11.1299 5.0625 10.5674V6.29395H2.66406C2.28385 6.29395 2 6.3903 1.8125 6.58301C1.625 6.77572 1.53125 7.05176 1.53125 7.41113V17.9658ZM6.875 10.8799H10.6328L6.41406 6.59082V10.4189C6.41406 10.5804 6.45052 10.6976 6.52344 10.7705C6.59635 10.8434 6.71354 10.8799 6.875 10.8799Z"/>
+					</svg>
+				`;
+			break;
+
+			case "save_icon":
+				return `
+					<svg viewBox="0 0 12 15"${class_string}${id}${tabindex}>
+						<path d="M5.98438 0.692383C6.23438 0.692383 6.4375 0.773112 6.59375 0.93457C6.75521 1.09603 6.83594 1.30436 6.83594 1.55957V8.8252L6.76562 10.4658L8.84375 8.17676L10.4531 6.59863C10.526 6.52051 10.6146 6.45801 10.7188 6.41113C10.8281 6.36426 10.9427 6.34082 11.0625 6.34082C11.3021 6.34082 11.5 6.42155 11.6562 6.58301C11.8125 6.74447 11.8906 6.94759 11.8906 7.19238C11.8906 7.30176 11.8672 7.40853 11.8203 7.5127C11.7734 7.61686 11.7031 7.71582 11.6094 7.80957L6.61719 12.7471C6.53385 12.8356 6.4375 12.9059 6.32812 12.958C6.21875 13.0101 6.10417 13.0361 5.98438 13.0361C5.85938 13.0361 5.74219 13.0101 5.63281 12.958C5.52344 12.9059 5.42708 12.8356 5.34375 12.7471L0.351562 7.80957C0.263021 7.71582 0.195312 7.61686 0.148438 7.5127C0.101562 7.40853 0.078125 7.30176 0.078125 7.19238C0.078125 6.94759 0.15625 6.74447 0.3125 6.58301C0.46875 6.42155 0.666667 6.34082 0.90625 6.34082C1.02604 6.34082 1.13802 6.36426 1.24219 6.41113C1.34635 6.45801 1.4375 6.52051 1.51562 6.59863L3.11719 8.17676L5.20312 10.4736L5.125 8.8252V1.55957C5.125 1.30436 5.20312 1.09603 5.35938 0.93457C5.52083 0.773112 5.72917 0.692383 5.98438 0.692383ZM0.8125 13.0127H11.1328C11.3776 13.0127 11.5781 13.0934 11.7344 13.2549C11.8906 13.4163 11.9688 13.6169 11.9688 13.8564C11.9688 14.096 11.8906 14.2965 11.7344 14.458C11.5781 14.6195 11.3776 14.7002 11.1328 14.7002H0.8125C0.578125 14.7002 0.382812 14.6195 0.226562 14.458C0.0703125 14.2965 -0.0078125 14.096 -0.0078125 13.8564C-0.0078125 13.6169 0.0703125 13.4163 0.226562 13.2549C0.382812 13.0934 0.578125 13.0127 0.8125 13.0127Z"/>
+					</svg>
+
+				`;
+			break;
+
+			case "check_icon":
+				return `
+					<svg viewBox="0 0 14 14"${class_string}${id}${tabindex}>
+						<path d="M5.28125 13.6611C4.90625 13.6611 4.58594 13.4945 4.32031 13.1611L0.273438 8.09863C0.174479 7.97884 0.101562 7.86165 0.0546875 7.74707C0.0130208 7.63249 -0.0078125 7.5153 -0.0078125 7.39551C-0.0078125 7.12467 0.0807292 6.90072 0.257812 6.72363C0.440104 6.54655 0.669271 6.45801 0.945312 6.45801C1.26302 6.45801 1.53125 6.60124 1.75 6.8877L5.25 11.3799L12.0312 0.606445C12.151 0.424154 12.2734 0.296549 12.3984 0.223633C12.5234 0.145508 12.6849 0.106445 12.8828 0.106445C13.1536 0.106445 13.375 0.192383 13.5469 0.364258C13.7188 0.530924 13.8047 0.749674 13.8047 1.02051C13.8047 1.12988 13.7865 1.24186 13.75 1.35645C13.7135 1.46582 13.6562 1.58301 13.5781 1.70801L6.23438 13.1533C6.00521 13.4919 5.6875 13.6611 5.28125 13.6611Z"/>
+					</svg>
+				`;
+			break;
+
+
+			case "edit_icon":
+				return `
+					<svg viewBox="0 0 23.6475 23.3041"${class_string}${id}${tabindex}>
+						<rect height="23.3041" opacity="0" width="23.6475" x="0" y="0"/>
+						<path d="M15.5591 4.88935L6.08643 4.88935C5.10986 4.88935 4.56299 5.41669 4.56299 6.43232L4.56299 17.5163C4.56299 18.5319 5.10986 19.0495 6.08643 19.0495L17.2095 19.0495C18.186 19.0495 18.7231 18.5319 18.7231 17.5163L18.7231 8.12957L20.2954 6.55445L20.2954 17.5944C20.2954 19.6159 19.27 20.6218 17.229 20.6218L6.05713 20.6218C4.02588 20.6218 2.99072 19.6159 2.99072 17.5944L2.99072 6.34443C2.99072 4.33271 4.02588 3.31708 6.05713 3.31708L17.1313 3.31708Z"/>
+						<path d="M9.61182 14.2936L11.5161 13.4636L20.6372 4.35224L19.2993 3.03388L10.188 12.1452L9.30908 13.9811C9.23096 14.1472 9.42627 14.3718 9.61182 14.2936ZM21.3599 3.63935L22.063 2.91669C22.395 2.56513 22.395 2.09638 22.063 1.77412L21.8384 1.53974C21.5356 1.23701 21.0571 1.27607 20.7349 1.58857L20.022 2.29169Z"/>
+					</svg>
+				`;
+			break;
+
+
+
+
+
+
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+var animated_list = [];
+	
+var ex_params = [
+	{
+		stroke:{
+			color: "#1377f980",
+			width: "4px",
+			dash_len: 3,
+			gap_len: 6,
+			dash_inc: 1
+		},
+		
+		frame_delay: 1,
+		initial_offset: 0,
+		defs: null,
+		default_border: {
+			style: "dashed",
+			width: "2px",
+			color: "#1377f980"
+		},
+	},
+];
+
+
+function toggleAnimations(){
+	for(var i = 0; i < animated_list.length; i++){
+		animated_list[i].toggleAnimation();
+	}
+}
+
+function destroyAnimations(){
+	for(var i = 0; i < animated_list.length; i++){
+		animated_list[i].destroy();
+	}
+}
+
+
+
+
+function createAnimatedBorder(element, params = null){
+	let svg, main_border,resize_observer, animation_handler,default_border;
+
+	(function init(){
+		svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		var offset_width = params.stroke.width;
+		var border_offset = ((parseInt((params.stroke.width).slice(0,-2))/2)*-1);
+		
+
+		svg.style.width = "calc(100% + " + offset_width + ")";
+		svg.style.height = "calc(100% + " + offset_width + ")";
+		svg.style.position = "absolute";
+		svg.style.left = border_offset + "px";
+		svg.style.top = border_offset + "px";
+		svg.style.pointerEvents = 'none';
+	
+
+
+
+		if(checkForProperty(params.defs)){
+			var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+			defs.innerHTML = params.defs;
+			svg.appendChild(defs);
+		}
+
+		element.prepend(svg);
+
+		main_border = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+
+		main_border.style.width = "100%";
+		main_border.style.height = "100%";
+		main_border.style.fill = "none";
+		main_border.setAttribute("rx", "10");
+		main_border.setAttribute("ry", "10");
+		main_border.setAttribute("stroke-linecap", "round");
+
+		initBorder(params.default_border);
+		alterBorder(params);
+
+		svg.appendChild(main_border);
+
+		animation_handler = new border_animation_handler(svg, params);
+
+		resize_observer = new ResizeObserver(resizeRect);
+		resize_observer.observe(svg);
+	})();
+
+	function initBorder(init_border){
+		default_border = init_border;
+		setBorderProps(element, init_border);
+		
+	}
+
+	function setBorderProps(element, border_changes, svg_display = null){
+
+		if(svg_display == null)
+			requestAnimationFrame(setBorder);
+		else if(svg_display == "none")
+			requestAnimationFrame(setBorderThenDisplay);
+		else
+			requestAnimationFrame(setDisplayThenBorder);
+
+
+
+		function setDisplayThenBorder(){
+			setSvgDisplay();
+			
+			setTimeout(setBorder,1);
+			
+		}
+
+		function setBorderThenDisplay(){
+			setBorder();
+			
+			setTimeout(setSvgDisplay,1);
+			
+		}
+
+		function timeoutThenFrame(callAfter){
+			setTimeout(frameAfterTimeout,1);
+
+			function frameAfterTimeout(){
+				requestAnimationFrame(callAfter);
+			}
+		}
+
+		function setBorder(){
+			if(checkForProperty(border_changes.width))
+				element.style.borderWidth = border_changes.width;
+			if(checkForProperty(border_changes.style))
+				element.style.borderStyle = border_changes.style;
+			if(checkForProperty(border_changes.color))
+				element.style.borderColor = border_changes.color;
+		}
+
+		function setSvgDisplay(){
+			if(svg_display != null)
+				svg.style.display = svg_display;
+		}
+
+	}
+
+	this.destroy = destroy;
+	function destroy(){
+		resize_observer.disconnect();
+		animation_handler.toggleAnimation(false);
+		svg.remove();
+	}
+
+
+
+	this.toggleAnimation = toggleAnimation;
+	function toggleAnimation(set_to = null) {
+		animation_handler.toggleAnimation(set_to);
+		
+		if(set_to){
+			
+			
+			setBorderProps(element, {color: "#ffffff00"}, "block");
+		}
+		else{
+			
+			
+			
+			setBorderProps(element, {color: default_border.color}, "none");
+		}
+		
+	}
+
+	this.alterBorder = alterBorder;
+	function alterBorder(params){
+		main_border.style.stroke = ((checkForProperty(params.stroke.color) ? params.stroke.color : default_settings.stroke.color));
+		main_border.style.strokeWidth = ((checkForProperty(params.stroke.width) ? params.stroke.width : default_settings.stroke.width));
+		main_border.style.strokeDasharray = (checkForProperty(params.stroke.dash_len)) ? params.stroke.dash_len + " " + params.stroke.gap_len : default_settings.stroke.dash_len + " " + default_settings.stroke.gap_len;
+	}
+
+	function resizeRect(){
+		main_border.style.width = "0";
+		main_border.style.height = "0";
+
+		window.setTimeout(function(){
+			main_border.style.width = "100%";
+			main_border.style.height = "100%";
+		},1);
+	}
+
+}
+
+
+function border_animation_handler(svg, animation) {
+	var animate, frame_counter, animate_array, current_offset;
+
+	(function() {
+		animate = true;
+		animate_array = getPaths(svg);
+		current_offset = 0;
+		frame_counter = 1;
+
+		if(animation.frame_delay > 0)
+			requestAnimationFrame(function(){currentAnimation(animation, 0)});
+		
+	})();
+	
+	function getPaths(svg){
+		var ret_paths = [];
+		for(var i = 0; i < svg.children.length; i++){
+			if(svg.children[i].nodeName == "rect" || svg.children[i].nodeName === "path")
+				ret_paths.push(svg.children[i]);
+		}
+		return ret_paths;
+	}
+
+
+
+	this.toggleAnimation = toggleAnimation;
+	function toggleAnimation(set_to) {
+		animate = (set_to != null) ? set_to : !animate;
+		if(animate)
+			currentAnimation();
+	}
+
+	 function currentAnimation(){
+		(function newFrame() {
+			if (animate || animation.frame_delay == 0){
+				if(frame_counter % animation.frame_delay == 0){						
+					current_offset += animation.stroke.dash_inc;
+					for (var i = 0; i < animate_array.length; i++){
+						animate_array[i].style.strokeDashoffset = current_offset;
+					
+						if(checkForProperty(animation.color_animation)){
+							animation.color_animation.pointer = (animation.color_animation.pointer+1 < animation.color_animation.color_array.length) ? animation.color_animation.pointer+1 : 0;
+							animate_array[i].style.stroke = animation.color_animation.color_array[animation.color_animation.pointer];
+						}
+					
+					}
+
+					if(current_offset >= 40000000)
+						current_offset = 0;
+				}
+				frame_counter++;
+				requestAnimationFrame(newFrame);
+			}
+		})();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+function checkForProperty(prop){
+	return (prop === "" || prop === null || prop === undefined) ? false : true;
+}
+
+
+
+function getRandomInclusive(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function get_query_strings(return_as_array = false){
+	var results = {};
+	if(window.location.search != ""){
+		var param;
+		var searched = window.location.search;
+		searched = searched.substring(1);
+		searched = searched.split("&");
+		if(return_as_array)
+			return searched;
+		else{
+			for(var i = 0; i< searched.length;i++)
+				parsePair(results, searched);
+		}
+	}
+	return results;
+
+	function parsePair(results, pair){
+		var value;
+		pair = pair[i].split("=");
+		if((typeof pair[1] === "undefined"))
+			value = true;
+		else{
+			switch(pair[1]){
+				case "null":
+					value = null;
+					break;
+				case "false":
+					value = false;
+					break;
+				case "true":
+					value = true;
+					break;
+				default:
+					var temp = parseInt(pair[1]);
+					if(isNaN(temp))
+						value = pair[1];
+					else
+						value = (temp.toString().length == pair[1].length) ? temp : pair[1];
+			}
+		}
+		results[pair[0]] = value;
+	}
+}
+
+function blobWorkersHandler(){
+	let workers = [];
+	let worker_pointer = 0;
+	let worker_blob = null;
+	
+
+	this.loadWorkerScript = loadWorkerScript;
+	function loadWorkerScript(new_worker_url, cb){
+		
+		getWorkerScript(new_worker_url, function(ret_blob, ret_script){
+			if(ret_blob != null){
+				worker_blob = ret_blob;
+				cb(true, ret_script);
+			}
+			else
+				cb(false, null);
+		});
+	}
+
+	this.loadWorkerFromBlob = loadWorkerFromBlob;
+	function loadWorkerFromBlob(new_blob, cb){
+		
+		worker_blob = new_blob;
+		buildWorkers(worker_blob);
+	}
+
+	
+	this.loadWorkerFromText = loadWorkerFromText;
+	function loadWorkerFromText(worker_text, cb){
+		worker_blob = URL.createObjectURL(new Blob([worker_text], { type: 'application/javascript'}));
+		cb(true);
+	}
+
+	this.scriptReady = scriptReady;
+	function scriptReady(){return (worker_blob != null) ? true : false}
+
+	this.initWorkers = initWorkers;
+	function initWorkers(cb){
+		buildWorkers(worker_blob);
+		sendMessageToWorker({msg_type:"get_version"}, [], function(ret){
+			cb(ret);
+		});
+	}
+
+	this.sendMessageToWorker = sendMessageToWorker;
+	function sendMessageToWorker(msg_param, transfer_array, cb){
+		let temp_pointer = worker_pointer;
+		worker_pointer = (worker_pointer + 1 < workers.length) ?  worker_pointer + 1 : 0;
+		sendArrayBufferToWorker(temp_pointer, msg_param, transfer_array, cb);
+	}
+
+
+	function sendArrayBufferToWorker(worker_pointer, msg_param, transfer_array, cb) {
+
+		workers[worker_pointer].worker.postMessage(msg_param, transfer_array);
+
+		if(cb != null)
+			workers[worker_pointer].worker.addEventListener("message", handleDeResponse);
+
+		function handleDeResponse(event){
+			workers[worker_pointer].worker.removeEventListener("message", handleDeResponse);
+
+			var data = event.data;
+			if(cb != null)
+				cb(data);
+		}
+	}
+
+	function buildWorkers(worker_blob_obj){
+		
+		const num_workers = 1;
+
+		for(var i = 0; i < num_workers; i++)
+			workers.push({id: i, worker: createWorker_blob(worker_blob_obj), in_use:false});
+
+		function createWorker_blob(blobURL) {
+			const worker = new Worker(blobURL);
+			return worker;
+		}
+	}
+
+	function getWorkerScript(main_worker_url, cb){
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', main_worker_url, true);
+
+		xhr.onreadystatechange = function (){
+			var ret;
+			if(xhr.readyState === 4 && xhr.status === 200)
+				cb(URL.createObjectURL(new Blob([xhr.response], { type: 'application/javascript'})), xhr.responseText);
+			else if(xhr.readyState === 4)
+				cb(null);
+		};
+		xhr.send();
+	}
+}
+
+
+
+function webauthn_handler(init_params = {name:"BitNote", id: "bitnote.xyz"}){
+	
+	(function init(){
+
+	})();
+
+
+	this.createCredential = createCredential;
+	function createCredential(prf_obj, callback){
+		
+		navigator.credentials.create({
+			publicKey: {
+				rp: {name: init_params.name, id: init_params.id},
+				user: {
+					id: self.crypto.getRandomValues(new Uint8Array(16)),
+					name:  prf_obj.key_name,
+					displayName: prf_obj.username,
+				},
+				pubKeyCredParams: [
+					{type: 'public-key', alg: -7},
+					{type: "public-key", alg: -8},
+					{type: "public-key", alg: -257}
+				],
+				timeout: 60000,
+				authenticatorSelection: {
+					
+					
+					residentKey: "required",
+				},
+				extensions: {prf: {}},
+				
+				
+				challenge: self.crypto.getRandomValues(new Uint8Array(16)).buffer,
+			}
+		}).then((c) => {
+			if(checkForProperty(c.getClientExtensionResults().prf) && c.getClientExtensionResults().prf.enabled === true)
+				callback(c.rawId);
+			else
+				callback(null);
+		}).catch((error) => {
+			var qq = 22;
+			callback(null);
+			
+			
+		});
+		
+	}
+
+	this.getCredential = getCredential;
+	function getCredential(prf_obj, callback){
+		var publicKey = {
+			timeout: 60000,
+			rpId: init_params.id,
+			
+			challenge: self.crypto.getRandomValues(new Uint8Array(16)).buffer,
+			extensions: {prf: {eval: {first: prf_obj.first}}},
+		};
+		if(checkForProperty(prf_obj.second))
+			publicKey.extensions.prf.eval.second = prf_obj.second;
+		if(checkForProperty(prf_obj.id)){
+			publicKey.allowCredentials = [{
+				type: "public-key",
+				id: prf_obj.id,
+				
+			}];
+		}
+
+		navigator.credentials.get({publicKey}).then((c) => {
+			var ext_results = c.getClientExtensionResults();
+			
+			if(checkForProperty(ext_results) && checkForProperty(ext_results.prf.results) && checkForProperty(ext_results.prf.results.first) && checkForProperty(ext_results.prf.results.second)){
+				var key_mat = concatArrayBuffers(ext_results.prf.results.first, ext_results.prf.results.second);
+				callback(key_mat, c.rawId);
+			}
+			else
+				callback(null);
+		}).catch((error) => {
+			var qq = 22;
+			callback(null);
+			
+			
+		});
+	}
+
+
+
+	function concatArrayBuffers(buffer1, buffer2) {
+		var tmp = new Uint8Array(buffer1.byteLength + buffer2.byteLength);
+		tmp.set(new Uint8Array(buffer1), 0);
+		tmp.set(new Uint8Array(buffer2), buffer1.byteLength);
+		return tmp.buffer;
+	}
+
+	this.webAuthnClick = webAuthnClick;
+	function webAuthnClick(prf_obj, bio_cb){
+
+		getCredential(prf_obj, bio_cb);
+
+		function handleBioLogin(key_mat, raw_id){
+			if(key_mat != null && raw_id != null){
+				getBiometrics(raw_id, handleLogin);
+			}
+			else
+				bio_cb(null);
+
+			function handleLogin(cred){
+					bio_cb(key_mat, cred);
+			}
+
+
+		}
+	}
+
+	function checkForProperty(prop){return (prop === "" || prop === null || prop === undefined) ? false : true;}
+
+}
+
+	
+
+function copy_to_clipboard(text_to_copy, cb = null){
+	navigator.clipboard.writeText(text_to_copy).then(() => {
+		if(cb != null)
+			cb(true);
+	}).catch(err => {
+		if(cb != null)
+			cb(false, err);
+	});
+}
+
+
+
+function clear_clipboard(cb = null, params = {}){
+	let prefix = (params.prefix != null) ? params.prefix : "";
+	let suffix = (params.suffix != null) ? params.suffix : "";
+	let default_item_clear = (params.item_clear != null) ? params.item_clear : 40;
+
+	(function next(pointer){
+		if(pointer < default_item_clear){
+			navigator.clipboard.writeText(prefix + pointer + suffix).then(function(){
+				++pointer;
+				window.setTimeout(function(){next(pointer)}, 250);
+			});
+		}
+		else if(cb != null){
+			cb(true);
+			cb = null;
+		}
+	})(0);
+}
+
+
+
+
+function buffer_helper(){
+	this.convertBufferType = convertBufferType;
+	this.bufferPush = bufferPush;
+	this.getBufferTypedArrayConstructor = getBufferTypedArrayConstructor;
+	this.bufferToHex = bufferToHex;
+	this.hexStringToHexNumber = hexStringToHexNumber;
+	this.hexToArrayBuffer = hexToArrayBuffer;
+
+	function convertBufferType(source_buff, output_type){
+		const buffer = new ArrayBuffer(inputBuffer.length);
+		var source_buff_type = getBufferTypedArrayConstructor(Object.prototype.toString.call(source_buff));
+		const source_buff_view = new source_buff_type(buffer);
+		source_buff_view.set(inputBuffer);
+		return new output_type(buffer);
+
+	}
+
+	function bufferPush(source_buff, new_values){
+		var source_buff_type = getBufferTypedArrayConstructor(Object.prototype.toString.call(source_buff));
+		var new_ab = new source_buff_type(source_buff.length + 1);
+		new_ab.set(source_buff, 0);
+		new_ab[new_ab.length -1] = new_values;
+		return new_ab;
+	}
+
+	
+	function getBufferTypedArrayConstructor(tag){
+		var type_name = tag.substring(8, tag.length - 1);
+		var window_global = Function('return this')();
+		var constructor = window_global[type_name];
+		if(constructor && typeof constructor === 'function')
+			return constructor;
+		else
+			throw new TypeError("Invalid typed array type tag: " + tag);
+	}
+
+
+	function bufferToHex(buffer) {return [...new Uint8Array (buffer)].map (b => b.toString (16).padStart (2, "0")).join ("");}
+
+	function hexStringToHexNumber(hex_str){
+		if(new RegExp(/0x/i).test(hex_str.substring(0,2)))
+			return hex_str.substring(2);
+		else
+			return hex_str;
+	}
+
+	
+	function hexToArrayBuffer(hex_str, buffer_type = null){		
+		hex_str = hexStringToHexNumber(hex_str);
+
+		var ret = [];
+
+		for(var i = 0; i < hex_str.length/2; i++){
+			var x = i*2;
+			const n = parseInt(hex_str.substr(x, 2), 16);
+			ret.push(n);
+		}
+		if(buffer_type)
+			return new buffer_type(ret);
+		else
+			return new Uint8Array(ret).buffer;
+	}
+}
+function font_handler(){
+	var loaded_obj = {};
+	var styles = window.document.styleSheets[0];
+
+	this.fontLoader = fontLoader;
+
+	function fontLoader(font_path_list, params = {}){
+		params.font_display = checkForProperty(params.font_display) ? params.font_display : "optional";
+
+		if(font_path_list != "" && font_path_list != undefined){
+			font_path_list = (Array.isArray(font_path_list)) ? font_path_list : [font_path_list];
+			for(var i = 0; i < font_path_list.length; i++){
+				var font_info = getFontInfo(font_path_list[i]);
+				if(loaded_obj[font_info.full_name] == undefined || loaded_obj[font_info.full_name] == null){
+					loaded_obj[font_info.full_name] = font_info;
+					loadNewFont(font_info, styles, params.font_display);
+				}
+			}
+		}
+	}
+
+	function loadNewFont(font_info, styles, font_display){
+		var new_font = `
+			@font-face{
+				font-family: '${font_info.name}';
+				format('${font_info.type} supports variations');
+				format('${font_info.type}-variations');
+				src: url("${font_info.path}");
+				font-weight: 100 900;
+				font-display: ${font_display};
+			}
+		`;
+		styles.insertRule(new_font);
+	}
+
+
+	function getFontInfo(path){
+		var font_info = {path: path};
+		var font_name = path.split("/");
+		font_info.full_name = font_name.pop();
+		font_name = font_info.full_name.split(".");
+		font_info.name = font_name[0];
+		font_info.type = font_name[1];
+		return font_info;
+	}
+
+	function checkForProperty(prop){return (prop === "" || prop === null || prop === undefined) ? false : true;}
+
+}
+
+
+
+function keccak_handler(){
+
+	var HEX_CHARS = '0123456789abcdef'.split('');
+	var KECCAK_PADDING = [1, 256, 65536, 16777216];
+	var SHIFT = [0, 8, 16, 24];
+	var RC = [1, 0, 32898, 0, 32906, 2147483648, 2147516416, 2147483648, 32907, 0, 2147483649, 0, 2147516545, 2147483648, 32777, 2147483648, 138, 0, 136, 0, 2147516425, 0, 2147483658, 0, 2147516555, 0, 139, 2147483648, 32905, 2147483648, 32771, 2147483648, 32770, 2147483648, 128, 2147483648, 32778, 0, 2147483658, 2147483648, 2147516545, 2147483648, 32896, 2147483648, 2147483649, 0, 2147516424, 2147483648];
+
+	this.keccak256 = keccak256;
+	function keccak256(hex_str){
+		return lazy_keccak(256, hex_str);
+	}
+
+	this.strict_hex_keccak256 = strict_hex_keccak256;
+	function strict_hex_keccak256(hex_str){
+		return strict_hex_keccak(256, hex_str);
+	}
+
+	this.str_keccak256 = str_keccak256;
+	function str_keccak256(str){
+		return str_keccak(256, str);
+	}
+
+	function Keccak(bits){
+		return {
+		blocks: [],
+		reset: true,
+		block: 0,
+		start: 0,
+		blockCount: 1600 - (bits << 1) >> 5,
+		outputBlocks: bits >> 5,
+		s: function (s) {
+			return [].concat(s, s, s, s, s);
+		}([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+		};
+	};
+
+	var update = function update(state, message){
+		var length = message.length,
+			blocks = state.blocks,
+			byteCount = state.blockCount << 2,
+			blockCount = state.blockCount,
+			outputBlocks = state.outputBlocks,
+			s = state.s,
+			index = 0,
+			i,
+			code;
+
+		while (index < length){
+			if (state.reset){
+				state.reset = false;
+				blocks[0] = state.block;
+				for(i = 1; i < blockCount + 1; ++i)
+					blocks[i] = 0;				
+			}
+
+
+			for(i = state.start; index < length && i < byteCount; ++index)
+				blocks[i >> 2] |= message[index] << SHIFT[i++ & 3];
+
+			state.lastByteIndex = i;
+			if(i >= byteCount){
+				state.start = i - byteCount;
+				state.block = blocks[blockCount];
+
+				for(i = 0; i < blockCount; ++i)
+					s[i] ^= blocks[i];
+
+				f(s);
+				state.reset = true;
+			}
+			else
+				state.start = i;
+		}
+
+		i = state.lastByteIndex;
+		blocks[i >> 2] |= KECCAK_PADDING[i & 3];
+
+		if(state.lastByteIndex === byteCount){
+			blocks[0] = blocks[blockCount];
+
+			for(i = 1; i < blockCount + 1; ++i)
+				blocks[i] = 0;			
+		}
+
+		blocks[blockCount - 1] |= 0x80000000;
+
+		for(i = 0; i < blockCount; ++i)
+			s[i] ^= blocks[i];
+
+		f(s);
+
+		var hex = '',
+			i = 0,
+			j = 0,
+			block;
+
+		while(j < outputBlocks){
+			for(i = 0; i < blockCount && j < outputBlocks; ++i, ++j){
+				block = s[i];
+				hex += HEX_CHARS[block >> 4 & 0x0F] + HEX_CHARS[block & 0x0F] + HEX_CHARS[block >> 12 & 0x0F] + HEX_CHARS[block >> 8 & 0x0F] + HEX_CHARS[block >> 20 & 0x0F] + HEX_CHARS[block >> 16 & 0x0F] + HEX_CHARS[block >> 28 & 0x0F] + HEX_CHARS[block >> 24 & 0x0F];
+			}
+
+			if(j % blockCount === 0){
+				f(s);
+				i = 0;
+			}
+		}
+
+		return "0x" + hex;
+	};
+
+	var f = function f(s) {
+		var h, l, n, c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31, b32, b33, b34, b35, b36, b37, b38, b39, b40, b41, b42, b43, b44, b45, b46, b47, b48, b49;
+
+		for (n = 0; n < 48; n += 2) {
+		c0 = s[0] ^ s[10] ^ s[20] ^ s[30] ^ s[40];
+		c1 = s[1] ^ s[11] ^ s[21] ^ s[31] ^ s[41];
+		c2 = s[2] ^ s[12] ^ s[22] ^ s[32] ^ s[42];
+		c3 = s[3] ^ s[13] ^ s[23] ^ s[33] ^ s[43];
+		c4 = s[4] ^ s[14] ^ s[24] ^ s[34] ^ s[44];
+		c5 = s[5] ^ s[15] ^ s[25] ^ s[35] ^ s[45];
+		c6 = s[6] ^ s[16] ^ s[26] ^ s[36] ^ s[46];
+		c7 = s[7] ^ s[17] ^ s[27] ^ s[37] ^ s[47];
+		c8 = s[8] ^ s[18] ^ s[28] ^ s[38] ^ s[48];
+		c9 = s[9] ^ s[19] ^ s[29] ^ s[39] ^ s[49];
+		h = c8 ^ (c2 << 1 | c3 >>> 31);
+		l = c9 ^ (c3 << 1 | c2 >>> 31);
+		s[0] ^= h;
+		s[1] ^= l;
+		s[10] ^= h;
+		s[11] ^= l;
+		s[20] ^= h;
+		s[21] ^= l;
+		s[30] ^= h;
+		s[31] ^= l;
+		s[40] ^= h;
+		s[41] ^= l;
+		h = c0 ^ (c4 << 1 | c5 >>> 31);
+		l = c1 ^ (c5 << 1 | c4 >>> 31);
+		s[2] ^= h;
+		s[3] ^= l;
+		s[12] ^= h;
+		s[13] ^= l;
+		s[22] ^= h;
+		s[23] ^= l;
+		s[32] ^= h;
+		s[33] ^= l;
+		s[42] ^= h;
+		s[43] ^= l;
+		h = c2 ^ (c6 << 1 | c7 >>> 31);
+		l = c3 ^ (c7 << 1 | c6 >>> 31);
+		s[4] ^= h;
+		s[5] ^= l;
+		s[14] ^= h;
+		s[15] ^= l;
+		s[24] ^= h;
+		s[25] ^= l;
+		s[34] ^= h;
+		s[35] ^= l;
+		s[44] ^= h;
+		s[45] ^= l;
+		h = c4 ^ (c8 << 1 | c9 >>> 31);
+		l = c5 ^ (c9 << 1 | c8 >>> 31);
+		s[6] ^= h;
+		s[7] ^= l;
+		s[16] ^= h;
+		s[17] ^= l;
+		s[26] ^= h;
+		s[27] ^= l;
+		s[36] ^= h;
+		s[37] ^= l;
+		s[46] ^= h;
+		s[47] ^= l;
+		h = c6 ^ (c0 << 1 | c1 >>> 31);
+		l = c7 ^ (c1 << 1 | c0 >>> 31);
+		s[8] ^= h;
+		s[9] ^= l;
+		s[18] ^= h;
+		s[19] ^= l;
+		s[28] ^= h;
+		s[29] ^= l;
+		s[38] ^= h;
+		s[39] ^= l;
+		s[48] ^= h;
+		s[49] ^= l;
+		b0 = s[0];
+		b1 = s[1];
+		b32 = s[11] << 4 | s[10] >>> 28;
+		b33 = s[10] << 4 | s[11] >>> 28;
+		b14 = s[20] << 3 | s[21] >>> 29;
+		b15 = s[21] << 3 | s[20] >>> 29;
+		b46 = s[31] << 9 | s[30] >>> 23;
+		b47 = s[30] << 9 | s[31] >>> 23;
+		b28 = s[40] << 18 | s[41] >>> 14;
+		b29 = s[41] << 18 | s[40] >>> 14;
+		b20 = s[2] << 1 | s[3] >>> 31;
+		b21 = s[3] << 1 | s[2] >>> 31;
+		b2 = s[13] << 12 | s[12] >>> 20;
+		b3 = s[12] << 12 | s[13] >>> 20;
+		b34 = s[22] << 10 | s[23] >>> 22;
+		b35 = s[23] << 10 | s[22] >>> 22;
+		b16 = s[33] << 13 | s[32] >>> 19;
+		b17 = s[32] << 13 | s[33] >>> 19;
+		b48 = s[42] << 2 | s[43] >>> 30;
+		b49 = s[43] << 2 | s[42] >>> 30;
+		b40 = s[5] << 30 | s[4] >>> 2;
+		b41 = s[4] << 30 | s[5] >>> 2;
+		b22 = s[14] << 6 | s[15] >>> 26;
+		b23 = s[15] << 6 | s[14] >>> 26;
+		b4 = s[25] << 11 | s[24] >>> 21;
+		b5 = s[24] << 11 | s[25] >>> 21;
+		b36 = s[34] << 15 | s[35] >>> 17;
+		b37 = s[35] << 15 | s[34] >>> 17;
+		b18 = s[45] << 29 | s[44] >>> 3;
+		b19 = s[44] << 29 | s[45] >>> 3;
+		b10 = s[6] << 28 | s[7] >>> 4;
+		b11 = s[7] << 28 | s[6] >>> 4;
+		b42 = s[17] << 23 | s[16] >>> 9;
+		b43 = s[16] << 23 | s[17] >>> 9;
+		b24 = s[26] << 25 | s[27] >>> 7;
+		b25 = s[27] << 25 | s[26] >>> 7;
+		b6 = s[36] << 21 | s[37] >>> 11;
+		b7 = s[37] << 21 | s[36] >>> 11;
+		b38 = s[47] << 24 | s[46] >>> 8;
+		b39 = s[46] << 24 | s[47] >>> 8;
+		b30 = s[8] << 27 | s[9] >>> 5;
+		b31 = s[9] << 27 | s[8] >>> 5;
+		b12 = s[18] << 20 | s[19] >>> 12;
+		b13 = s[19] << 20 | s[18] >>> 12;
+		b44 = s[29] << 7 | s[28] >>> 25;
+		b45 = s[28] << 7 | s[29] >>> 25;
+		b26 = s[38] << 8 | s[39] >>> 24;
+		b27 = s[39] << 8 | s[38] >>> 24;
+		b8 = s[48] << 14 | s[49] >>> 18;
+		b9 = s[49] << 14 | s[48] >>> 18;
+		s[0] = b0 ^ ~b2 & b4;
+		s[1] = b1 ^ ~b3 & b5;
+		s[10] = b10 ^ ~b12 & b14;
+		s[11] = b11 ^ ~b13 & b15;
+		s[20] = b20 ^ ~b22 & b24;
+		s[21] = b21 ^ ~b23 & b25;
+		s[30] = b30 ^ ~b32 & b34;
+		s[31] = b31 ^ ~b33 & b35;
+		s[40] = b40 ^ ~b42 & b44;
+		s[41] = b41 ^ ~b43 & b45;
+		s[2] = b2 ^ ~b4 & b6;
+		s[3] = b3 ^ ~b5 & b7;
+		s[12] = b12 ^ ~b14 & b16;
+		s[13] = b13 ^ ~b15 & b17;
+		s[22] = b22 ^ ~b24 & b26;
+		s[23] = b23 ^ ~b25 & b27;
+		s[32] = b32 ^ ~b34 & b36;
+		s[33] = b33 ^ ~b35 & b37;
+		s[42] = b42 ^ ~b44 & b46;
+		s[43] = b43 ^ ~b45 & b47;
+		s[4] = b4 ^ ~b6 & b8;
+		s[5] = b5 ^ ~b7 & b9;
+		s[14] = b14 ^ ~b16 & b18;
+		s[15] = b15 ^ ~b17 & b19;
+		s[24] = b24 ^ ~b26 & b28;
+		s[25] = b25 ^ ~b27 & b29;
+		s[34] = b34 ^ ~b36 & b38;
+		s[35] = b35 ^ ~b37 & b39;
+		s[44] = b44 ^ ~b46 & b48;
+		s[45] = b45 ^ ~b47 & b49;
+		s[6] = b6 ^ ~b8 & b0;
+		s[7] = b7 ^ ~b9 & b1;
+		s[16] = b16 ^ ~b18 & b10;
+		s[17] = b17 ^ ~b19 & b11;
+		s[26] = b26 ^ ~b28 & b20;
+		s[27] = b27 ^ ~b29 & b21;
+		s[36] = b36 ^ ~b38 & b30;
+		s[37] = b37 ^ ~b39 & b31;
+		s[46] = b46 ^ ~b48 & b40;
+		s[47] = b47 ^ ~b49 & b41;
+		s[8] = b8 ^ ~b0 & b2;
+		s[9] = b9 ^ ~b1 & b3;
+		s[18] = b18 ^ ~b10 & b12;
+		s[19] = b19 ^ ~b11 & b13;
+		s[28] = b28 ^ ~b20 & b22;
+		s[29] = b29 ^ ~b21 & b23;
+		s[38] = b38 ^ ~b30 & b32;
+		s[39] = b39 ^ ~b31 & b33;
+		s[48] = b48 ^ ~b40 & b42;
+		s[49] = b49 ^ ~b41 & b43;
+		s[0] ^= RC[n];
+		s[1] ^= RC[n + 1];
+		}
+	};
+
+	function strict_hex_keccak(bits, hex){
+		if(hex.length % 2 != 0)
+			return null;
+
+		if(hex.slice(0, 2) == "0x")
+			hex = hex.slice(2);
+
+		var msg = [];
+		for (var i = 0; i < hex.length; i += 2){
+			var new_str = hex.slice(i, i + 2);
+			new_str = parseInt(new_str, 16);
+			if(new_str > 255)
+				return str_keccak(bits, hex);
+			msg.push(new_str);
+		}
+
+		return keccak(bits, msg);
+	}
+
+
+	function lazy_keccak(bits, hex){
+		if(hex.length % 2 != 0)
+			return str_keccak(bits, hex);
+
+		if(hex.slice(0, 2) == "0x")
+			hex = hex.slice(2);
+
+		var msg = [];
+		for (var i = 0; i < hex.length; i += 2){
+			var new_str = hex.slice(i, i + 2);
+			new_str = parseInt(new_str, 16);
+			if(isNaN(new_str) || new_str > 255)
+				return str_keccak(bits, hex);
+			msg.push(new_str);
+		}
+
+		return keccak(bits, msg);
+	}
+	
+	function str_keccak(bits, str){
+		var text_encoder = new TextEncoder();
+		var msg = [];
+		for(var i = 0; i < str.length; i++){
+			var new_str = str.slice(i, i+1);
+			new_str = text_encoder.encode(new_str);
+			msg.push(new_str);
+		}
+		return keccak(bits, msg);
+	}
+
+	function keccak(bits, hex){
+		return update(Keccak(bits, bits), hex);
+	}
+
+}
+	function compressor(text, compress = true, cb) {
+		var cs;
+		var enc_alg = "deflate-raw";
+
+		if(compress){
+			cs = new CompressionStream(enc_alg);
+			text = new TextEncoder().encode(text);
+		}
+		else
+			cs = new DecompressionStream(enc_alg);
+
+		const writer = cs.writable.getWriter();
+		writer.write(text);
+		writer.close();
+
+		const chunks = [];
+		const reader = cs.readable.getReader();
+
+		(function readNext(){
+			reader.read().then(function(result){
+				if(!result.done){
+					chunks.push(result.value);
+					readNext();
+				}
+				else
+					cb((new Uint8Array(chunks.reduce((acc, val) => acc.concat(Array.from(val)), []))).buffer);
+			});
+		})();
+	}
+
+
+
+function database(db_name, stores,version_number, cb){
+	let db;
+
+	(function openDatabase(){
+		var req = window.indexedDB.open(db_name, version_number);
+
+		req.onsuccess = function(event){
+			console.log("DB Success");
+			db = this.result;
+			cb(true);
+		};
+
+		req.onerror = function (event) {
+			console.log("Unable to open DB: ", event.target.message);
+			cb(false);
+		};
+
+		req.onblocked = function(event){
+			console.log("Opening db has been blocked", event.target.message);
+			cb(false);
+		};
+
+		req.onupgradeneeded = function(event){
+			console.log("DB Upgraded");
+			db = event.target.result;
+
+			for(var i = 0; i < stores.length; i++)
+				db.createObjectStore(stores[i].name, stores[i].params);
+		};
+	})();
+
+	this.getPersist = function(cb){
+		navigator.permissions.query({name:'persistent-storage'}).then(function(result){
+			if(result.state == 'granted')
+				cb(true);
+			else if (result.state == 'prompt')
+				navigator.storage.persist().then(cb);
+			else
+				cb(false);
+		});
+	};
+
+	this.clearStore = clearStore;
+
+	function clearStore(store_name){
+		
+		securelyDeleteFromStore(this, store_name, function(ret){
+			db.transaction(store_name, 'readwrite').objectStore(store_name).clear();
+		});
+		
+		
+		
+	}
+
+	this.clearDatabase = clearDatabase;
+
+	function clearDatabase(db_name){
+		db.close();
+		window.indexedDB.deleteDatabase(db_name);
+	}
+
+	this.getWriteableStore = getWriteableStore;
+
+	function getWriteableStore(store_name, cb){
+		return db.transaction(store_name, 'readwrite').objectStore(store_name);
+	}
+
+	this.getKeyWithStore = getKeyWithStore;
+
+	
+	function getKeyWithStore(store_obj, keyname, cb){
+		var req = store_obj.get(keyname);
+
+		req.onsuccess = handleSuccess;
+		req.onerror = function(){cb(null)};
+
+		function handleSuccess(e){
+			cb({valid: true, response:this.result, store: store_obj});
+			
+		}
+	}
+
+	this.getStore = function(store_name, cb){
+		return db.transaction(store_name, 'readonly').objectStore(store_name);
+	};
+
+	function getObjectStore(store_name, mode){
+		return db.transaction(store_name, mode).objectStore(store_name);
+	}
+
+
+
+	
+	this.getKey = function(store_names, key_name, cb){
+		getKeyFromDB(store_names, key_name, cb);
+	};
+
+	function getKeyFromDB(store_names, keyname, cb){
+		store_names = (typeof store_names === 'string') ? [store_names] : store_names;
+
+		var store = getObjectStore(store_names, 'readwrite');
+		var req = store.get(keyname);
+
+		req.onsuccess = handleSuccess;
+		req.onerror = function(){cb(null)};
+
+		function handleSuccess(e){
+			cb({valid: true, response:this.result, store: store});
+		}
+	}
+
+	function checkForProperty(prop){return (prop === "" || prop === null || prop === undefined) ? false : true;}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function secureOverwriteBuffer(dataLength, useRandom = true, callback) {
+  if (!useRandom) {
+    
+    const pattern = new Uint8Array([0xFF, 0x00, 0xFF, 0x00]); 
+    const overwriteData = new Uint8Array(dataLength);
+    
+    
+    for (let i = 0; i < dataLength; i++) {
+      overwriteData[i] = pattern[i % pattern.length];
+    }
+    
+    callback(overwriteData.buffer);
+  } else {
+    
+    const chunkSize = 65536;
+    const overwriteData = new Uint8Array(dataLength);
+    let offset = 0;
+    
+    function fillNextChunk() {
+      if (offset >= dataLength) {
+        callback(overwriteData.buffer);
+        return;
+      }
+      
+      const remainingBytes = Math.min(chunkSize, dataLength - offset);
+      const chunk = new Uint8Array(remainingBytes);
+      self.crypto.getRandomValues(chunk);
+      
+      overwriteData.set(chunk, offset);
+      offset += remainingBytes;
+      
+      
+      setTimeout(fillNextChunk, 0);
+    }
+    
+    fillNextChunk();
+  }
+}
+
+
+
+
+
+function securelyDeleteFromStore(dbHandler, storeNames, callback) {
+  if (!Array.isArray(storeNames)) {
+    storeNames = [storeNames];
+  }
+
+  let completedStores = 0;
+  
+  storeNames.forEach(storeName => {
+    const store = dbHandler.getStore(storeName);
+    const allRecordsRequest = store.getAll();
+    
+    allRecordsRequest.onsuccess = function(event) {
+      const records = event.target.result;
+      let processedRecords = 0;
+      
+      if (records.length === 0) {
+        
+        const writeableStore = dbHandler.getWriteableStore(storeName);
+        writeableStore.clear().onsuccess = function() {
+          completedStores++;
+          if (completedStores === storeNames.length && callback) {
+            callback(true);
+          }
+        };
+        return;
+      }
+      
+      
+      records.forEach(record => {
+        const writeableStore = dbHandler.getWriteableStore(storeName);
+        const getRequest = writeableStore.get(record.file_id);
+        
+        getRequest.onsuccess = function(event) {
+          const recordToOverwrite = event.target.result;
+          
+          if (recordToOverwrite && recordToOverwrite.data) {
+            
+            const dataLength = recordToOverwrite.data.byteLength;
+           
+		   
+		   
+		   
+		   
+			secureOverwriteBuffer(dataLength, false, function(overwriteData) {
+				
+				recordToOverwrite.data = overwriteData;
+
+				
+				const putRequest = writeableStore.put(recordToOverwrite);
+				putRequest.onsuccess = function() {
+					processedRecords++;
+
+					if (processedRecords === records.length) {
+					
+						writeableStore.clear().onsuccess = function() {
+						completedStores++;
+							if (completedStores === storeNames.length && callback) {
+								callback(true);
+							}
+						};
+					}
+				};
+
+				putRequest.onerror = function(err) {
+					console.error("Error overwriting record:", err);
+					processedRecords++;
+
+					if (processedRecords === records.length) {
+						writeableStore.clear().onsuccess = function() {
+							completedStores++;
+							if (completedStores === storeNames.length && callback) {
+								callback(false); 
+							}
+						};
+					}
+				};
+			});
+
+          } else {
+            
+            processedRecords++;
+            
+            if (processedRecords === records.length) {
+              writeableStore.clear().onsuccess = function() {
+                completedStores++;
+                if (completedStores === storeNames.length && callback) {
+                  callback(true);
+                }
+              };
+            }
+          }
+        };
+      });
+    };
+    
+    allRecordsRequest.onerror = function(err) {
+      console.error("Error fetching records for secure deletion:", err);
+      completedStores++;
+      if (completedStores === storeNames.length && callback) {
+        callback(false);
+      }
+    };
+  });
+}
+
+
+function topbar_ns_handler(settings = {}){
+	let topbar_ns_container;
+	
+	(function init(){
+		topbar_ns_container = document.createElement("div");
+		topbar_ns_container.className = "topbar_ns_container";
+		document.body.prepend(topbar_ns_container);
+
+	})();
+
+	this.newNotification = newNotification;
+	function newNotification(params, cb = null){
+		let notification_cleared = false;
+		
+		params.close_on_resolve = (checkForProperty(params.close_on_resolve)) ? params.close_on_resolve : true;
+		params.allow_close = (checkForProperty(params.allow_close)) ? params.allow_close : true;
+		params.full_bar_target = (checkForProperty(params.full_bar_target)) ? params.full_bar_target : false;
+
+		params.self_remove_ms = (checkForProperty(params.self_remove_ms)) ? params.self_remove_ms : 0;
+
+		
+		
+
+		let std_notification_bar = document.createElement("div");
+		std_notification_bar.className = "std_notification_bar";
+
+		let std_notification_msg = document.createElement("span");
+		std_notification_msg.className = "std_notification_msg";
+		std_notification_msg.innerHTML = params.msg_html;
+		std_notification_bar.prepend(std_notification_msg);
+
+		let std_notfication_close;
+		let std_close_container;
+		if(params.allow_close){
+			std_close_container = document.createElement("div");
+			if(checkForProperty(params.close_icon)){
+				std_notfication_close = document.createElement("svg");
+				std_close_container.appendChild(std_notfication_close);
+				std_notfication_close.outerHTML = params.close_icon;
+			}
+			else{
+				std_notfication_close = document.createElement("span");
+				std_notfication_close.innerHTML = "x";
+				std_notfication_close.className = "std_notfication_close";
+				
+				std_close_container.appendChild(std_notfication_close);
+			}
+			std_notification_bar.appendChild(std_close_container);
+		}
+
+		if(checkForProperty(params.svg_icon)){
+			var std_icon_container = document.createElement("div");
+			std_icon_container.className = "std_icon_container";
+			std_icon_container.innerHTML = params.svg_icon;
+			std_notification_bar.prepend(std_icon_container);
+		}
+
+		
+		topbar_ns_container.append(std_notification_bar);
+		
+		if(checkForProperty(params.custom_bg_color))
+			std_notification_bar.style.backgroundColor = params.custom_bg_color;
+		
+		if(checkForProperty(params.custom_color))
+			std_notification_msg.style.color = params.custom_color;
+
+		var main_target = (params.full_bar_target) ? std_notification_bar : null;
+
+		if(params.full_bar_target)
+			std_notification_bar.style.cursor = "pointer";
+
+
+		setStdListeners();
+
+		if(params.self_remove_ms > 0)
+			setRemoveTimer(params.self_remove_ms);
+
+		function setRemoveTimer(remove_timer_ms){
+			var frame_count = 60;
+			var wait_increment = remove_timer_ms/frame_count;
+			var opacity_increment = 1/frame_count;
+			var starting_opacity = 1;
+
+			(function wait(){
+				remove_timer_ms -= wait_increment;
+				requestAnimationFrame(handleFrame);
+
+				function handleFrame(){
+					if(!notification_cleared){
+						std_notification_bar.style.opacity = starting_opacity;
+						
+						starting_opacity -= opacity_increment;
+						if(remove_timer_ms > 0)
+							window.setTimeout(wait, wait_increment);
+						else
+							clearNotfication();
+					}
+				}
+			})();
+
+
+		}
+
+		function resolveHandler(){
+			if(params.close_on_resolve)
+				clearNotfication();
+			sendCallback(true);
+		}
+
+		function closeNotfication(){
+			clearNotfication();
+			sendCallback(false);
+		}
+
+		function sendCallback(response){
+			if(cb != null)
+				cb(response);
+		}
+
+		function setStdListeners(){
+			if(params.allow_close)
+				std_close_container.addEventListener("click", closeNotfication, true);
+			if(main_target)
+				main_target.addEventListener("click", resolveHandler, false);				
+		}
+
+		function clearNotfication(){
+			if(!notification_cleared){
+				notification_cleared = true;
+				if(main_target)
+					main_target.removeEventListener("click", resolveHandler);
+
+				if(params.allow_close)
+					std_close_container.removeEventListener("click", closeNotfication, true);
+				std_notification_bar.remove();
+			}
+		}
+		
+		return {
+			clear: clearNotfication
+		};
+	}
+
+
+	function checkForProperty(prop){
+		return (prop === "" || prop === null || prop === undefined) ? false : true;
+	}
+}
+
+
+
+let ww_js_script = `
+
+let ww_version = "03";
+
+self.addEventListener("message", handleMessage);
+
+let eh = new ww_encryption_handler();
+let active_mp_buff = null;
+let active_pk_buff = null;
+let active_ecdh_priv_key = null;
+let active_ecdh_pub_key = null;
+let shared_ecdh_pub_key = null;
+
+let secp_h;
+
+let kh = new keccak_handler();
+let bh = new buffer_helper();
+
+let active_prf_key = null;
+let active_prf_buff = null;
+let active_seed = null;
+let active_hkdf = null;
+
+let active_det_ecdh_pub_buff = null;
+
+
+
+let salt_byte_len = 16;
+let salt_hex_len = 32;
+let misc_slice = 32;
+
+
+
+
+let det_ecdh_h = new determineEcdh();
+
+
+
+function handleMessage(msg_event){
+	var msg_type = msg_event.data.msg_type;
+
+	switch(msg_type){
+
+
+		case "get_version":
+			
+			self.postMessage(ww_version);
+		break;
+
+
+		
+		case "prf_to_key":
+			buffToHkdf(msg_event.data.prf_buff, function(ret){
+				active_prf_key = ret;
+				active_prf_buff = msg_event.data.prf_buff;
+				self.postMessage(null);
+			});
+		break;
+
+
+
+		case "set_seed":
+			generateNewSeed(msg_event.data.seed_name, function(seed){
+				active_seed = seed;
+				
+				seedToHkdf(seed,function(hkdf){
+					active_hkdf = hkdf;
+					self.postMessage(null);
+					genDetEcdh(active_seed);
+				});
+			});
+		break;
+
+
+		case "get_det_public_ecdh":
+			self.postMessage(active_det_ecdh_pub_buff);
+		break;
+
+		
+		case "gen_seed_pk":
+			var key = active_hkdf;
+			generateAesFromHkdf(active_hkdf, function(ret){
+				var salt1 = ret.salt;
+				var aes_key = ret.aes_key;
+			});
+		break;
+
+		case "new_enc":
+			var key = active_hkdf;
+			var msg_buff = msg_event.data.msg_buff;
+
+			generateAesFromHkdf(key, null, function(ret){
+				var key_salt = ret.salt;
+				var aes_key = ret.aes_key;
+				eh.encrypt(aes_key, msg_buff, key_salt, function(encrypted_buff){
+					self.postMessage({encrypted_buff, salt:key_salt}, [encrypted_buff,key_salt]);
+				});
+			});
+		break;
+
+
+		case "new_dec":
+			var key = active_hkdf;
+			var msg_buff = msg_event.data.msg_buff;
+			var key_salt = msg_buff.slice(0,salt_byte_len);
+
+			generateAesFromHkdf(key, key_salt, function(ret){
+				var aes_key = ret.aes_key;
+				
+				eh.noDecodeDecrypt(aes_key, msg_buff.slice(salt_byte_len), key_salt, function(decrypted_buff){
+					if(decrypted_buff === null)
+						self.postMessage(null);
+					else
+						self.postMessage({decrypted_buff}, [decrypted_buff]);
+				});
+			});
+		break;
+
+
+		case "set_shared_pub":
+			eh.importEcdhPub(msg_event.data.pub_buff, function(key){
+				shared_ecdh_pub_key = key;
+				self.postMessage(true);
+			});
+
+		break;
+
+
+		case "shared_ecdh_enc":
+			var msg_buff = msg_event.data.msg_buff;
+			eh.deriveEcdhKey(active_ecdh_priv_key, shared_ecdh_pub_key, function(derived_key){
+				var iv = self.crypto.getRandomValues(new Uint8Array(salt_byte_len));
+				iv = iv.buffer;
+				eh.encrypt(derived_key, msg_buff, iv, function(encrypted_buff){
+					
+					var salt = iv;
+					self.postMessage({encrypted_buff, salt}, [encrypted_buff,salt]);
+				
+				});
+			});
+		
+		break;
+
+		case "shared_ecdh_dec":
+			var msg_buff = msg_event.data.msg_buff;
+			var key_salt = msg_buff.slice(0,salt_byte_len);
+			msg_buff = msg_buff.slice(salt_byte_len);
+			
+			eh.importEcdhPub(msg_event.data.pub_buff, function(shared_pub){
+				eh.deriveEcdhKey(active_ecdh_priv_key, shared_pub, function(derived_key){
+					eh.noDecodeDecrypt(derived_key, msg_buff, key_salt, function(decrypted_buff){
+						if(decrypted_buff === null)
+							self.postMessage(null);
+						else
+							self.postMessage({decrypted_buff}, [decrypted_buff]);
+					});
+				});
+			});
+		
+		break;
+
+
+		
+			
+		
+		
+	
+	}
+
+
+
+
+
+
+
+	function genDetEcdh(seed){
+
+		var ret1 = det_ecdh_h.generateKeyPair(seed);
+
+		det_ecdh_h.convertKeys(ret1.privateKey, ret1.publicKey, function(result){
+			active_det_ecdh_pub_buff = result.publicKey.rawBuffer;
+			active_ecdh_priv_key = result.privateKey.key;
+			active_ecdh_pub_key = result.publicKey.key;
+		});
+	}
+
+
+
+
+
+	function buffToHkdf(prf_buff,cb){
+		self.crypto.subtle.importKey(
+			"raw",
+			prf_buff,
+			{ name: "HKDF" },
+			false,
+			["deriveKey", "deriveBits"]
+		).then(cb);
+	}
+
+
+	function generateNewSeed(seed_name = "", cb){
+		var sliced_buff = active_prf_buff.slice(0,misc_slice);
+		
+		let salt = kh.strict_hex_keccak256(bh.bufferToHex(sliced_buff) + seed_name);
+		
+		
+		let info = new TextEncoder().encode("filekey pk seed: " + salt);
+		
+		
+		
+		keyToSeed(active_prf_key, bh.hexToArrayBuffer(salt), info, function(seed){
+			cb(seed);
+		});
+	}
+
+	function seedToHkdf(seed, cb){
+		buffToHkdf(seed, function(ret){
+			var qq = 222;
+			cb(ret);
+		});
+	}
+
+	function keyToSeed(imported_key, salt, info, cb){
+
+		self.crypto.subtle.deriveBits(
+			{
+				name: "HKDF",
+				hash: "SHA-256",
+				salt: salt,
+				info: info,
+			},
+			imported_key,
+			512
+		).then(callbackWithSeed);
+
+		function callbackWithSeed(seed_buff){
+			
+			cb(seed_buff);
+			
+		}
+	}
+
+
+	function generateAesFromHkdf(hkdf, known_salt = null, cb) {
+		
+		let salt = (known_salt === null) ? (self.crypto.getRandomValues(new Uint8Array(salt_byte_len))).buffer : known_salt;
+		
+		
+		
+		var alg = {
+			name: "HKDF",
+			hash: "SHA-256",
+			salt: salt,
+			info: new Uint8Array([]),
+		};
+		var derived_alg = {
+			name: "AES-GCM",
+			length: 256
+		};
+		
+		self.crypto.subtle.deriveKey(
+			alg,
+			hkdf,
+			derived_alg,
+			true,
+			["encrypt", "decrypt"]
+		).then(function(aes_key){
+			cb({aes_key, salt});
+		});
+	}
+
+
+
+
+
+	function checkForProperty(prop){return (prop === "" || prop === null || prop === undefined) ? false : true;}
+}
+
+
+
+function ww_encryption_handler(){
+
+	this.encrypt = encrypt;
+	function encrypt(key, plaintext, iv, cb, aad = ""){
+		var alg_obj = { name: "AES-GCM", iv};
+		if(aad != "")
+			alg_obj.additionalData = aad;
+
+		self.crypto.subtle.encrypt(alg_obj, key, plaintext).then((encrpyted_stuff) => {
+			cb(encrpyted_stuff);
+		});
+	}
+
+	this.noDecodeDecrypt = noDecodeDecrypt;
+	function noDecodeDecrypt(key, ciphertext, iv, cb, aad = ""){
+		var alg_obj  = 	{name: "AES-GCM", iv};
+
+		if(aad != "")
+			alg_obj.additionalData = aad;
+		
+		self.crypto.subtle.decrypt(alg_obj, key, ciphertext).then((decrpyted_stuff) =>{
+			cb(decrpyted_stuff);
+		}).catch(function(e){
+			cb(null)
+		});
+	}
+
+	this.hexToArrayBuffer = hexToArrayBuffer;
+	function hexToArrayBuffer(hex_str, buffer_type = null){
+		const regex = new RegExp(/0x/i);
+		if(regex.test(hex_str.substring(0,2)))
+			hex_str = hex_str.substring(2);
+
+		var ret = [];
+
+		for(var i = 0; i < hex_str.length/2; i++){
+			var x = i*2;
+			const n = parseInt(hex_str.substr(x, 2), 16);
+			ret.push(n);
+		}
+		if(buffer_type)
+			return new buffer_type(ret);
+		else
+			return ret;
+	}
+	
+	this.deriveEcdhKey = deriveEcdhKey;
+	function deriveEcdhKey(privateKey, publicKey, callback) {
+		self.crypto.subtle.deriveKey(
+			{
+				name: "ECDH",
+				public: publicKey,
+			},
+			privateKey,
+			{
+				name: "AES-GCM",
+				length: 256,
+			},
+			true,
+			["encrypt", "decrypt"]
+		).then(callback);
+	}
+
+	this.importEcdhPub = importEcdhPub;
+	function importEcdhPub(pub_buff, cb){
+		crypto.subtle.importKey(
+			"raw",
+			pub_buff,
+			{
+				name: "ECDH",
+				namedCurve: "P-521"
+			},
+			true,
+			[]  
+		).then(cb);
+	}
+}
+
+
+
+
+
+
+
+
+function buffer_helper(){
+	this.convertBufferType = convertBufferType;
+	this.bufferPush = bufferPush;
+	this.getBufferTypedArrayConstructor = getBufferTypedArrayConstructor;
+	this.bufferToHex = bufferToHex;
+	this.hexStringToHexNumber = hexStringToHexNumber;
+	this.hexToArrayBuffer = hexToArrayBuffer;
+
+	function convertBufferType(source_buff, output_type){
+		const buffer = new ArrayBuffer(inputBuffer.length);
+		var source_buff_type = getBufferTypedArrayConstructor(Object.prototype.toString.call(source_buff));
+		const source_buff_view = new source_buff_type(buffer);
+		source_buff_view.set(inputBuffer);
+		return new output_type(buffer);
+
+	}
+
+	function bufferPush(source_buff, new_values){
+		var source_buff_type = getBufferTypedArrayConstructor(Object.prototype.toString.call(source_buff));
+		var new_ab = new source_buff_type(source_buff.length + 1);
+		new_ab.set(source_buff, 0);
+		new_ab[new_ab.length -1] = new_values;
+		return new_ab;
+	}
+
+	
+	function getBufferTypedArrayConstructor(tag){
+		var type_name = tag.substring(8, tag.length - 1);
+		var window_global = Function('return this')();
+		var constructor = window_global[type_name];
+		if(constructor && typeof constructor === 'function')
+			return constructor;
+		else
+			throw new TypeError("Invalid typed array type tag: " + tag);
+	}
+
+
+	function bufferToHex(buffer) {return [...new Uint8Array (buffer)].map (b => b.toString (16).padStart (2, "0")).join ("");}
+
+	function hexStringToHexNumber(hex_str){
+		if(new RegExp(/0x/i).test(hex_str.substring(0,2)))
+			return hex_str.substring(2);
+		else
+			return hex_str;
+	}
+
+	
+	function hexToArrayBuffer(hex_str, buffer_type = null){		
+		hex_str = hexStringToHexNumber(hex_str);
+
+		var ret = [];
+
+		for(var i = 0; i < hex_str.length/2; i++){
+			var x = i*2;
+			const n = parseInt(hex_str.substr(x, 2), 16);
+			ret.push(n);
+		}
+		if(buffer_type)
+			return new buffer_type(ret);
+		else
+			return new Uint8Array(ret).buffer;
+	}
+}
+
+
+
+
+
+function keccak_handler(){
+
+	var HEX_CHARS = '0123456789abcdef'.split('');
+	var KECCAK_PADDING = [1, 256, 65536, 16777216];
+	var SHIFT = [0, 8, 16, 24];
+	var RC = [1, 0, 32898, 0, 32906, 2147483648, 2147516416, 2147483648, 32907, 0, 2147483649, 0, 2147516545, 2147483648, 32777, 2147483648, 138, 0, 136, 0, 2147516425, 0, 2147483658, 0, 2147516555, 0, 139, 2147483648, 32905, 2147483648, 32771, 2147483648, 32770, 2147483648, 128, 2147483648, 32778, 0, 2147483658, 2147483648, 2147516545, 2147483648, 32896, 2147483648, 2147483649, 0, 2147516424, 2147483648];
+
+	this.keccak256 = keccak256;
+	function keccak256(hex_str){
+		return lazy_keccak(256, hex_str);
+	}
+
+	this.strict_hex_keccak256 = strict_hex_keccak256;
+	function strict_hex_keccak256(hex_str){
+		return strict_hex_keccak(256, hex_str);
+	}
+
+	this.str_keccak256 = str_keccak256;
+	function str_keccak256(str){
+		return str_keccak(256, str);
+	}
+
+	function Keccak(bits){
+		return {
+		blocks: [],
+		reset: true,
+		block: 0,
+		start: 0,
+		blockCount: 1600 - (bits << 1) >> 5,
+		outputBlocks: bits >> 5,
+		s: function (s) {
+			return [].concat(s, s, s, s, s);
+		}([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+		};
+	};
+
+	var update = function update(state, message){
+		var length = message.length,
+			blocks = state.blocks,
+			byteCount = state.blockCount << 2,
+			blockCount = state.blockCount,
+			outputBlocks = state.outputBlocks,
+			s = state.s,
+			index = 0,
+			i,
+			code;
+
+		while (index < length){
+			if (state.reset){
+				state.reset = false;
+				blocks[0] = state.block;
+				for(i = 1; i < blockCount + 1; ++i)
+					blocks[i] = 0;				
+			}
+
+
+			for(i = state.start; index < length && i < byteCount; ++index)
+				blocks[i >> 2] |= message[index] << SHIFT[i++ & 3];
+
+			state.lastByteIndex = i;
+			if(i >= byteCount){
+				state.start = i - byteCount;
+				state.block = blocks[blockCount];
+
+				for(i = 0; i < blockCount; ++i)
+					s[i] ^= blocks[i];
+
+				f(s);
+				state.reset = true;
+			}
+			else
+				state.start = i;
+		}
+
+		i = state.lastByteIndex;
+		blocks[i >> 2] |= KECCAK_PADDING[i & 3];
+
+		if(state.lastByteIndex === byteCount){
+			blocks[0] = blocks[blockCount];
+
+			for(i = 1; i < blockCount + 1; ++i)
+				blocks[i] = 0;			
+		}
+
+		blocks[blockCount - 1] |= 0x80000000;
+
+		for(i = 0; i < blockCount; ++i)
+			s[i] ^= blocks[i];
+
+		f(s);
+
+		var hex = '',
+			i = 0,
+			j = 0,
+			block;
+
+		while(j < outputBlocks){
+			for(i = 0; i < blockCount && j < outputBlocks; ++i, ++j){
+				block = s[i];
+				hex += HEX_CHARS[block >> 4 & 0x0F] + HEX_CHARS[block & 0x0F] + HEX_CHARS[block >> 12 & 0x0F] + HEX_CHARS[block >> 8 & 0x0F] + HEX_CHARS[block >> 20 & 0x0F] + HEX_CHARS[block >> 16 & 0x0F] + HEX_CHARS[block >> 28 & 0x0F] + HEX_CHARS[block >> 24 & 0x0F];
+			}
+
+			if(j % blockCount === 0){
+				f(s);
+				i = 0;
+			}
+		}
+
+		return "0x" + hex;
+	};
+
+	var f = function f(s) {
+		var h, l, n, c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31, b32, b33, b34, b35, b36, b37, b38, b39, b40, b41, b42, b43, b44, b45, b46, b47, b48, b49;
+
+		for (n = 0; n < 48; n += 2) {
+		c0 = s[0] ^ s[10] ^ s[20] ^ s[30] ^ s[40];
+		c1 = s[1] ^ s[11] ^ s[21] ^ s[31] ^ s[41];
+		c2 = s[2] ^ s[12] ^ s[22] ^ s[32] ^ s[42];
+		c3 = s[3] ^ s[13] ^ s[23] ^ s[33] ^ s[43];
+		c4 = s[4] ^ s[14] ^ s[24] ^ s[34] ^ s[44];
+		c5 = s[5] ^ s[15] ^ s[25] ^ s[35] ^ s[45];
+		c6 = s[6] ^ s[16] ^ s[26] ^ s[36] ^ s[46];
+		c7 = s[7] ^ s[17] ^ s[27] ^ s[37] ^ s[47];
+		c8 = s[8] ^ s[18] ^ s[28] ^ s[38] ^ s[48];
+		c9 = s[9] ^ s[19] ^ s[29] ^ s[39] ^ s[49];
+		h = c8 ^ (c2 << 1 | c3 >>> 31);
+		l = c9 ^ (c3 << 1 | c2 >>> 31);
+		s[0] ^= h;
+		s[1] ^= l;
+		s[10] ^= h;
+		s[11] ^= l;
+		s[20] ^= h;
+		s[21] ^= l;
+		s[30] ^= h;
+		s[31] ^= l;
+		s[40] ^= h;
+		s[41] ^= l;
+		h = c0 ^ (c4 << 1 | c5 >>> 31);
+		l = c1 ^ (c5 << 1 | c4 >>> 31);
+		s[2] ^= h;
+		s[3] ^= l;
+		s[12] ^= h;
+		s[13] ^= l;
+		s[22] ^= h;
+		s[23] ^= l;
+		s[32] ^= h;
+		s[33] ^= l;
+		s[42] ^= h;
+		s[43] ^= l;
+		h = c2 ^ (c6 << 1 | c7 >>> 31);
+		l = c3 ^ (c7 << 1 | c6 >>> 31);
+		s[4] ^= h;
+		s[5] ^= l;
+		s[14] ^= h;
+		s[15] ^= l;
+		s[24] ^= h;
+		s[25] ^= l;
+		s[34] ^= h;
+		s[35] ^= l;
+		s[44] ^= h;
+		s[45] ^= l;
+		h = c4 ^ (c8 << 1 | c9 >>> 31);
+		l = c5 ^ (c9 << 1 | c8 >>> 31);
+		s[6] ^= h;
+		s[7] ^= l;
+		s[16] ^= h;
+		s[17] ^= l;
+		s[26] ^= h;
+		s[27] ^= l;
+		s[36] ^= h;
+		s[37] ^= l;
+		s[46] ^= h;
+		s[47] ^= l;
+		h = c6 ^ (c0 << 1 | c1 >>> 31);
+		l = c7 ^ (c1 << 1 | c0 >>> 31);
+		s[8] ^= h;
+		s[9] ^= l;
+		s[18] ^= h;
+		s[19] ^= l;
+		s[28] ^= h;
+		s[29] ^= l;
+		s[38] ^= h;
+		s[39] ^= l;
+		s[48] ^= h;
+		s[49] ^= l;
+		b0 = s[0];
+		b1 = s[1];
+		b32 = s[11] << 4 | s[10] >>> 28;
+		b33 = s[10] << 4 | s[11] >>> 28;
+		b14 = s[20] << 3 | s[21] >>> 29;
+		b15 = s[21] << 3 | s[20] >>> 29;
+		b46 = s[31] << 9 | s[30] >>> 23;
+		b47 = s[30] << 9 | s[31] >>> 23;
+		b28 = s[40] << 18 | s[41] >>> 14;
+		b29 = s[41] << 18 | s[40] >>> 14;
+		b20 = s[2] << 1 | s[3] >>> 31;
+		b21 = s[3] << 1 | s[2] >>> 31;
+		b2 = s[13] << 12 | s[12] >>> 20;
+		b3 = s[12] << 12 | s[13] >>> 20;
+		b34 = s[22] << 10 | s[23] >>> 22;
+		b35 = s[23] << 10 | s[22] >>> 22;
+		b16 = s[33] << 13 | s[32] >>> 19;
+		b17 = s[32] << 13 | s[33] >>> 19;
+		b48 = s[42] << 2 | s[43] >>> 30;
+		b49 = s[43] << 2 | s[42] >>> 30;
+		b40 = s[5] << 30 | s[4] >>> 2;
+		b41 = s[4] << 30 | s[5] >>> 2;
+		b22 = s[14] << 6 | s[15] >>> 26;
+		b23 = s[15] << 6 | s[14] >>> 26;
+		b4 = s[25] << 11 | s[24] >>> 21;
+		b5 = s[24] << 11 | s[25] >>> 21;
+		b36 = s[34] << 15 | s[35] >>> 17;
+		b37 = s[35] << 15 | s[34] >>> 17;
+		b18 = s[45] << 29 | s[44] >>> 3;
+		b19 = s[44] << 29 | s[45] >>> 3;
+		b10 = s[6] << 28 | s[7] >>> 4;
+		b11 = s[7] << 28 | s[6] >>> 4;
+		b42 = s[17] << 23 | s[16] >>> 9;
+		b43 = s[16] << 23 | s[17] >>> 9;
+		b24 = s[26] << 25 | s[27] >>> 7;
+		b25 = s[27] << 25 | s[26] >>> 7;
+		b6 = s[36] << 21 | s[37] >>> 11;
+		b7 = s[37] << 21 | s[36] >>> 11;
+		b38 = s[47] << 24 | s[46] >>> 8;
+		b39 = s[46] << 24 | s[47] >>> 8;
+		b30 = s[8] << 27 | s[9] >>> 5;
+		b31 = s[9] << 27 | s[8] >>> 5;
+		b12 = s[18] << 20 | s[19] >>> 12;
+		b13 = s[19] << 20 | s[18] >>> 12;
+		b44 = s[29] << 7 | s[28] >>> 25;
+		b45 = s[28] << 7 | s[29] >>> 25;
+		b26 = s[38] << 8 | s[39] >>> 24;
+		b27 = s[39] << 8 | s[38] >>> 24;
+		b8 = s[48] << 14 | s[49] >>> 18;
+		b9 = s[49] << 14 | s[48] >>> 18;
+		s[0] = b0 ^ ~b2 & b4;
+		s[1] = b1 ^ ~b3 & b5;
+		s[10] = b10 ^ ~b12 & b14;
+		s[11] = b11 ^ ~b13 & b15;
+		s[20] = b20 ^ ~b22 & b24;
+		s[21] = b21 ^ ~b23 & b25;
+		s[30] = b30 ^ ~b32 & b34;
+		s[31] = b31 ^ ~b33 & b35;
+		s[40] = b40 ^ ~b42 & b44;
+		s[41] = b41 ^ ~b43 & b45;
+		s[2] = b2 ^ ~b4 & b6;
+		s[3] = b3 ^ ~b5 & b7;
+		s[12] = b12 ^ ~b14 & b16;
+		s[13] = b13 ^ ~b15 & b17;
+		s[22] = b22 ^ ~b24 & b26;
+		s[23] = b23 ^ ~b25 & b27;
+		s[32] = b32 ^ ~b34 & b36;
+		s[33] = b33 ^ ~b35 & b37;
+		s[42] = b42 ^ ~b44 & b46;
+		s[43] = b43 ^ ~b45 & b47;
+		s[4] = b4 ^ ~b6 & b8;
+		s[5] = b5 ^ ~b7 & b9;
+		s[14] = b14 ^ ~b16 & b18;
+		s[15] = b15 ^ ~b17 & b19;
+		s[24] = b24 ^ ~b26 & b28;
+		s[25] = b25 ^ ~b27 & b29;
+		s[34] = b34 ^ ~b36 & b38;
+		s[35] = b35 ^ ~b37 & b39;
+		s[44] = b44 ^ ~b46 & b48;
+		s[45] = b45 ^ ~b47 & b49;
+		s[6] = b6 ^ ~b8 & b0;
+		s[7] = b7 ^ ~b9 & b1;
+		s[16] = b16 ^ ~b18 & b10;
+		s[17] = b17 ^ ~b19 & b11;
+		s[26] = b26 ^ ~b28 & b20;
+		s[27] = b27 ^ ~b29 & b21;
+		s[36] = b36 ^ ~b38 & b30;
+		s[37] = b37 ^ ~b39 & b31;
+		s[46] = b46 ^ ~b48 & b40;
+		s[47] = b47 ^ ~b49 & b41;
+		s[8] = b8 ^ ~b0 & b2;
+		s[9] = b9 ^ ~b1 & b3;
+		s[18] = b18 ^ ~b10 & b12;
+		s[19] = b19 ^ ~b11 & b13;
+		s[28] = b28 ^ ~b20 & b22;
+		s[29] = b29 ^ ~b21 & b23;
+		s[38] = b38 ^ ~b30 & b32;
+		s[39] = b39 ^ ~b31 & b33;
+		s[48] = b48 ^ ~b40 & b42;
+		s[49] = b49 ^ ~b41 & b43;
+		s[0] ^= RC[n];
+		s[1] ^= RC[n + 1];
+		}
+	};
+
+	function strict_hex_keccak(bits, hex){
+		if(hex.length % 2 != 0)
+			return null;
+
+		if(hex.slice(0, 2) == "0x")
+			hex = hex.slice(2);
+
+		var msg = [];
+		for (var i = 0; i < hex.length; i += 2){
+			var new_str = hex.slice(i, i + 2);
+			new_str = parseInt(new_str, 16);
+			if(new_str > 255)
+				return str_keccak(bits, hex);
+			msg.push(new_str);
+		}
+
+		return keccak(bits, msg);
+	}
+
+
+	function lazy_keccak(bits, hex){
+		if(hex.length % 2 != 0)
+			return str_keccak(bits, hex);
+
+		if(hex.slice(0, 2) == "0x")
+			hex = hex.slice(2);
+
+		var msg = [];
+		for (var i = 0; i < hex.length; i += 2){
+			var new_str = hex.slice(i, i + 2);
+			new_str = parseInt(new_str, 16);
+			if(isNaN(new_str) || new_str > 255)
+				return str_keccak(bits, hex);
+			msg.push(new_str);
+		}
+
+		return keccak(bits, msg);
+	}
+	
+	function str_keccak(bits, str){
+		var text_encoder = new TextEncoder();
+		var msg = [];
+		for(var i = 0; i < str.length; i++){
+			var new_str = str.slice(i, i+1);
+			new_str = text_encoder.encode(new_str);
+			msg.push(new_str);
+		}
+		return keccak(bits, msg);
+	}
+
+	function keccak(bits, hex){
+		return update(Keccak(bits, bits), hex);
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function determineEcdh(){
+
+
+	
+	const P521 = {
+		
+		P: BigInt("0x1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"),
+		
+		A: BigInt("0x1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC"),
+		
+		B: BigInt("0x051953EB9618E1C9A1F929A21A0B68540EEA2DA725B99B315F3B8B489918EF109E156193951EC7E937B1652C0BD3BB1BF073573DF883D2C34F1EF451FD46B503F00"),
+		
+		GX: BigInt("0xC6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66"),
+		GY: BigInt("0x11839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650"),
+		
+		N: BigInt("0x1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA51868783BF2F966B7FCC0148F709A5D03BB5C9B8899C47AEBB6FB71E91386409")
+	};
+
+	
+	function modAdd(a, b, m) {
+		return ((a % m) + (b % m)) % m;
+	}
+
+	function modSub(a, b, m) {
+		return ((a % m) - (b % m) + m) % m;
+	}
+
+	function modMul(a, b, m) {
+		return ((a % m) * (b % m)) % m;
+	}
+
+	function modInv(a, m) {
+		function egcd(a, b) {
+			if (a === BigInt(0)) return [b, BigInt(0), BigInt(1)];
+			const [g, x, y] = egcd(b % a, a);
+			return [g, y - (b / a) * x, x];
+		}
+		
+		const [g, x, _] = egcd(a, m);
+		if (g !== BigInt(1)) throw new Error("Modular inverse does not exist");
+		return ((x % m) + m) % m;
+	}
+
+	
+	function isOnCurve(point) {
+		if (point === null) return true; 
+		
+		const { x, y } = point;
+		
+		const left = modMul(y, y, P521.P);
+		const x3 = modMul(modMul(x, x, P521.P), x, P521.P);
+		const ax = modMul(P521.A, x, P521.P);
+		const right = modAdd(modAdd(x3, ax, P521.P), P521.B, P521.P);
+		
+		return left === right;
+	}
+
+	
+	function pointAdd(P1, P2) {
+		if (P1 === null) return P2;
+		if (P2 === null) return P1;
+		
+		if (P1.x === P2.x) {
+			if (P1.y === P2.y) {
+				return pointDouble(P1);
+			}
+			return null; 
+		}
+		
+		const slope = modMul(
+			modSub(P2.y, P1.y, P521.P),
+			modInv(modSub(P2.x, P1.x, P521.P), P521.P),
+			P521.P
+		);
+		
+		const x3 = modSub(modSub(modMul(slope, slope, P521.P), P1.x, P521.P), P2.x, P521.P);
+		const y3 = modSub(modMul(slope, modSub(P1.x, x3, P521.P), P521.P), P1.y, P521.P);
+		
+		const result = { x: x3, y: y3 };
+		if (!isOnCurve(result)) throw new Error("Point addition resulted in invalid point");
+		return result;
+	}
+
+	function pointDouble(P) {
+		if (P === null) return null;
+		if (P.y === BigInt(0)) return null;
+		
+		const slope = modMul(
+			modAdd(modMul(BigInt(3), modMul(P.x, P.x, P521.P), P521.P), P521.A, P521.P),
+			modInv(modMul(BigInt(2), P.y, P521.P), P521.P),
+			P521.P
+		);
+		
+		const x3 = modSub(modMul(slope, slope, P521.P), modMul(BigInt(2), P.x, P521.P), P521.P);
+		const y3 = modSub(modMul(slope, modSub(P.x, x3, P521.P), P521.P), P.y, P521.P);
+		
+		const result = { x: x3, y: y3 };
+		if (!isOnCurve(result)) throw new Error("Point doubling resulted in invalid point");
+		return result;
+	}
+
+	
+	function scalarMul(k, P) {
+		if (k === BigInt(0)) return null;
+		if (P === null) return null;
+		
+		let r0 = null;
+		let r1 = P;
+		
+		const bits = k.toString(2).padStart(521, '0');
+		
+		for (let i = 0; i < bits.length; i++) {
+			if (bits[i] === '0') {
+				r1 = pointAdd(r0, r1);
+				r0 = pointDouble(r0);
+			} else {
+				r0 = pointAdd(r0, r1);
+				r1 = pointDouble(r1);
+			}
+		}
+		
+		return r0;
+	}
+
+	
+	
+	this.generateKeyPair = generateKeyPair;
+	function generateKeyPair(seed) {
+		if (!(seed instanceof ArrayBuffer) || seed.byteLength !== 64) {
+			throw new Error("Seed must be a 64-byte ArrayBuffer");
+		}
+
+		
+		const seedView = new Uint8Array(seed);
+		let privateKey = BigInt(0);
+
+		
+		for (let i = 0; i < seedView.length; i++) {
+			privateKey = (privateKey << BigInt(8)) | BigInt(seedView[i]);
+		}
+
+		
+		const mask = (BigInt(1) << BigInt(521)) - BigInt(1);
+		privateKey = privateKey & mask;
+
+		
+		privateKey = (privateKey % (P521.N - BigInt(1))) + BigInt(1);
+
+		
+		const publicKey = scalarMul(privateKey, { x: P521.GX, y: P521.GY });
+
+		if (!isOnCurve(publicKey)) {
+			throw new Error("Generated public key is not on curve");
+		}
+
+		return { privateKey, publicKey };
+	}
+
+
+
+
+
+
+
+	this.convertKeys = convertKeys;
+	function convertKeys(privateKey, publicKey, cb) {
+		
+		function calculateLength(length) {
+			if (length < 128) {
+				return new Uint8Array([length]);
+			} else if (length < 256) {
+				return new Uint8Array([0x81, length]);
+			}
+			return new Uint8Array([0x82, (length >> 8) & 0xFF, length & 0xFF]);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function convertToPKCS8(privateKey, inner_cb) {
+    
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    console.log("Browser detected:", isSafari ? "Safari" : "Other browser");
+    
+    if (isSafari) {
+        
+        console.log("Using Safari-specific deterministic implementation");
+        convertSafariPKCS8Deterministic(privateKey, inner_cb);
+    } else {
+        
+        console.log("Using standard implementation for non-Safari browsers");
+        convertStandardPKCS8(privateKey, inner_cb);
+    }
+    
+    
+    function convertStandardPKCS8(privateKey, inner_cb) {
+        
+        function calculateLength(length) {
+            if (length < 128) {
+                return new Uint8Array([length]);
+            } else if (length < 256) {
+                return new Uint8Array([0x81, length]);
+            }
+            return new Uint8Array([0x82, (length >> 8) & 0xFF, length & 0xFF]);
+        }
+
+        
+        const privateKeyBytes = new Uint8Array(66);
+        let temp = privateKey;
+        for (let i = privateKeyBytes.length - 1; i >= 0; i--) {
+            privateKeyBytes[i] = Number(temp & BigInt(0xFF));
+            temp = temp >> BigInt(8);
+        }
+
+        
+        const curveOid = new Uint8Array([0x06, 0x05, 0x2B, 0x81, 0x04, 0x00, 0x23]);
+
+        
+        const ecPublicKeyOid = new Uint8Array([0x06, 0x07, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x02, 0x01]);
+
+        
+        const version = new Uint8Array([0x02, 0x01, 0x00]);
+
+        
+        const algorithmSequenceContent = new Uint8Array([
+            ...ecPublicKeyOid,
+            ...curveOid
+        ]);
+        const algoIdLength = calculateLength(algorithmSequenceContent.length);
+        const algorithmIdentifier = new Uint8Array([
+            0x30, ...algoIdLength, ...algorithmSequenceContent
+        ]);
+
+        
+        const privateKeyOctet = new Uint8Array([0x04, 0x42, ...privateKeyBytes]);
+
+        
+        const parameters = new Uint8Array([0xA0, 0x07, ...curveOid]);
+
+        
+        const ecKeySequenceContent = new Uint8Array([
+            0x02, 0x01, 0x01,  
+            ...privateKeyOctet,
+            ...parameters
+        ]);
+        const ecKeyLength = calculateLength(ecKeySequenceContent.length);
+        const ecPrivateKey = new Uint8Array([
+            0x30, ...ecKeyLength, ...ecKeySequenceContent
+        ]);
+
+        
+        const ecKeyWrapperLength = calculateLength(ecPrivateKey.length);
+        const wrappedEcKey = new Uint8Array([
+            0x04, ...ecKeyWrapperLength, ...ecPrivateKey
+        ]);
+
+        
+        const pkcs8Content = new Uint8Array([
+            ...version,
+            ...algorithmIdentifier,
+            ...wrappedEcKey
+        ]);
+        const pkcs8Length = calculateLength(pkcs8Content.length);
+        const pkcs8Key = new Uint8Array([
+            0x30, ...pkcs8Length, ...pkcs8Content
+        ]);
+
+        try {
+            crypto.subtle.importKey(
+                "pkcs8",
+                pkcs8Key.buffer,
+                {
+                    name: "ECDH",
+                    namedCurve: "P-521"
+                },
+                true,
+                ["deriveKey", "deriveBits"]
+            ).then(function(key){
+                inner_cb({ success: true, key, pkcs8Buffer: pkcs8Key.buffer });
+            }).catch(function(error) {
+                console.error("Standard implementation failed:", error);
+                inner_cb({ success: false, error: error.message });
+            });
+        } catch (error) {
+            console.error("Exception in standard implementation:", error);
+            inner_cb({ success: false, error: error.message });
+        }
+    }
+
+    
+    function convertSafariPKCS8Deterministic(privateKey, inner_cb) {
+        try {
+            
+            
+            
+            
+            
+            
+            console.log("Generating a template key pair using WebCrypto...");
+            
+            
+            crypto.subtle.generateKey(
+                {
+                    name: "ECDH",
+                    namedCurve: "P-521"
+                },
+                true, 
+                ["deriveKey", "deriveBits"]
+            ).then(function(keyPair) {
+                console.log("Template key pair generated successfully");
+                
+                
+                crypto.subtle.exportKey(
+                    "pkcs8",
+                    keyPair.privateKey
+                ).then(function(exportedKey) {
+                    console.log("Template key exported successfully");
+                    
+                    
+                    const pkcs8Template = new Uint8Array(exportedKey);
+                    console.log("Template PKCS#8 structure length:", pkcs8Template.length);
+                    
+                    
+                    const privateKeyBytes = new Uint8Array(66);
+                    let temp = privateKey;
+                    for (let i = privateKeyBytes.length - 1; i >= 0; i--) {
+                        privateKeyBytes[i] = Number(temp & BigInt(0xFF));
+                        temp = temp >> BigInt(8);
+                    }
+                    
+                    
+                    const publicKey = scalarMul(privateKey, { x: P521.GX, y: P521.GY });
+                    
+                    
+                    const xBytes = new Uint8Array(66);
+                    let tempX = publicKey.x;
+                    for (let i = xBytes.length - 1; i >= 0; i--) {
+                        xBytes[i] = Number(tempX & BigInt(0xFF));
+                        tempX = tempX >> BigInt(8);
+                    }
+                    
+                    const yBytes = new Uint8Array(66);
+                    let tempY = publicKey.y;
+                    for (let i = yBytes.length - 1; i >= 0; i--) {
+                        yBytes[i] = Number(tempY & BigInt(0xFF));
+                        tempY = tempY >> BigInt(8);
+                    }
+                    
+                    
+                    const publicKeyBytes = new Uint8Array(133);
+                    publicKeyBytes[0] = 0x04; 
+                    publicKeyBytes.set(xBytes, 1);
+                    publicKeyBytes.set(yBytes, 67);
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    const modifiedTemplate = new Uint8Array(pkcs8Template);
+                    
+                    
+                    
+                    findAndReplaceKey(modifiedTemplate, privateKeyBytes);
+                    
+                    
+                    
+                    
+                    
+                    findAndReplacePublicKey(modifiedTemplate, publicKeyBytes);
+                    
+                    
+                    crypto.subtle.importKey(
+                        "pkcs8",
+                        modifiedTemplate.buffer,
+                        {
+                            name: "ECDH",
+                            namedCurve: "P-521"
+                        },
+                        true,
+                        ["deriveKey", "deriveBits"]
+                    ).then(function(key) {
+                        console.log("Deterministic key imported successfully");
+                        inner_cb({ success: true, key, pkcs8Buffer: modifiedTemplate.buffer });
+                    }).catch(function(error) {
+                        console.error("Error importing deterministic key:", error);
+                        
+                        
+                        console.log("Fallback: Using template key");
+                        crypto.subtle.importKey(
+                            "pkcs8",
+                            pkcs8Template.buffer,
+                            {
+                                name: "ECDH",
+                                namedCurve: "P-521"
+                            },
+                            true,
+                            ["deriveKey", "deriveBits"]
+                        ).then(function(key) {
+                            console.log("Template key imported as fallback");
+                            inner_cb({ 
+                                success: true, 
+                                key, 
+                                pkcs8Buffer: pkcs8Template.buffer,
+                                warning: "Using template key (non-deterministic)"
+                            });
+                        }).catch(function(fallbackError) {
+                            console.error("Even fallback failed:", fallbackError);
+                            inner_cb({ success: false, error: error.message + " / " + fallbackError.message });
+                        });
+                    });
+                }).catch(function(error) {
+                    console.error("Error exporting template key:", error);
+                    inner_cb({ success: false, error: error.message });
+                });
+            }).catch(function(error) {
+                console.error("Error generating template key:", error);
+                inner_cb({ success: false, error: error.message });
+            });
+        } catch (error) {
+            console.error("Exception in Safari implementation:", error);
+            inner_cb({ success: false, error: error.message });
+        }
+    }
+    
+    
+    function findAndReplaceKey(template, newKey) {
+        
+        for (let i = 0; i < template.length - 68; i++) {
+            if (template[i] === 0x04 && template[i+1] === 0x42) {
+                
+                console.log("Potential private key location found at index:", i);
+                
+                
+                for (let j = 0; j < 66; j++) {
+                    template[i + 2 + j] = newKey[j];
+                }
+                
+                console.log("Private key replaced");
+                return true;
+            }
+        }
+        
+        console.log("Warning: Private key location not found in template");
+        return false;
+    }
+    
+    
+    function findAndReplacePublicKey(template, newKey) {
+        
+        
+        
+        
+        for (let i = 0; i < template.length - 3; i++) {
+            if (template[i] === 0xA1) {
+                
+                
+                
+                
+                let j = i + 1;
+                while (j < template.length && template[j] !== 0x03) j++;
+                
+                if (j < template.length) {
+                    
+                    j++;
+                    while (j < template.length && (template[j] & 0x80)) j++;
+                    j++;
+                    
+                    
+                    if (j < template.length && template[j] === 0x00) {
+                        j++;
+                        
+                        
+                        if (j < template.length && template[j] === 0x04) {
+                            console.log("Public key location found at index:", j);
+                            
+                            
+                            for (let k = 0; k < newKey.length; k++) {
+                                if (j + k < template.length) {
+                                    template[j + k] = newKey[k];
+                                }
+                            }
+                            
+                            console.log("Public key replaced");
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        
+        console.log("Warning: Public key location not found in template");
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		function convertPublicKeyToRaw(publicKey, inner_cb) {
+			
+			const xBytes = new Uint8Array(66);
+			let tempX = publicKey.x;
+			for (let i = xBytes.length - 1; i >= 0; i--) {
+				xBytes[i] = Number(tempX & BigInt(0xFF));
+				tempX = tempX >> BigInt(8);
+			}
+
+			
+			const yBytes = new Uint8Array(66);
+			let tempY = publicKey.y;
+			for (let i = yBytes.length - 1; i >= 0; i--) {
+				yBytes[i] = Number(tempY & BigInt(0xFF));
+				tempY = tempY >> BigInt(8);
+			}
+
+			
+			const rawPublicKey = new Uint8Array(133);
+			rawPublicKey[0] = 0x04;
+			rawPublicKey.set(xBytes, 1);
+			rawPublicKey.set(yBytes, 67);
+
+			try {
+				crypto.subtle.importKey(
+					"raw",
+					rawPublicKey.buffer,
+					{
+						name: "ECDH",
+						namedCurve: "P-521"
+					},
+					true,
+					[]  
+				).then(function(key){
+					inner_cb({ success: true, key, rawBuffer: rawPublicKey.buffer });
+				});
+				
+				
+			} catch (error) {
+				console.log("Public key import failed with length:", rawPublicKey.length);
+				console.log("Full bytes:", Array.from(rawPublicKey).map(b => b.toString(16).padStart(2, '0')).join(' '));
+				inner_cb({ success: false, error: error.message });
+			}
+		}
+
+
+		(function init(){
+			convertToPKCS8(privateKey, function(privateResult){
+				convertPublicKeyToRaw(publicKey, function(publicResult){
+					cb({privateKey: privateResult, publicKey: publicResult});
+				});
+			});
+		})();
+		
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+`;
+
+
+</script>
+</body>
+</html>
