@@ -2,6 +2,13 @@
 <html lang=en>
 <head>
 
+<!--
+	For WebAuthn to work, change 'id' in 'webauthn_handler'
+	to your hostname/domain (IP address won't work).
+
+    webauthn_h = new webauthn_handler({name:"Filekey", id:"example.com"});
+-->
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5">
 
@@ -198,26 +205,26 @@ body{margin:0;}
 
 @media screen and (max-width:1080px){
 	#main_window{flex-direction:column;}
-	
-	
+
+
 	#main_container{padding:15vh 5vw;width:100%;}
 	#logo_container{width: auto;padding-left:5vw;}
-	
-	
-	
+
+
+
 
 	#drop_container{width:80%;margin-top:.5vh}
-	
-	.std_outer, .std_dl_outer, .std_status_outer, .std_upload_outer{width:calc(100% - 70px)}
-	
-	
 
-	
+	.std_outer, .std_dl_outer, .std_status_outer, .std_upload_outer{width:calc(100% - 70px)}
+
+
+
+
 	#logo_container{align-items:baseline;width:100vw;background-color:#fff;z-index:1100}
 	#chiz_container{z-index:1101}
 
 
-	
+
 
 
 	.pub_key_textarea_cont{width:85%}
@@ -225,7 +232,7 @@ body{margin:0;}
 }
 
 
-	
+
 
 
 
@@ -254,13 +261,13 @@ body{margin:0;}
 </div>
 
 <div id=main_window>
-	
+
 
 	<div id=logo_container><div id=logo_bar></div></div>
 	<div id=chiz_container>
 		<div id=chiz_hidden_click_container></div>
 		<div id=chiz_icon_container></div>
-		<div id=chiz_menu_container>	
+		<div id=chiz_menu_container>
 			<div id=chiz_menu_inner>
 				<div id=chiz_list>
 					<span class=chiz_item id=chiz_get_public_key>Your Share Key</span>
@@ -270,10 +277,10 @@ body{margin:0;}
 					<span class=chiz_item id=chiz_terms>Terms</span>
 					<span class=chiz_item id=chiz_privacy>Privacy</span>
 					<span class=chiz_item id=chiz_license>License</span>
-					
+
 					<span class=chiz_item id=chiz_clear_all>Clear All</span>
-					
-					
+
+
 				</div>
 				<div id=version_container>
 					<span id=version_number_ele></span>
@@ -282,7 +289,7 @@ body{margin:0;}
 		</div>
 	</div>
 
-	
+
 	<div id=main_container>
 		<div id=main_inner>
 		</div>
@@ -297,7 +304,7 @@ body{margin:0;}
 			</div>
 		</div>
 	</div>
-	
+
 </div>
 
 <script>
@@ -351,25 +358,25 @@ window.addEventListener("DOMContentLoaded", domInit);
 
 function domInit(){
 	main_inner = document.getElementById("main_inner");
-	
-	
+
+
 	initWorkers();
 	initDB();
 	registerBasicSw();
 
 	webauthn_h = new webauthn_handler({name:"Filekey", id:"aulait.org"});
-	
+
 	initImportOptions();
 	initMessage();
 	initLogo();
 	initDropContainer();
 	initChizMenu();
-	
+
 
 	memTest();
-	
-	
-	
+
+
+
 	var font_h = new font_handler();
 	font_h.fontLoader(['inter_variable.ttf', ], {
 		font_display: "block"
@@ -390,14 +397,14 @@ function initQueryChecks(){
 	 var temp_qs = get_query_strings(false);
 	 if(checkForProperty(temp_qs.pub))
 		confirmAndAttachPub(temp_qs.pub, function(ret){
-			
+
 		});
-	 
+
 }
 
 function confirmAndAttachPub(hex_pub, cb){
 
-	
+
 	if(hex_pub.length === 266){
 		 attachSendAddress(hex_pub, cb);
 	}
@@ -431,18 +438,18 @@ function checkSwVersion(){
 }
 
 function setVersionNumber(){
-	document.getElementById("version_number_ele").innerText = local_version_number;	
+	document.getElementById("version_number_ele").innerText = local_version_number;
 }
 
 
 function sendSwMessage(data, cb) {
     var msg_channel = new MessageChannel();
-	
+
 	if(swc == null){
 		console.log("no sw yet");
 		return;
 	}
-	
+
     if (swc.state === 'activated') {
         msg_channel.port1.onmessage = cb;
         swc.postMessage(data, [msg_channel.port2]);
@@ -455,13 +462,13 @@ function sendSwMessage(data, cb) {
 
 
 function memTest(){
-	
+
 	if (performance.memory){
 		const memoryInfo = performance.memory;
 		console.log('JS Heap used: ' + memoryInfo.usedJSHeapSize);
 		console.log('JS Heap total: ' + memoryInfo.totalJSHeapSize);
 		console.log('JS Heap limit: ' + memoryInfo.jsHeapSizeLimit);
-	} 
+	}
 	else
 		console.log('Memory info is not available in this browser.');
 }
@@ -479,21 +486,21 @@ function initLogo(){
 
 function initMessage(){
 
-	
-	var html_string = "<strong>Files need protection. FileKey secures them</strong><span>. Works with passkeys. Drop files in. They lock. Drop them again. They unlock. Your data stays on your device, and only you hold the key. Open source and powered by AES-256 encryption—the same standard trusted by the US government for top-secret information. For the latest updates, join our </span><a class='borderless msg_link' href='https://signal.group/#CjQKIDpdakX0nr1V00ciNv3dsWCFZgUwm_NylulFJz4VOUJ_EhBtY-bq759RNExzcCWMUGIB' target=_blank>Signal</a><span> group or </span><a class='borderless msg_link' href='https://filekey.substack.com/' target=_blank>Substack</a><span>.</span></span>";
-	 
-	
 
-	
-	
-		
+	var html_string = "<strong>Files need protection. FileKey secures them</strong><span>. Works with passkeys. Drop files in. They lock. Drop them again. They unlock. Your data stays on your device, and only you hold the key. Open source and powered by AES-256 encryption—the same standard trusted by the US government for top-secret information. For the latest updates, join our </span><a class='borderless msg_link' href='https://signal.group/#CjQKIDpdakX0nr1V00ciNv3dsWCFZgUwm_NylulFJz4VOUJ_EhBtY-bq759RNExzcCWMUGIB' target=_blank>Signal</a><span> group or </span><a class='borderless msg_link' href='https://filekey.substack.com/' target=_blank>Substack</a><span>.</span></span>";
+
+
+
+
+
+
 	htmlWriter({char_speed:8}, html_string, main_inner, {}, function(){
-		
-		
-		
+
+
+
 		var html_string = "<span>To start, </span><span class=msg_clickable id=int_msg_clickable_gen_passkey>generate</span><span> a new filekey or </span><span class=msg_clickable id=clickable_load_seckey>authenticate</span><span> your existing filekey.</span>";
 
-		
+
 
 		var events_obj = {
 			int_msg_clickable_gen_passkey: {target:genNewPasskey},
@@ -503,8 +510,8 @@ function initMessage(){
 
 
 
-		
-		
+
+
 	});
 }
 
@@ -512,21 +519,21 @@ function registerBasicSw(){
 	if ('serviceWorker' in navigator) {
 	  window.addEventListener('load', () => {
 		navigator.serviceWorker.register('sw.js').then((registration) => {
-			
-			
+
+
 			console.log('Service Worker registered with scope:', registration.scope);
-			
+
 			swc = navigator.serviceWorker.controller;
-			
-			
+
+
 			registration.onupdatefound = () => {
 				const newSW = registration.installing;
 				newSW.onstatechange = () => {
 					if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
-						
-						
+
+
 						updateSwc();
-						sendNewUpdateAlert();						
+						sendNewUpdateAlert();
 					}
 
 					if (newSW.state === 'activated' && navigator.serviceWorker.controller){
@@ -545,26 +552,26 @@ function registerBasicSw(){
 	function sendNewUpdateAlert(){
 		var html_string = "<span>A new version of FileKey is available. Please refresh the page to update.</span>";
 		htmlWriter(getWarningParams(), html_string, main_inner);
-		
 
-		
-		
+
+
+
 	}
 
 	function updateSwc(){
-		
+
 			swc = navigator.serviceWorker.controller;
 			checkSwVersion();
-		
+
 	}
-		
+
 }
 
 
 function initWorkers(){
 	ww_h = new blobWorkersHandler();
 
-	
+
 	ww_h.loadWorkerFromText(ww_js_script, storeAndWaitForWorker);
 
 }
@@ -616,7 +623,7 @@ function initChizMenu(){
 			e.stopPropagation();
 	}
 
-		
+
 	function displayMenuMessage(e){
 
 		var display_speed = 10;
@@ -671,7 +678,7 @@ function initChizMenu(){
 					<p>Every FileKey user has a unique "Share Key" – a long string of characters that works like a public address. You can find yours in the menu under "Your Share Key."</p>
 
 					<h4 class=no_class_yet>Sharing a File</h4>
-					
+
 
 					<ol class=msg_no_margin_cont>
 						<li>Click the "Share" button next to any file</li>
@@ -698,7 +705,7 @@ function initChizMenu(){
 						<li>The encryption happens entirely on your device – no servers involved</li>
 						<li>Files are secured with military-grade encryption (AES-256)</li>
 					</ul>
-					
+
 					<p>Share files with confidence, knowing only your intended recipient can access them!</p>
 
 
@@ -747,7 +754,7 @@ function initChizMenu(){
 				`;
 
 
-				
+
 			break;
 
 			case "chiz_contact_us":
@@ -755,7 +762,7 @@ function initChizMenu(){
 			break;
 
 
-			
+
 			case "chiz_source_code":
 				html_string = `
 					<h2 class=msg_menu_heading>Source code</h2>
@@ -808,7 +815,7 @@ function initChizMenu(){
 
 
 			case "chiz_privacy":
-			
+
 				html_string = `
 					<h2 class=msg_menu_heading>Privacy Policy</h2>
 					<h3 class=msg_number_heading>No Data Collection:</h3>
@@ -844,21 +851,21 @@ function initChizMenu(){
 					<p>By using FileKey, you agree to the terms of this license. If you contribute to the project, you also acknowledge that your contributions will be made available under GPLv3.</p>
 				`;
 
-				
-				
+
+
 			break;
 
 			case "chiz_get_public_key":
 				displayPublicKey(main_inner);
 			return;
-			
-			
+
+
 
 		}
 
 		(function writeMenuMessage(){
-			
-			
+
+
 			htmlWriter({char_speed:display_speed}, html_string, main_inner, events_obj);
 			scrollToBottom();
 		})();
@@ -880,7 +887,7 @@ function displayPublicKey(main_inner){
 	getDetEcdhPublicKey(function(ret){
 
 		var events_obj = {};
-		
+
 		if(ret == null)
 			html_string = `<span>Authentication required to generate share key.</span>`;
 		else{
@@ -889,9 +896,9 @@ function displayPublicKey(main_inner){
 			rand_copy_id = "copy_button_" + rand_id;
 			rand_svg_id = "copy_svg_cont_" + rand_id;
 			rand_pub_id = "copy_pub_" + rand_id;
-			
 
-			
+
+
 			var copy_icon = hb.getSvg("copy_icon", {class_string: "copy_icon"});
 			html_string = `
 					<span>Your share key is a public key that allows others to encrypt data that only you can decrypt:</span>
@@ -901,20 +908,20 @@ function displayPublicKey(main_inner){
 					</div>`;
 		}
 		htmlWriter({char_speed:8}, html_string, main_inner, events_obj,function(ret){
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
 			if(rand_copy_id != null){
 				var copy_svg_cont = document.getElementById(rand_svg_id);
 				copy_svg_cont.innerHTML = copy_icon;
 				var copy_button = document.getElementById(rand_copy_id);
 				copy_button.addEventListener("click", copyPub);
-				
+
 			}
-			
+
 		});
 		scrollToBottom();
 	});
@@ -943,30 +950,30 @@ function getDetEcdhPublicKey(cb){
 function clearAll(){
 	tempTest();
 
-	
+
 	active_share_prompt = null;
-	
+
 	main_inner.innerHTML = "";
 	db_h.clearDbStore();
 
 
 	function tempTest(){
-		
+
 	}
 }
 
 function genNewPasskey(){
 	var prf_obj = {key_name:"Filekey", username:"default_user"};
 	webauthn_h.createCredential(prf_obj, function(ret){
-		
+
 		if(ret === null)
 			htmlWriter(getErrorParams(), "<span>Failed to generate new filekey. Please try again.</span>", main_inner);
-			
-			
+
+
 		else{
 
-			
-			
+
+
 
 			var html_string = "<span>Filekey created. </span><span class=msg_clickable id=clickable_load_seckey_from_gen_pk>Now tap to authenticate</span><span>.</span>";
 
@@ -1000,20 +1007,20 @@ function shareEnc(data, cb){
 	var msg_buff = data;
 	var msg_param = {msg_type: "shared_ecdh_enc", msg_buff};
 	ww_h.sendMessageToWorker(msg_param, [msg_buff], function(ret){
-		
+
 		cb(ret);
 	});
 }
 
 function shareDec(data, cb){
 	var msg_buff = data;
-	
+
 	var pub_buff = msg_buff.slice(0, 133);
 	msg_buff = msg_buff.slice(133);
-	
+
 	var msg_param = {msg_type: "shared_ecdh_dec", msg_buff, pub_buff};
 	ww_h.sendMessageToWorker(msg_param, [msg_buff, pub_buff], function(ret){
-		
+
 		cb(ret);
 	});
 }
@@ -1032,7 +1039,7 @@ function waitForWebWorker(valid = true){
 		ww_h.initWorkers(function(worker_version){
 			changeVersionIfChanged(worker_version);
 			checkSwVersion();
-			
+
 			var qq = 22;
 		});
 	}
@@ -1054,31 +1061,31 @@ function initPrf(cb){
 		cb(true);
 	else{
 		var prf_obj = getPrfObject(null);
-		
-		
+
+
 		webauthn_h.webAuthnClick(prf_obj, function(prf_buff, cred){
-			
+
 
 			if(prf_buff == null){
-				
+
 				cb(null);
 			}
 			else if(prf_buff.byteLength > 0){
-				
+
 				prfToWebWorkerKey(prf_buff, function(){
 					genDefaultSeed(cb);
 					active_prf = true;
 
 
-					
-					
-					
-					
+
+
+
+
 					var html_string = "<span>Filekey authenticated. Now drag and drop files to encrypt or decrypt them!</span>";
 					htmlWriter({char_speed:8}, html_string, main_inner);
 					document.getElementById("drop_container").style.display = "flex";
 					scrollToBottom();
-					
+
 
 
 				});
@@ -1089,10 +1096,10 @@ function initPrf(cb){
 
 		});
 
-		
+
 	}
-		
-	
+
+
 }
 
 
@@ -1117,7 +1124,7 @@ function initDropContainer(){
 	document.getElementsByClassName("dc_icon_container")[0].innerHTML = hb.getSvg("plus_icon", {class_string: "plus_icon"});
 	drop_border_obj = new createAnimatedBorder(document.getElementById("drop_container"), ex_params[0]);
 	drop_border_obj.toggleAnimation(false);
-	
+
 }
 
 
@@ -1130,14 +1137,14 @@ function createDownloadEle(dl_obj){
 
 	displayIfShare(file_id);
 
-	
+
 
 	function displayIfShare(file_id){
-		
+
 		document.getElementById(file_id + "_share").addEventListener("click", triggerShare);
 	}
 
-	
+
 	function triggerShare(e){
 		let new_filename = "";
 		let id = e.currentTarget.id;
@@ -1179,7 +1186,7 @@ function createDownloadEle(dl_obj){
 					handleShare(dl_obj.data);
 				}
 				else{
-					
+
 					new_filename = new_filename.replace(".filekey", ".shared_filekey");
 					preShareDec(ret.data, handleShare);
 				}
@@ -1191,13 +1198,13 @@ function createDownloadEle(dl_obj){
 		function handleShare(ps_data){
 			shareEnc(ps_data, function(res){
 
-				
+
 				getDetEcdhPublicKey(function(pub){
 					var combined_buff = combineArrayBuffers(res.salt,res.encrypted_buff);
 					combined_buff = combineArrayBuffers(pub, combined_buff);
 					download_ab(new_filename, combined_buff);
 				});
-				
+
 			});
 		}
 	}
@@ -1210,7 +1217,7 @@ function createDownloadEle(dl_obj){
 		let confirm_pub_key, text_area, edit_pub_key;
 		var html_string = "<span>Enter recipient's share key:</span>";
 
-		
+
 
 		htmlWriter({char_speed:4}, html_string, main_inner, {}, function(ret){
 			setPubTextArea();
@@ -1224,7 +1231,7 @@ function createDownloadEle(dl_obj){
 			var outer_ele = document.createElement("div");
 			main_inner.appendChild(outer_ele);
 			outer_ele.outerHTML = new_html;
-			
+
 			text_area = document.getElementById("pub_key_textarea");
 			text_area.setAttribute("rows", 1);
 			text_area.style.height = (text_area.scrollHeight) + 'px';
@@ -1238,12 +1245,12 @@ function createDownloadEle(dl_obj){
 
 
 
-			
+
 			text_area.addEventListener('input', function() {
-				
+
 				this.style.height = 'auto';
 				this.style.height = (this.scrollHeight) + 'px';
-				
+
 			});
 
 
@@ -1262,7 +1269,7 @@ function createDownloadEle(dl_obj){
 
 							edit_pub_key.style.display = "flex";
 							edit_pub_key.addEventListener("click", editPubKey);
-							
+
 						}
 						else
 							invalidPubKey();
@@ -1278,7 +1285,7 @@ function createDownloadEle(dl_obj){
 
 			function editPubKey(){
 				active_send_pub = null;
-				
+
 				confirm_pub_key.style.display = "flex";
 				confirm_pub_key.addEventListener("click", confirmPubKey);
 
@@ -1293,7 +1300,7 @@ function createDownloadEle(dl_obj){
 		}
 
 
-		
+
 		function invalidPubKey(){
 			var html_string = "<span>Invalid share key.</span>";
 			htmlWriter({char_speed:8}, html_string, main_inner);
@@ -1311,7 +1318,7 @@ function createDownloadEle(dl_obj){
 		id = id.replace("file_id_", "");
 
 
-		
+
 
 		getFileData(id, function(ret){
 			download_ab(ret.filename, ret.data);
@@ -1329,7 +1336,7 @@ function createDownloadEle(dl_obj){
 
 	function preShareDec(file_contents, cb){
 		decMsg(file_contents, function(ret){
-			
+
 
 			if(ret === null){
 				var params = getErrorParams();
@@ -1364,20 +1371,20 @@ function std_newStatus(encrypted_status, status_count){
 	var outer_ele = document.createElement("div");
 	main_inner.appendChild(outer_ele);
 	outer_ele.outerHTML = new_html;
-	
-	
-	
-	
+
+
+
+
 
 	return {ele_id, ts:performance.now(), status_msg};
-	
-	
+
+
 }
 
 
 function fk_db_handler(cb){
-	
-	
+
+
   let main_handler;
     var db_obj, db_name, version_number;
     (function init(){
@@ -1448,7 +1455,7 @@ function fk_db_handler(cb){
         main_handler.getKeyWithStore(store_obj, file_id, cb);
     }
 
-	
+
     this.saveNewFile = saveNewFile;
     function saveNewFile(file_id, file_obj, cb) {
         getFileStore(file_id, function(ret) {
@@ -1475,7 +1482,7 @@ function fk_db_handler(cb){
             } else
                 console.log("Warning", "Failed to set biometrics for: " + file_id);
         });
-		
+
     }
 
 
@@ -1500,36 +1507,36 @@ function fk_db_handler(cb){
 	this.openDbCursorWithKey = openDbCursorWithKey;
 	function openDbCursorWithKey(key){
 		var store = main_handler.getStore(db_obj.data_store.name);
-		
+
 		const request = store.openKeyCursor();
 
 		request.onsuccess = (event) => {
 		  const cursor = event.target.result;
 		  if (cursor) {
-			
-			
-			
+
+
+
 			cursor.continue();
 		  } else {
-			
+
 		  }
 		};
 	}
 
 
-	
+
 }
 
 
 
 function createWebmLink(id, data){
-	
-	
 
-	
+
+
+
 	const blob = new Blob([data], { type: 'video/webm' });
 
-	
+
 	const url = URL.createObjectURL(blob);
 
 	var file_ele = document.getElementById("file_id_" + id + "_blob");
@@ -1539,38 +1546,38 @@ function createWebmLink(id, data){
 	});
 
 
-	
-	
 
-	
-	
-	
+
+
+
+
+
 
 }
 
 function newDownloadObj(filename, data, params = {encrypted_status: true}, cb){
-	
-	
-	
-	
 
-	
+
+
+
+
+
 	var file_id = genIdConfirmHash(data);
-	
+
 	var new_dl_obj = {filename, data, ts: Date.now(),file_id};
 	new_dl_obj = Object.assign(new_dl_obj, params);
-	
+
 
 	db_h.saveNewFile("f" + new_dl_obj.file_id, new_dl_obj, function(ret){
-		
+
 		createDownloadEle(new_dl_obj);
 
-		
+
 
 		cb();
 	});
-	
-	
+
+
 }
 
 
@@ -1586,11 +1593,11 @@ function checkIfViewableType(filename){
 
 
 function handleSharedFile(file_obj){
-	
-	
-	
-	
-	
+
+
+
+
+
 	var file_array = current_active_file_array;
 
 	if(file_array.length > 0){
@@ -1603,9 +1610,9 @@ function handleSharedFile(file_obj){
 
 		(function nextFile(file){
 			getFlatFile(file, function(file_contents, filename){
-				
 
-				
+
+
 				shareDec(file_contents, function(ret){
 
 
@@ -1614,12 +1621,12 @@ function handleSharedFile(file_obj){
 						var params = getErrorParams();
 						var html_string = "<span>Failed to unlock file with this key. Please try again.</span>";
 						htmlWriter(params, html_string, main_inner);
-						
-						
-						
+
+
+
 					}
 					else{
-						
+
 						var new_filename = filename.replace(".shared_filekey", "");
 						newDownloadObj(new_filename, decodeData(ret.decrypted_buff), {encrypt_status, shared_file:true}, function(ret){
 
@@ -1637,13 +1644,13 @@ function handleSharedFile(file_obj){
 			});
 		})(file_array[fc++]);
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 
 
 
@@ -1669,21 +1676,21 @@ function undoStuff(){
 			parseFilekeyFile(file, function(file_contents, filename){
 
 				decMsg(file_contents, function(ret){
-					
+
 
 					if(ret === null){
 						status_obj.animator.clearStatus();
 						var params = getErrorParams();
 						var html_string = "<span>Failed to unlock file with this key. Please try again.</span>";
 						htmlWriter(params, html_string, main_inner);
-						
-						
-						
+
+
+
 					}
 					else{
-						
+
 						var new_filename = filename.replace(".filekey", "");
-						
+
 						newDownloadObj(new_filename, decodeData(ret.decrypted_buff), {encrypt_status}, function(ret){
 
 							scrollForFirstFile(fc);
@@ -1691,11 +1698,11 @@ function undoStuff(){
 							if(fc < file_array.length)
 								nextFile(file_array[fc++]);
 							else
-								status_obj.animator.triggerStatusFinish(status_obj);						
+								status_obj.animator.triggerStatusFinish(status_obj);
 						});
 					}
 
-					
+
 
 				});
 			});
@@ -1715,7 +1722,7 @@ function getErrorParams(){
 function set3dotStatusAnimation(status_obj){
 	let active_animation = true;
 	let status_ele = document.getElementById(status_obj.ele_id);
-	
+
 	let start_ts = performance.now();
 
 	(function startAnimation(){
@@ -1751,8 +1758,8 @@ function set3dotStatusAnimation(status_obj){
 	function triggerStatusFinish(){
 		if(status_obj != null){
 			endStatus();
-			
-			
+
+
 		}
 
 		function endStatus(){
@@ -1766,44 +1773,44 @@ function set3dotStatusAnimation(status_obj){
 
 function decodeData(decoded_data){
 	if(file_as_text){
-		
+
 		var ret = leaveItAlone(decoded_data);
 		return ret;
 	}
 	else{
-		
+
 		var ret = leaveItAlone(decoded_data);
 		return ret;
 	}
 }
 
 
-	
+
 function parseFilekeyFile(file, cb){
 	var filename = file.name;
 	if(checkForProperty(file.size)){
-		
+
 		readFile(file, function(ret){
 			cb(ret, filename);
 		});
 	}
 	else{
 		file.file(new_file => {
-			
+
 			readFile(new_file, function(ret){
 				cb(ret, filename);
 			});
 		});
-		
+
 	}
 
 
-	
+
 
 }
 
 
-	
+
 function doStuff(){
 	var file_array = current_active_file_array;
 
@@ -1817,30 +1824,30 @@ function doStuff(){
 
 		(function nextFile(file){
 			getFlatFile(file, function(file_contents, filename){
-				
-				
-				
+
+
+
 				encNewMsg(file_contents, function(ret){
 					var combined_buff = combineArrayBuffers(ret.salt,ret.encrypted_buff);
 
-					
+
 					var new_filename = filename + ".filekey";
 					newDownloadObj(new_filename, combined_buff, {encrypt_status}, function(ret){
-						
+
 						scrollForFirstFile(fc);
-						
-						
+
+
 						if(fc < file_array.length)
 							nextFile(file_array[fc++]);
 						else
-							status_obj.animator.triggerStatusFinish(status_obj);						
+							status_obj.animator.triggerStatusFinish(status_obj);
 					});
 
 				});
 			});
 		})(file_array[fc++]);
 	}
-}	
+}
 
 function scrollForFirstFile(fc){
 	if(fc === 1)
@@ -1849,7 +1856,7 @@ function scrollForFirstFile(fc){
 
 
 function getFlatFile(file, cb){
-	
+
 	var filename = file.name;
 	if(checkForProperty(file.size)){
 		readFile(file, retFile);
@@ -1865,14 +1872,14 @@ function getFlatFile(file, cb){
 		cb(ret, filename);
 	}
 
-	
+
 }
 
 
 
 
 function readFile(file, inner_cb){
-	
+
 	const reader = new FileReader();
 	reader.onload = function(event) {
 	   inner_cb(event.target.result);
@@ -1889,17 +1896,17 @@ function genDefaultSeed(cb){
 	let allow_gen = true;
 
 	(function generateAnotherOne(e){
-		
+
 		if(allow_gen){
-			
+
 			var suffix = "";
 			var new_seed_count = 0;
-			
+
 			allow_gen = false;
 			var seed_name = (suffix + "_" + new_seed_count++);
 			setNewSeed(seed_name, function(){
-				
-				
+
+
 				cb(true);
 			});
 		}
@@ -1954,18 +1961,18 @@ function prfToWebWorkerKey(prf_buff, cb){
 }
 
 function setNewSeed(seed_name, cb){
-	
+
 	var msg_param = {msg_type: "set_seed", seed_name};
 	ww_h.sendMessageToWorker(msg_param, [], cb);
-	
-	
+
+
 }
 
 
 function encNewMsg(msg_data, cb){
 	var msg_buff;
 	if(file_as_text)
-		
+
 		msg_buff = msg_data;
 	else
 		msg_buff = stringToArrayBuffer(msg_data);
@@ -1975,15 +1982,15 @@ function encNewMsg(msg_data, cb){
 
 
 function stringToArrayBuffer(str) {
-    
+
     const buffer = new Uint8Array(str.length);
 
-    
+
     for (let i = 0; i < str.length; i++) {
         buffer[i] = str.charCodeAt(i);
     }
 
-    
+
     return buffer.buffer;
 }
 
@@ -1994,7 +2001,7 @@ function leaveItAlone(already_as_needed) {
 
 
 function decMsg(msg_buff, cb){
-	
+
 	var msg_param = {msg_type: "new_dec", msg_buff};
 	ww_h.sendMessageToWorker(msg_param, [msg_buff], cb);
 }
@@ -2007,8 +2014,8 @@ function decMsg(msg_buff, cb){
 
 
 function getPrfObject(id = null){
-	
-	
+
+
 
 	var first_data = "filekey_security_key_wallet_first";
 	var second_data = "filekey_security_key_wallet_second";
@@ -2024,15 +2031,15 @@ function getPrfObject(id = null){
 
 function genIdConfirmHash(file_buff){
 	var confirm_hashes = [];
-	
-	
+
+
 	var buff_len = file_buff.byteLength;
 	var init_log_size = 20;
 	var max_hash_chunk = 2 ** init_log_size;
 	var max_confirm_length = max_hash_chunk/2;
 
-	
-	
+
+
 	if(buff_len < max_hash_chunk)
 		return kh.strict_hex_keccak256(bh.bufferToHex(file_buff));
 	else
@@ -2045,12 +2052,12 @@ function genIdConfirmHash(file_buff){
 		for(var i = 0; i < confirm_points_array.length; i++){
 			var hex_buff = new ArrayBuffer(max_confirm_length);
 			var start_point = confirm_points_array[i];
-			
+
 			hex_buff = new Uint8Array(file_buff, start_point, max_confirm_length);
 			hex_buff = kh.strict_hex_keccak256(bh.bufferToHex(hex_buff));
 			appendToConfirm(hex_buff);
 		}
-		
+
 		return computeConfirmStr();
 	}
 
@@ -2069,7 +2076,7 @@ function genIdConfirmHash(file_buff){
 		var ret_points = [];
 		ret_points.push(0);
 		var last_point_end = ret_points[0] + max_confirm_length;
-		
+
 		var num_points = (floorLog2(buff_len) - (init_log_size - 2));
 
 		var spacer = calcSpacer();
@@ -2084,7 +2091,7 @@ function genIdConfirmHash(file_buff){
 
 		return ret_points;
 
-		
+
 
 		function getEndPoint(){
 			return buff_len - max_confirm_length;
@@ -2096,7 +2103,7 @@ function genIdConfirmHash(file_buff){
 			spacer = (spacer / (num_points-1));
 			spacer = Math.floor(spacer);
 			return spacer;
-			
+
 		}
 	}
 
@@ -2116,7 +2123,7 @@ function genIdConfirmHash(file_buff){
 
 function useBiometricsErrorHandler(error_value){
 	var error_obj;
-	
+
 	switch(error_value){
 		case "no_prf":
 			error_obj = {msg_html:"Invalid passkey, or unsupported device.", full_bar_target:true, self_remove_ms:8000, custom_bg_color: "#e93232", custom_color:"#fff", svg_icon:hb.getSvg("warning_w_border",  {class_string:"std_icon"}), close_icon:hb.getSvg("x",  {class_string:"std_close_icon"})};
@@ -2126,7 +2133,7 @@ function useBiometricsErrorHandler(error_value){
 			error_obj = {msg_html:"No account detected.",full_bar_target:true, self_remove_ms:8000, custom_bg_color: "#500202", custom_color:"#fff", svg_icon:hb.getSvg("warning_w_border",  {class_string:"std_icon"}), close_icon:hb.getSvg("x",  {class_string:"std_close_icon"})};
 		break;
 	}
-	
+
 }
 
 
@@ -2150,33 +2157,33 @@ function useBiometricsErrorHandler(error_value){
 
 
 function setFileImport(){
-	
-    
-    
+
+
+
 
 	const drag_window = document.getElementById('drag_window');
 	const file_drag_zone = document.getElementById('file_drag_zone');
 
 	var current_cursor = "";
-	
-	
 
-	
+
+
+
 	let file_array = [];
 	let active_border_animation = false;
-	
+
 	setImportButtons();
 	initDragContainer();
 
-    
-  
+
+
 
     function preventDefaults(e) {
         e.preventDefault();
         e.stopPropagation();
     }
 
-	
+
 
 	function initDragContainer(){
 
@@ -2184,19 +2191,19 @@ function setFileImport(){
 		document.addEventListener('dragenter', setDragContainer);
 		document.addEventListener('drop', droppedFile);
 		document.addEventListener('dragover', doNothing);
-		
-		drag_window.addEventListener('dragleave', windowDragLeave);
-		
 
-		
-		
-		
+		drag_window.addEventListener('dragleave', windowDragLeave);
+
+
+
+
+
 
 		function setDragContainer(e){
 			preventDefaults(e);
-			
+
 			setCurrentCursor(e, 'none');
-			
+
 			var qq = 22;
 			drag_window.style.display = "block";
 			file_drag_zone.style.display = "block";
@@ -2218,7 +2225,7 @@ function setFileImport(){
 		function windowDragLeave(e){
 			if(e.fromElement == null)
 				removeDragContainer();
-				
+
 		}
 
 		function removeDragEvents(){
@@ -2234,12 +2241,12 @@ function setFileImport(){
 		}
 
 		function setCurrentCursor(e, type = 'copy'){
-			
+
 				current_cursor = type;
 				e.dataTransfer.dropEffect = current_cursor;
-			
 
-			
+
+
 		}
 
 		function droppedFile(e){
@@ -2247,9 +2254,9 @@ function setFileImport(){
 			var qq = 22;
 			removeDragContainer();
 			unhighlight(e);
-			
-			
-			
+
+
+
 			if(e.target === file_drag_zone)
 				handleDrop(e);
 		}
@@ -2259,7 +2266,7 @@ function setFileImport(){
 			drag_window.style.display = "none";
 			file_drag_zone.style.display = "none";
 
-			
+
 
 		}
 
@@ -2274,7 +2281,7 @@ function setFileImport(){
 		}
 
 
-		
+
 
 
 		function unhighlight(e) {
@@ -2292,17 +2299,17 @@ function setFileImport(){
 	}
 
     function handleDrop(e) {
-		
-		
+
+
         const items = e.dataTransfer.items;
 		var items_remaining = items.length;
 
         for (let i = 0; i < items.length; i++){
-            const item = items[i].webkitGetAsEntry(); 
+            const item = items[i].webkitGetAsEntry();
 
             if(item){
                 if(item.isFile){
-                    
+
                     addFileToList(item);
 					items_remaining--;
 					if(items_remaining <= 0){
@@ -2312,7 +2319,7 @@ function setFileImport(){
 					}
                 }
 				else if(item.isDirectory){
-                    
+
                     handleDirectory(item);
                 }
             }
@@ -2321,13 +2328,13 @@ function setFileImport(){
 
     function handleDirectory(dirEntry) {
         const dirReader = dirEntry.createReader();
-        
+
         dirReader.readEntries((entries) => {
             for (const entry of entries) {
                 if (entry.isFile) {
                     addFileToList(entry);
                 } else if (entry.isDirectory) {
-                    handleDirectory(entry); 
+                    handleDirectory(entry);
                 }
             }
         }, (error) => {
@@ -2339,34 +2346,34 @@ function setFileImport(){
 		var qq_add = 22;
 		file_array.push(new_file);
 	}
-	
+
 	function setFileArrayList(){
-		
+
 		var qq_add = 22;
 		current_active_file_array = file_array;
 	}
 
 
-	
+
 	function setImportButtons(){
 
 		document.getElementById('drop_container').addEventListener('click', function(e) {
 			document.getElementById('file_input').click();
 		});
 
-		
+
 		document.getElementById('file_input').addEventListener('change', function(event) {
 			const files = event.target.files;
-			
+
 			setFileList(event.target.files);
 			handleNewFiles();
 		});
-		
-		
+
+
 
 		function setFileList(files){
 			current_active_file_array = files;
-			
+
 		}
 	}
 
@@ -2383,7 +2390,7 @@ function displayFiles(file_array){
 }
 
 function scrollToBottom(){
-	
+
 	var main_inner = document.getElementById("main_inner");
 
 	var three_quarters = (document.body.clientHeight*.75);
@@ -2398,16 +2405,16 @@ function handleNewFiles(){
 		if(ret != null){
 			displayFiles(current_active_file_array);
 
-			
+
 			basedOnFileType(current_active_file_array[0]);
 
-			
-			
+
+
 		}
 	});
 
 	function basedOnFileType(file_obj){
-		
+
 		var file_params = getFileParams(file_obj.name);
 		switch(file_params.file_type){
 			case "Encrypted File":
@@ -2422,7 +2429,7 @@ function handleNewFiles(){
 	}
 
 
-	
+
 
 }
 
@@ -2447,8 +2454,8 @@ function setPrfIfNot(cb){
 		if(ret)
 			cb(ret);
 		else{
-			
-			
+
+
 			var html_string = "<span>Authentication failed. Please try again.</span>";
 			htmlWriter(getErrorParams(), html_string, main_inner);
 			cb(null);
@@ -2477,7 +2484,7 @@ function setPrfIfNot(cb){
 
 function std_newUpload(filename){
 	var file_params = getFileParams(filename);
-	
+
 	var new_html = hb.html_newFileUpload(file_params);
 	var outer_ele = document.createElement("div");
 	main_inner.appendChild(outer_ele);
@@ -2509,7 +2516,7 @@ function getFileParams(filename){
 function std_newDownload(params){
 	var file_params = getFileParams(params.filename);
 	params = Object.assign(params, file_params);
-	
+
 	var new_html = hb.html_newDownload(params);
 	var outer_ele = document.createElement("div");
 	main_inner.appendChild(outer_ele);
@@ -2537,7 +2544,7 @@ function htmlWriter(params, html_string, print_to_ele, event_obj, cb){
 
 	var ele = document.getElementById(params.msg_id);
 
-	
+
 
 	(function printNext(current_ele, print_to, inner_cb = null){
 		let at_least_one_printed = false;
@@ -2547,8 +2554,8 @@ function htmlWriter(params, html_string, print_to_ele, event_obj, cb){
 		let new_ele = appendAndReturnNewEle(current_ele, print_to);
 
 		if(next_child == null){
-			
-			
+
+
 
 			if(checkForProperty(new_ele.id) && checkForProperty(event_obj[new_ele.id]))
 				addEventToEle(new_ele, event_obj[new_ele.id]);
@@ -2559,7 +2566,7 @@ function htmlWriter(params, html_string, print_to_ele, event_obj, cb){
 				else
 					printNext(next_sib, print_to, inner_cb);
 			});
-			
+
 		}
 		else{
 			printNext(next_child, new_ele, function(){
@@ -2598,7 +2605,7 @@ function htmlWriter(params, html_string, print_to_ele, event_obj, cb){
 		var placeholder = current_ele.getAttribute('placeholder');
 		if(placeholder)
 			new_ele.setAttribute('placeholder', placeholder);
-			
+
 		append_to.append(new_ele);
 		return new_ele;
 	}
@@ -2682,7 +2689,7 @@ function std_fillTextBoxAnimation(params, main_ele, text, custom_html_array, cb)
 
 
 function html_builder(){
-	
+
 
 	this.html_newFileUpload = html_newFileUpload;
 	function html_newFileUpload(params = {}){
@@ -2703,11 +2710,11 @@ function html_builder(){
 
 	this.html_newTextarea = html_newTextarea;
 	function html_newTextarea(params = {}){
-		
+
 		var placeholder = (checkForProperty(params.placeholder)) ? params.placeholder : "";
 		var check_icon = hb.getSvg("check_icon", {class_string: "confirm_icon"});
 		var edit_icon = hb.getSvg("edit_icon", {class_string: "edit_icon"});
-		
+
 		return `
 			<div class="pub_key_textarea_cont set_right"><textarea id=pub_key_textarea placeholder='${placeholder}'></textarea><span id=confirm_pub_key class=no_select>${check_icon} <span>Confirm</span></span><span id=edit_pub_key class=no_select>${edit_icon} <span>Edit</span></span></div>
 		`;
@@ -2715,12 +2722,12 @@ function html_builder(){
 
 	this.html_newMessage = html_newMessage;
 	function html_newMessage(params = {}){
-		
+
 		var dp_class_string  = (checkForProperty(params.dp_class_string)) ? params.dp_class_string : "std_dp";
 		var filekey_icon_class = (checkForProperty(params.failed_filekey_icon)) ? params.failed_filekey_icon : "filekey_icon";
 		var filekey_msg_icon = hb.getSvg("filekey_icon", {class_string: filekey_icon_class});
-		
-		
+
+
 		return `
 			<div class=std_outer>
 				<div class=std_msg_inner>
@@ -2735,7 +2742,7 @@ function html_builder(){
 	function html_newStatus(params = {}){
 		params.class_string = (checkForProperty(params.class_string)) ? params.class_string : "filekey_icon";
 		var filekey_msg_icon = hb.getSvg("filekey_icon", {class_string: params.class_string});
-		
+
 		return `
 			<div class=std_status_outer>
 				<div class=std_status_inner>
@@ -2750,8 +2757,8 @@ function html_builder(){
 	this.html_newDownload = html_newDownload;
 	function html_newDownload(params = {}){
 		var file_id = "file_id_" + params.file_id;
-		
-		
+
+
 		return `
 			<div class=std_dl_outer>
 				<div class=std_download>
@@ -2768,7 +2775,7 @@ function html_builder(){
 								<span class=dl_action id=${file_id}>${hb.getSvg("save_icon", {class_string: "save_icon"})} Save</span>
 							</div>
 						</div>
-						
+
 						<div class="action_icon_container special_action" id=${file_id + "_blob"}>
 							${hb.getSvg("dl_icon", {class_string: "dl_icon"})}
 						</div>
@@ -2781,7 +2788,7 @@ function html_builder(){
 
 	this.html_newShare = html_newShare;
 	function html_newShare(params = {}){
-		
+
 	}
 
 
@@ -2832,14 +2839,14 @@ function html_builder(){
 					</svg>
 				`;
 			break;
-			
+
 			case "plus_icon":
 				return `
 					<svg viewBox="0 0 34 33"${class_string}${id}${tabindex}>
 						<path d="M17 32.7086C14.7774 32.7086 12.6917 32.2873 10.7429 31.4446C8.79413 30.6124 7.08238 29.4589 5.60764 27.9842C4.1329 26.5095 2.97417 24.7977 2.13146 22.8489C1.29929 20.9002 0.883203 18.8145 0.883203 16.5918C0.883203 14.3692 1.29929 12.2835 2.13146 10.3347C2.97417 8.38596 4.1329 6.67421 5.60764 5.19947C7.08238 3.7142 8.79413 2.55547 10.7429 1.7233C12.6917 0.891126 14.7774 0.475039 17 0.475039C19.2226 0.475039 21.3083 0.891126 23.2571 1.7233C25.2059 2.55547 26.9176 3.7142 28.3924 5.19947C29.8671 6.67421 31.0206 8.38596 31.8527 10.3347C32.6954 12.2835 33.1168 14.3692 33.1168 16.5918C33.1168 18.8145 32.6954 20.9002 31.8527 22.8489C31.0206 24.7977 29.8671 26.5095 28.3924 27.9842C26.9176 29.4589 25.2059 30.6124 23.2571 31.4446C21.3083 32.2873 19.2226 32.7086 17 32.7086ZM17 30.0225C18.854 30.0225 20.592 29.6749 22.2143 28.9796C23.8365 28.2844 25.2638 27.3206 26.4963 26.0881C27.7287 24.8556 28.6926 23.4283 29.3878 21.8061C30.083 20.1839 30.4307 18.4458 30.4307 16.5918C30.4307 14.7379 30.083 12.9998 29.3878 11.3776C28.6926 9.74483 27.7287 8.31749 26.4963 7.09557C25.2638 5.86311 23.8365 4.89926 22.2143 4.20402C20.592 3.50879 18.854 3.16117 17 3.16117C15.146 3.16117 13.408 3.50879 11.7857 4.20402C10.1635 4.89926 8.73619 5.86311 7.50373 7.09557C6.27127 8.31749 5.30742 9.74483 4.61219 11.3776C3.91695 12.9998 3.56934 14.7379 3.56934 16.5918C3.56934 18.4458 3.91695 20.1839 4.61219 21.8061C5.30742 23.4283 6.27127 24.8556 7.50373 26.0881C8.73619 27.3206 10.1635 28.2844 11.7857 28.9796C13.408 29.6749 15.146 30.0225 17 30.0225ZM9.66844 16.5918C9.66844 16.1915 9.78958 15.8703 10.0319 15.628C10.2847 15.3752 10.6165 15.2488 11.0273 15.2488H15.6727V10.6033C15.6727 10.2031 15.7939 9.8765 16.0362 9.62369C16.2784 9.37088 16.5892 9.24447 16.9684 9.24447C17.3687 9.24447 17.69 9.37088 17.9322 9.62369C18.1851 9.86597 18.3115 10.1925 18.3115 10.6033V15.2488H22.9727C23.373 15.2488 23.6943 15.3752 23.9365 15.628C24.1894 15.8703 24.3158 16.1915 24.3158 16.5918C24.3158 16.9711 24.1894 17.2818 23.9365 17.5241C23.6943 17.7664 23.373 17.8875 22.9727 17.8875H18.3115V22.5487C18.3115 22.949 18.1851 23.2756 17.9322 23.5284C17.69 23.7707 17.3687 23.8918 16.9684 23.8918C16.5892 23.8918 16.2784 23.7707 16.0362 23.5284C15.7939 23.2756 15.6727 22.949 15.6727 22.5487V17.8875H11.0273C10.627 17.8875 10.3005 17.7664 10.0477 17.5241C9.79484 17.2818 9.66844 16.9711 9.66844 16.5918Z"/>
 					</svg>
 				`;
-			break;			
+			break;
 
 			case "dl_icon":
 				return `
@@ -2858,7 +2865,7 @@ function html_builder(){
 						<rect x="19" y="24.4614" width="9" height="2" rx="1"/>
 					</svg>
 
-					
+
 				`;
 			break;
 
@@ -2933,7 +2940,7 @@ function html_builder(){
 
 
 var animated_list = [];
-	
+
 var ex_params = [
 	{
 		stroke:{
@@ -2943,7 +2950,7 @@ var ex_params = [
 			gap_len: 6,
 			dash_inc: 1
 		},
-		
+
 		frame_delay: 1,
 		initial_offset: 0,
 		defs: null,
@@ -2978,7 +2985,7 @@ function createAnimatedBorder(element, params = null){
 		svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 		var offset_width = params.stroke.width;
 		var border_offset = ((parseInt((params.stroke.width).slice(0,-2))/2)*-1);
-		
+
 
 		svg.style.width = "calc(100% + " + offset_width + ")";
 		svg.style.height = "calc(100% + " + offset_width + ")";
@@ -2986,7 +2993,7 @@ function createAnimatedBorder(element, params = null){
 		svg.style.left = border_offset + "px";
 		svg.style.top = border_offset + "px";
 		svg.style.pointerEvents = 'none';
-	
+
 
 
 
@@ -3021,7 +3028,7 @@ function createAnimatedBorder(element, params = null){
 	function initBorder(init_border){
 		default_border = init_border;
 		setBorderProps(element, init_border);
-		
+
 	}
 
 	function setBorderProps(element, border_changes, svg_display = null){
@@ -3037,16 +3044,16 @@ function createAnimatedBorder(element, params = null){
 
 		function setDisplayThenBorder(){
 			setSvgDisplay();
-			
+
 			setTimeout(setBorder,1);
-			
+
 		}
 
 		function setBorderThenDisplay(){
 			setBorder();
-			
+
 			setTimeout(setSvgDisplay,1);
-			
+
 		}
 
 		function timeoutThenFrame(callAfter){
@@ -3085,19 +3092,19 @@ function createAnimatedBorder(element, params = null){
 	this.toggleAnimation = toggleAnimation;
 	function toggleAnimation(set_to = null) {
 		animation_handler.toggleAnimation(set_to);
-		
+
 		if(set_to){
-			
-			
+
+
 			setBorderProps(element, {color: "#ffffff00"}, "block");
 		}
 		else{
-			
-			
-			
+
+
+
 			setBorderProps(element, {color: default_border.color}, "none");
 		}
-		
+
 	}
 
 	this.alterBorder = alterBorder;
@@ -3131,9 +3138,9 @@ function border_animation_handler(svg, animation) {
 
 		if(animation.frame_delay > 0)
 			requestAnimationFrame(function(){currentAnimation(animation, 0)});
-		
+
 	})();
-	
+
 	function getPaths(svg){
 		var ret_paths = [];
 		for(var i = 0; i < svg.children.length; i++){
@@ -3155,16 +3162,16 @@ function border_animation_handler(svg, animation) {
 	 function currentAnimation(){
 		(function newFrame() {
 			if (animate || animation.frame_delay == 0){
-				if(frame_counter % animation.frame_delay == 0){						
+				if(frame_counter % animation.frame_delay == 0){
 					current_offset += animation.stroke.dash_inc;
 					for (var i = 0; i < animate_array.length; i++){
 						animate_array[i].style.strokeDashoffset = current_offset;
-					
+
 						if(checkForProperty(animation.color_animation)){
 							animation.color_animation.pointer = (animation.color_animation.pointer+1 < animation.color_animation.color_array.length) ? animation.color_animation.pointer+1 : 0;
 							animate_array[i].style.stroke = animation.color_animation.color_array[animation.color_animation.pointer];
 						}
-					
+
 					}
 
 					if(current_offset >= 40000000)
@@ -3259,11 +3266,11 @@ function blobWorkersHandler(){
 	let workers = [];
 	let worker_pointer = 0;
 	let worker_blob = null;
-	
+
 
 	this.loadWorkerScript = loadWorkerScript;
 	function loadWorkerScript(new_worker_url, cb){
-		
+
 		getWorkerScript(new_worker_url, function(ret_blob, ret_script){
 			if(ret_blob != null){
 				worker_blob = ret_blob;
@@ -3276,12 +3283,12 @@ function blobWorkersHandler(){
 
 	this.loadWorkerFromBlob = loadWorkerFromBlob;
 	function loadWorkerFromBlob(new_blob, cb){
-		
+
 		worker_blob = new_blob;
 		buildWorkers(worker_blob);
 	}
 
-	
+
 	this.loadWorkerFromText = loadWorkerFromText;
 	function loadWorkerFromText(worker_text, cb){
 		worker_blob = URL.createObjectURL(new Blob([worker_text], { type: 'application/javascript'}));
@@ -3324,7 +3331,7 @@ function blobWorkersHandler(){
 	}
 
 	function buildWorkers(worker_blob_obj){
-		
+
 		const num_workers = 1;
 
 		for(var i = 0; i < num_workers; i++)
@@ -3354,7 +3361,7 @@ function blobWorkersHandler(){
 
 
 function webauthn_handler(init_params = {name:"BitNote", id: "bitnote.xyz"}){
-	
+
 	(function init(){
 
 	})();
@@ -3362,7 +3369,7 @@ function webauthn_handler(init_params = {name:"BitNote", id: "bitnote.xyz"}){
 
 	this.createCredential = createCredential;
 	function createCredential(prf_obj, callback){
-		
+
 		navigator.credentials.create({
 			publicKey: {
 				rp: {name: init_params.name, id: init_params.id},
@@ -3378,13 +3385,13 @@ function webauthn_handler(init_params = {name:"BitNote", id: "bitnote.xyz"}){
 				],
 				timeout: 60000,
 				authenticatorSelection: {
-					
-					
+
+
 					residentKey: "required",
 				},
 				extensions: {prf: {}},
-				
-				
+
+
 				challenge: self.crypto.getRandomValues(new Uint8Array(16)).buffer,
 			}
 		}).then((c) => {
@@ -3395,10 +3402,10 @@ function webauthn_handler(init_params = {name:"BitNote", id: "bitnote.xyz"}){
 		}).catch((error) => {
 			var qq = 22;
 			callback(null);
-			
-			
+
+
 		});
-		
+
 	}
 
 	this.getCredential = getCredential;
@@ -3406,7 +3413,7 @@ function webauthn_handler(init_params = {name:"BitNote", id: "bitnote.xyz"}){
 		var publicKey = {
 			timeout: 60000,
 			rpId: init_params.id,
-			
+
 			challenge: self.crypto.getRandomValues(new Uint8Array(16)).buffer,
 			extensions: {prf: {eval: {first: prf_obj.first}}},
 		};
@@ -3416,13 +3423,13 @@ function webauthn_handler(init_params = {name:"BitNote", id: "bitnote.xyz"}){
 			publicKey.allowCredentials = [{
 				type: "public-key",
 				id: prf_obj.id,
-				
+
 			}];
 		}
 
 		navigator.credentials.get({publicKey}).then((c) => {
 			var ext_results = c.getClientExtensionResults();
-			
+
 			if(checkForProperty(ext_results) && checkForProperty(ext_results.prf.results) && checkForProperty(ext_results.prf.results.first) && checkForProperty(ext_results.prf.results.second)){
 				var key_mat = concatArrayBuffers(ext_results.prf.results.first, ext_results.prf.results.second);
 				callback(key_mat, c.rawId);
@@ -3432,8 +3439,8 @@ function webauthn_handler(init_params = {name:"BitNote", id: "bitnote.xyz"}){
 		}).catch((error) => {
 			var qq = 22;
 			callback(null);
-			
-			
+
+
 		});
 	}
 
@@ -3470,7 +3477,7 @@ function webauthn_handler(init_params = {name:"BitNote", id: "bitnote.xyz"}){
 
 }
 
-	
+
 
 function copy_to_clipboard(text_to_copy, cb = null){
 	navigator.clipboard.writeText(text_to_copy).then(() => {
@@ -3531,7 +3538,7 @@ function buffer_helper(){
 		return new_ab;
 	}
 
-	
+
 	function getBufferTypedArrayConstructor(tag){
 		var type_name = tag.substring(8, tag.length - 1);
 		var window_global = Function('return this')();
@@ -3552,8 +3559,8 @@ function buffer_helper(){
 			return hex_str;
 	}
 
-	
-	function hexToArrayBuffer(hex_str, buffer_type = null){		
+
+	function hexToArrayBuffer(hex_str, buffer_type = null){
 		hex_str = hexStringToHexNumber(hex_str);
 
 		var ret = [];
@@ -3673,7 +3680,7 @@ function keccak_handler(){
 				state.reset = false;
 				blocks[0] = state.block;
 				for(i = 1; i < blockCount + 1; ++i)
-					blocks[i] = 0;				
+					blocks[i] = 0;
 			}
 
 
@@ -3702,7 +3709,7 @@ function keccak_handler(){
 			blocks[0] = blocks[blockCount];
 
 			for(i = 1; i < blockCount + 1; ++i)
-				blocks[i] = 0;			
+				blocks[i] = 0;
 		}
 
 		blocks[blockCount - 1] |= 0x80000000;
@@ -3949,7 +3956,7 @@ function keccak_handler(){
 
 		return keccak(bits, msg);
 	}
-	
+
 	function str_keccak(bits, str){
 		var text_encoder = new TextEncoder();
 		var msg = [];
@@ -4043,13 +4050,13 @@ function database(db_name, stores,version_number, cb){
 	this.clearStore = clearStore;
 
 	function clearStore(store_name){
-		
+
 		securelyDeleteFromStore(this, store_name, function(ret){
 			db.transaction(store_name, 'readwrite').objectStore(store_name).clear();
 		});
-		
-		
-		
+
+
+
 	}
 
 	this.clearDatabase = clearDatabase;
@@ -4067,7 +4074,7 @@ function database(db_name, stores,version_number, cb){
 
 	this.getKeyWithStore = getKeyWithStore;
 
-	
+
 	function getKeyWithStore(store_obj, keyname, cb){
 		var req = store_obj.get(keyname);
 
@@ -4076,7 +4083,7 @@ function database(db_name, stores,version_number, cb){
 
 		function handleSuccess(e){
 			cb({valid: true, response:this.result, store: store_obj});
-			
+
 		}
 	}
 
@@ -4090,7 +4097,7 @@ function database(db_name, stores,version_number, cb){
 
 
 
-	
+
 	this.getKey = function(store_names, key_name, cb){
 		getKeyFromDB(store_names, key_name, cb);
 	};
@@ -4136,39 +4143,39 @@ function database(db_name, stores,version_number, cb){
 
 function secureOverwriteBuffer(dataLength, useRandom = true, callback) {
   if (!useRandom) {
-    
-    const pattern = new Uint8Array([0xFF, 0x00, 0xFF, 0x00]); 
+
+    const pattern = new Uint8Array([0xFF, 0x00, 0xFF, 0x00]);
     const overwriteData = new Uint8Array(dataLength);
-    
-    
+
+
     for (let i = 0; i < dataLength; i++) {
       overwriteData[i] = pattern[i % pattern.length];
     }
-    
+
     callback(overwriteData.buffer);
   } else {
-    
+
     const chunkSize = 65536;
     const overwriteData = new Uint8Array(dataLength);
     let offset = 0;
-    
+
     function fillNextChunk() {
       if (offset >= dataLength) {
         callback(overwriteData.buffer);
         return;
       }
-      
+
       const remainingBytes = Math.min(chunkSize, dataLength - offset);
       const chunk = new Uint8Array(remainingBytes);
       self.crypto.getRandomValues(chunk);
-      
+
       overwriteData.set(chunk, offset);
       offset += remainingBytes;
-      
-      
+
+
       setTimeout(fillNextChunk, 0);
     }
-    
+
     fillNextChunk();
   }
 }
@@ -4183,17 +4190,17 @@ function securelyDeleteFromStore(dbHandler, storeNames, callback) {
   }
 
   let completedStores = 0;
-  
+
   storeNames.forEach(storeName => {
     const store = dbHandler.getStore(storeName);
     const allRecordsRequest = store.getAll();
-    
+
     allRecordsRequest.onsuccess = function(event) {
       const records = event.target.result;
       let processedRecords = 0;
-      
+
       if (records.length === 0) {
-        
+
         const writeableStore = dbHandler.getWriteableStore(storeName);
         writeableStore.clear().onsuccess = function() {
           completedStores++;
@@ -4203,34 +4210,34 @@ function securelyDeleteFromStore(dbHandler, storeNames, callback) {
         };
         return;
       }
-      
-      
+
+
       records.forEach(record => {
         const writeableStore = dbHandler.getWriteableStore(storeName);
         const getRequest = writeableStore.get(record.file_id);
-        
+
         getRequest.onsuccess = function(event) {
           const recordToOverwrite = event.target.result;
-          
+
           if (recordToOverwrite && recordToOverwrite.data) {
-            
+
             const dataLength = recordToOverwrite.data.byteLength;
-           
-		   
-		   
-		   
-		   
+
+
+
+
+
 			secureOverwriteBuffer(dataLength, false, function(overwriteData) {
-				
+
 				recordToOverwrite.data = overwriteData;
 
-				
+
 				const putRequest = writeableStore.put(recordToOverwrite);
 				putRequest.onsuccess = function() {
 					processedRecords++;
 
 					if (processedRecords === records.length) {
-					
+
 						writeableStore.clear().onsuccess = function() {
 						completedStores++;
 							if (completedStores === storeNames.length && callback) {
@@ -4248,7 +4255,7 @@ function securelyDeleteFromStore(dbHandler, storeNames, callback) {
 						writeableStore.clear().onsuccess = function() {
 							completedStores++;
 							if (completedStores === storeNames.length && callback) {
-								callback(false); 
+								callback(false);
 							}
 						};
 					}
@@ -4256,9 +4263,9 @@ function securelyDeleteFromStore(dbHandler, storeNames, callback) {
 			});
 
           } else {
-            
+
             processedRecords++;
-            
+
             if (processedRecords === records.length) {
               writeableStore.clear().onsuccess = function() {
                 completedStores++;
@@ -4271,7 +4278,7 @@ function securelyDeleteFromStore(dbHandler, storeNames, callback) {
         };
       });
     };
-    
+
     allRecordsRequest.onerror = function(err) {
       console.error("Error fetching records for secure deletion:", err);
       completedStores++;
@@ -4285,7 +4292,7 @@ function securelyDeleteFromStore(dbHandler, storeNames, callback) {
 
 function topbar_ns_handler(settings = {}){
 	let topbar_ns_container;
-	
+
 	(function init(){
 		topbar_ns_container = document.createElement("div");
 		topbar_ns_container.className = "topbar_ns_container";
@@ -4296,15 +4303,15 @@ function topbar_ns_handler(settings = {}){
 	this.newNotification = newNotification;
 	function newNotification(params, cb = null){
 		let notification_cleared = false;
-		
+
 		params.close_on_resolve = (checkForProperty(params.close_on_resolve)) ? params.close_on_resolve : true;
 		params.allow_close = (checkForProperty(params.allow_close)) ? params.allow_close : true;
 		params.full_bar_target = (checkForProperty(params.full_bar_target)) ? params.full_bar_target : false;
 
 		params.self_remove_ms = (checkForProperty(params.self_remove_ms)) ? params.self_remove_ms : 0;
 
-		
-		
+
+
 
 		let std_notification_bar = document.createElement("div");
 		std_notification_bar.className = "std_notification_bar";
@@ -4327,7 +4334,7 @@ function topbar_ns_handler(settings = {}){
 				std_notfication_close = document.createElement("span");
 				std_notfication_close.innerHTML = "x";
 				std_notfication_close.className = "std_notfication_close";
-				
+
 				std_close_container.appendChild(std_notfication_close);
 			}
 			std_notification_bar.appendChild(std_close_container);
@@ -4340,12 +4347,12 @@ function topbar_ns_handler(settings = {}){
 			std_notification_bar.prepend(std_icon_container);
 		}
 
-		
+
 		topbar_ns_container.append(std_notification_bar);
-		
+
 		if(checkForProperty(params.custom_bg_color))
 			std_notification_bar.style.backgroundColor = params.custom_bg_color;
-		
+
 		if(checkForProperty(params.custom_color))
 			std_notification_msg.style.color = params.custom_color;
 
@@ -4373,7 +4380,7 @@ function topbar_ns_handler(settings = {}){
 				function handleFrame(){
 					if(!notification_cleared){
 						std_notification_bar.style.opacity = starting_opacity;
-						
+
 						starting_opacity -= opacity_increment;
 						if(remove_timer_ms > 0)
 							window.setTimeout(wait, wait_increment);
@@ -4406,7 +4413,7 @@ function topbar_ns_handler(settings = {}){
 			if(params.allow_close)
 				std_close_container.addEventListener("click", closeNotfication, true);
 			if(main_target)
-				main_target.addEventListener("click", resolveHandler, false);				
+				main_target.addEventListener("click", resolveHandler, false);
 		}
 
 		function clearNotfication(){
@@ -4420,7 +4427,7 @@ function topbar_ns_handler(settings = {}){
 				std_notification_bar.remove();
 			}
 		}
-		
+
 		return {
 			clear: clearNotfication
 		};
@@ -4479,12 +4486,12 @@ function handleMessage(msg_event){
 
 
 		case "get_version":
-			
+
 			self.postMessage(ww_version);
 		break;
 
 
-		
+
 		case "prf_to_key":
 			buffToHkdf(msg_event.data.prf_buff, function(ret){
 				active_prf_key = ret;
@@ -4498,7 +4505,7 @@ function handleMessage(msg_event){
 		case "set_seed":
 			generateNewSeed(msg_event.data.seed_name, function(seed){
 				active_seed = seed;
-				
+
 				seedToHkdf(seed,function(hkdf){
 					active_hkdf = hkdf;
 					self.postMessage(null);
@@ -4512,7 +4519,7 @@ function handleMessage(msg_event){
 			self.postMessage(active_det_ecdh_pub_buff);
 		break;
 
-		
+
 		case "gen_seed_pk":
 			var key = active_hkdf;
 			generateAesFromHkdf(active_hkdf, function(ret){
@@ -4542,7 +4549,7 @@ function handleMessage(msg_event){
 
 			generateAesFromHkdf(key, key_salt, function(ret){
 				var aes_key = ret.aes_key;
-				
+
 				eh.noDecodeDecrypt(aes_key, msg_buff.slice(salt_byte_len), key_salt, function(decrypted_buff){
 					if(decrypted_buff === null)
 						self.postMessage(null);
@@ -4568,20 +4575,20 @@ function handleMessage(msg_event){
 				var iv = self.crypto.getRandomValues(new Uint8Array(salt_byte_len));
 				iv = iv.buffer;
 				eh.encrypt(derived_key, msg_buff, iv, function(encrypted_buff){
-					
+
 					var salt = iv;
 					self.postMessage({encrypted_buff, salt}, [encrypted_buff,salt]);
-				
+
 				});
 			});
-		
+
 		break;
 
 		case "shared_ecdh_dec":
 			var msg_buff = msg_event.data.msg_buff;
 			var key_salt = msg_buff.slice(0,salt_byte_len);
 			msg_buff = msg_buff.slice(salt_byte_len);
-			
+
 			eh.importEcdhPub(msg_event.data.pub_buff, function(shared_pub){
 				eh.deriveEcdhKey(active_ecdh_priv_key, shared_pub, function(derived_key){
 					eh.noDecodeDecrypt(derived_key, msg_buff, key_salt, function(decrypted_buff){
@@ -4592,15 +4599,15 @@ function handleMessage(msg_event){
 					});
 				});
 			});
-		
+
 		break;
 
 
-		
-			
-		
-		
-	
+
+
+
+
+
 	}
 
 
@@ -4637,14 +4644,14 @@ function handleMessage(msg_event){
 
 	function generateNewSeed(seed_name = "", cb){
 		var sliced_buff = active_prf_buff.slice(0,misc_slice);
-		
+
 		let salt = kh.strict_hex_keccak256(bh.bufferToHex(sliced_buff) + seed_name);
-		
-		
+
+
 		let info = new TextEncoder().encode("filekey pk seed: " + salt);
-		
-		
-		
+
+
+
 		keyToSeed(active_prf_key, bh.hexToArrayBuffer(salt), info, function(seed){
 			cb(seed);
 		});
@@ -4671,19 +4678,19 @@ function handleMessage(msg_event){
 		).then(callbackWithSeed);
 
 		function callbackWithSeed(seed_buff){
-			
+
 			cb(seed_buff);
-			
+
 		}
 	}
 
 
 	function generateAesFromHkdf(hkdf, known_salt = null, cb) {
-		
+
 		let salt = (known_salt === null) ? (self.crypto.getRandomValues(new Uint8Array(salt_byte_len))).buffer : known_salt;
-		
-		
-		
+
+
+
 		var alg = {
 			name: "HKDF",
 			hash: "SHA-256",
@@ -4694,7 +4701,7 @@ function handleMessage(msg_event){
 			name: "AES-GCM",
 			length: 256
 		};
-		
+
 		self.crypto.subtle.deriveKey(
 			alg,
 			hkdf,
@@ -4734,7 +4741,7 @@ function ww_encryption_handler(){
 
 		if(aad != "")
 			alg_obj.additionalData = aad;
-		
+
 		self.crypto.subtle.decrypt(alg_obj, key, ciphertext).then((decrpyted_stuff) =>{
 			cb(decrpyted_stuff);
 		}).catch(function(e){
@@ -4760,7 +4767,7 @@ function ww_encryption_handler(){
 		else
 			return ret;
 	}
-	
+
 	this.deriveEcdhKey = deriveEcdhKey;
 	function deriveEcdhKey(privateKey, publicKey, callback) {
 		self.crypto.subtle.deriveKey(
@@ -4788,7 +4795,7 @@ function ww_encryption_handler(){
 				namedCurve: "P-521"
 			},
 			true,
-			[]  
+			[]
 		).then(cb);
 	}
 }
@@ -4825,7 +4832,7 @@ function buffer_helper(){
 		return new_ab;
 	}
 
-	
+
 	function getBufferTypedArrayConstructor(tag){
 		var type_name = tag.substring(8, tag.length - 1);
 		var window_global = Function('return this')();
@@ -4846,8 +4853,8 @@ function buffer_helper(){
 			return hex_str;
 	}
 
-	
-	function hexToArrayBuffer(hex_str, buffer_type = null){		
+
+	function hexToArrayBuffer(hex_str, buffer_type = null){
 		hex_str = hexStringToHexNumber(hex_str);
 
 		var ret = [];
@@ -4920,7 +4927,7 @@ function keccak_handler(){
 				state.reset = false;
 				blocks[0] = state.block;
 				for(i = 1; i < blockCount + 1; ++i)
-					blocks[i] = 0;				
+					blocks[i] = 0;
 			}
 
 
@@ -4949,7 +4956,7 @@ function keccak_handler(){
 			blocks[0] = blocks[blockCount];
 
 			for(i = 1; i < blockCount + 1; ++i)
-				blocks[i] = 0;			
+				blocks[i] = 0;
 		}
 
 		blocks[blockCount - 1] |= 0x80000000;
@@ -5196,7 +5203,7 @@ function keccak_handler(){
 
 		return keccak(bits, msg);
 	}
-	
+
 	function str_keccak(bits, str){
 		var text_encoder = new TextEncoder();
 		var msg = [];
@@ -5245,22 +5252,22 @@ function keccak_handler(){
 function determineEcdh(){
 
 
-	
+
 	const P521 = {
-		
+
 		P: BigInt("0x1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"),
-		
+
 		A: BigInt("0x1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC"),
-		
+
 		B: BigInt("0x051953EB9618E1C9A1F929A21A0B68540EEA2DA725B99B315F3B8B489918EF109E156193951EC7E937B1652C0BD3BB1BF073573DF883D2C34F1EF451FD46B503F00"),
-		
+
 		GX: BigInt("0xC6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66"),
 		GY: BigInt("0x11839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650"),
-		
+
 		N: BigInt("0x1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA51868783BF2F966B7FCC0148F709A5D03BB5C9B8899C47AEBB6FB71E91386409")
 	};
 
-	
+
 	function modAdd(a, b, m) {
 		return ((a % m) + (b % m)) % m;
 	}
@@ -5279,47 +5286,47 @@ function determineEcdh(){
 			const [g, x, y] = egcd(b % a, a);
 			return [g, y - (b / a) * x, x];
 		}
-		
+
 		const [g, x, _] = egcd(a, m);
 		if (g !== BigInt(1)) throw new Error("Modular inverse does not exist");
 		return ((x % m) + m) % m;
 	}
 
-	
+
 	function isOnCurve(point) {
-		if (point === null) return true; 
-		
+		if (point === null) return true;
+
 		const { x, y } = point;
-		
+
 		const left = modMul(y, y, P521.P);
 		const x3 = modMul(modMul(x, x, P521.P), x, P521.P);
 		const ax = modMul(P521.A, x, P521.P);
 		const right = modAdd(modAdd(x3, ax, P521.P), P521.B, P521.P);
-		
+
 		return left === right;
 	}
 
-	
+
 	function pointAdd(P1, P2) {
 		if (P1 === null) return P2;
 		if (P2 === null) return P1;
-		
+
 		if (P1.x === P2.x) {
 			if (P1.y === P2.y) {
 				return pointDouble(P1);
 			}
-			return null; 
+			return null;
 		}
-		
+
 		const slope = modMul(
 			modSub(P2.y, P1.y, P521.P),
 			modInv(modSub(P2.x, P1.x, P521.P), P521.P),
 			P521.P
 		);
-		
+
 		const x3 = modSub(modSub(modMul(slope, slope, P521.P), P1.x, P521.P), P2.x, P521.P);
 		const y3 = modSub(modMul(slope, modSub(P1.x, x3, P521.P), P521.P), P1.y, P521.P);
-		
+
 		const result = { x: x3, y: y3 };
 		if (!isOnCurve(result)) throw new Error("Point addition resulted in invalid point");
 		return result;
@@ -5328,31 +5335,31 @@ function determineEcdh(){
 	function pointDouble(P) {
 		if (P === null) return null;
 		if (P.y === BigInt(0)) return null;
-		
+
 		const slope = modMul(
 			modAdd(modMul(BigInt(3), modMul(P.x, P.x, P521.P), P521.P), P521.A, P521.P),
 			modInv(modMul(BigInt(2), P.y, P521.P), P521.P),
 			P521.P
 		);
-		
+
 		const x3 = modSub(modMul(slope, slope, P521.P), modMul(BigInt(2), P.x, P521.P), P521.P);
 		const y3 = modSub(modMul(slope, modSub(P.x, x3, P521.P), P521.P), P.y, P521.P);
-		
+
 		const result = { x: x3, y: y3 };
 		if (!isOnCurve(result)) throw new Error("Point doubling resulted in invalid point");
 		return result;
 	}
 
-	
+
 	function scalarMul(k, P) {
 		if (k === BigInt(0)) return null;
 		if (P === null) return null;
-		
+
 		let r0 = null;
 		let r1 = P;
-		
+
 		const bits = k.toString(2).padStart(521, '0');
-		
+
 		for (let i = 0; i < bits.length; i++) {
 			if (bits[i] === '0') {
 				r1 = pointAdd(r0, r1);
@@ -5362,35 +5369,35 @@ function determineEcdh(){
 				r1 = pointDouble(r1);
 			}
 		}
-		
+
 		return r0;
 	}
 
-	
-	
+
+
 	this.generateKeyPair = generateKeyPair;
 	function generateKeyPair(seed) {
 		if (!(seed instanceof ArrayBuffer) || seed.byteLength !== 64) {
 			throw new Error("Seed must be a 64-byte ArrayBuffer");
 		}
 
-		
+
 		const seedView = new Uint8Array(seed);
 		let privateKey = BigInt(0);
 
-		
+
 		for (let i = 0; i < seedView.length; i++) {
 			privateKey = (privateKey << BigInt(8)) | BigInt(seedView[i]);
 		}
 
-		
+
 		const mask = (BigInt(1) << BigInt(521)) - BigInt(1);
 		privateKey = privateKey & mask;
 
-		
+
 		privateKey = (privateKey % (P521.N - BigInt(1))) + BigInt(1);
 
-		
+
 		const publicKey = scalarMul(privateKey, { x: P521.GX, y: P521.GY });
 
 		if (!isOnCurve(publicKey)) {
@@ -5408,7 +5415,7 @@ function determineEcdh(){
 
 	this.convertKeys = convertKeys;
 	function convertKeys(privateKey, publicKey, cb) {
-		
+
 		function calculateLength(length) {
 			if (length < 128) {
 				return new Uint8Array([length]);
@@ -5437,23 +5444,23 @@ function determineEcdh(){
 
 
 function convertToPKCS8(privateKey, inner_cb) {
-    
+
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     console.log("Browser detected:", isSafari ? "Safari" : "Other browser");
-    
+
     if (isSafari) {
-        
+
         console.log("Using Safari-specific deterministic implementation");
         convertSafariPKCS8Deterministic(privateKey, inner_cb);
     } else {
-        
+
         console.log("Using standard implementation for non-Safari browsers");
         convertStandardPKCS8(privateKey, inner_cb);
     }
-    
-    
+
+
     function convertStandardPKCS8(privateKey, inner_cb) {
-        
+
         function calculateLength(length) {
             if (length < 128) {
                 return new Uint8Array([length]);
@@ -5463,7 +5470,7 @@ function convertToPKCS8(privateKey, inner_cb) {
             return new Uint8Array([0x82, (length >> 8) & 0xFF, length & 0xFF]);
         }
 
-        
+
         const privateKeyBytes = new Uint8Array(66);
         let temp = privateKey;
         for (let i = privateKeyBytes.length - 1; i >= 0; i--) {
@@ -5471,16 +5478,16 @@ function convertToPKCS8(privateKey, inner_cb) {
             temp = temp >> BigInt(8);
         }
 
-        
+
         const curveOid = new Uint8Array([0x06, 0x05, 0x2B, 0x81, 0x04, 0x00, 0x23]);
 
-        
+
         const ecPublicKeyOid = new Uint8Array([0x06, 0x07, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x02, 0x01]);
 
-        
+
         const version = new Uint8Array([0x02, 0x01, 0x00]);
 
-        
+
         const algorithmSequenceContent = new Uint8Array([
             ...ecPublicKeyOid,
             ...curveOid
@@ -5490,15 +5497,15 @@ function convertToPKCS8(privateKey, inner_cb) {
             0x30, ...algoIdLength, ...algorithmSequenceContent
         ]);
 
-        
+
         const privateKeyOctet = new Uint8Array([0x04, 0x42, ...privateKeyBytes]);
 
-        
+
         const parameters = new Uint8Array([0xA0, 0x07, ...curveOid]);
 
-        
+
         const ecKeySequenceContent = new Uint8Array([
-            0x02, 0x01, 0x01,  
+            0x02, 0x01, 0x01,
             ...privateKeyOctet,
             ...parameters
         ]);
@@ -5507,13 +5514,13 @@ function convertToPKCS8(privateKey, inner_cb) {
             0x30, ...ecKeyLength, ...ecKeySequenceContent
         ]);
 
-        
+
         const ecKeyWrapperLength = calculateLength(ecPrivateKey.length);
         const wrappedEcKey = new Uint8Array([
             0x04, ...ecKeyWrapperLength, ...ecPrivateKey
         ]);
 
-        
+
         const pkcs8Content = new Uint8Array([
             ...version,
             ...algorithmIdentifier,
@@ -5546,91 +5553,91 @@ function convertToPKCS8(privateKey, inner_cb) {
         }
     }
 
-    
+
     function convertSafariPKCS8Deterministic(privateKey, inner_cb) {
         try {
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
             console.log("Generating a template key pair using WebCrypto...");
-            
-            
+
+
             crypto.subtle.generateKey(
                 {
                     name: "ECDH",
                     namedCurve: "P-521"
                 },
-                true, 
+                true,
                 ["deriveKey", "deriveBits"]
             ).then(function(keyPair) {
                 console.log("Template key pair generated successfully");
-                
-                
+
+
                 crypto.subtle.exportKey(
                     "pkcs8",
                     keyPair.privateKey
                 ).then(function(exportedKey) {
                     console.log("Template key exported successfully");
-                    
-                    
+
+
                     const pkcs8Template = new Uint8Array(exportedKey);
                     console.log("Template PKCS#8 structure length:", pkcs8Template.length);
-                    
-                    
+
+
                     const privateKeyBytes = new Uint8Array(66);
                     let temp = privateKey;
                     for (let i = privateKeyBytes.length - 1; i >= 0; i--) {
                         privateKeyBytes[i] = Number(temp & BigInt(0xFF));
                         temp = temp >> BigInt(8);
                     }
-                    
-                    
+
+
                     const publicKey = scalarMul(privateKey, { x: P521.GX, y: P521.GY });
-                    
-                    
+
+
                     const xBytes = new Uint8Array(66);
                     let tempX = publicKey.x;
                     for (let i = xBytes.length - 1; i >= 0; i--) {
                         xBytes[i] = Number(tempX & BigInt(0xFF));
                         tempX = tempX >> BigInt(8);
                     }
-                    
+
                     const yBytes = new Uint8Array(66);
                     let tempY = publicKey.y;
                     for (let i = yBytes.length - 1; i >= 0; i--) {
                         yBytes[i] = Number(tempY & BigInt(0xFF));
                         tempY = tempY >> BigInt(8);
                     }
-                    
-                    
+
+
                     const publicKeyBytes = new Uint8Array(133);
-                    publicKeyBytes[0] = 0x04; 
+                    publicKeyBytes[0] = 0x04;
                     publicKeyBytes.set(xBytes, 1);
                     publicKeyBytes.set(yBytes, 67);
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
+
+
+
                     const modifiedTemplate = new Uint8Array(pkcs8Template);
-                    
-                    
-                    
+
+
+
                     findAndReplaceKey(modifiedTemplate, privateKeyBytes);
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                     findAndReplacePublicKey(modifiedTemplate, publicKeyBytes);
-                    
-                    
+
+
                     crypto.subtle.importKey(
                         "pkcs8",
                         modifiedTemplate.buffer,
@@ -5645,8 +5652,8 @@ function convertToPKCS8(privateKey, inner_cb) {
                         inner_cb({ success: true, key, pkcs8Buffer: modifiedTemplate.buffer });
                     }).catch(function(error) {
                         console.error("Error importing deterministic key:", error);
-                        
-                        
+
+
                         console.log("Fallback: Using template key");
                         crypto.subtle.importKey(
                             "pkcs8",
@@ -5659,9 +5666,9 @@ function convertToPKCS8(privateKey, inner_cb) {
                             ["deriveKey", "deriveBits"]
                         ).then(function(key) {
                             console.log("Template key imported as fallback");
-                            inner_cb({ 
-                                success: true, 
-                                key, 
+                            inner_cb({
+                                success: true,
+                                key,
                                 pkcs8Buffer: pkcs8Template.buffer,
                                 warning: "Using template key (non-deterministic)"
                             });
@@ -5683,65 +5690,65 @@ function convertToPKCS8(privateKey, inner_cb) {
             inner_cb({ success: false, error: error.message });
         }
     }
-    
-    
+
+
     function findAndReplaceKey(template, newKey) {
-        
+
         for (let i = 0; i < template.length - 68; i++) {
             if (template[i] === 0x04 && template[i+1] === 0x42) {
-                
+
                 console.log("Potential private key location found at index:", i);
-                
-                
+
+
                 for (let j = 0; j < 66; j++) {
                     template[i + 2 + j] = newKey[j];
                 }
-                
+
                 console.log("Private key replaced");
                 return true;
             }
         }
-        
+
         console.log("Warning: Private key location not found in template");
         return false;
     }
-    
-    
+
+
     function findAndReplacePublicKey(template, newKey) {
-        
-        
-        
-        
+
+
+
+
         for (let i = 0; i < template.length - 3; i++) {
             if (template[i] === 0xA1) {
-                
-                
-                
-                
+
+
+
+
                 let j = i + 1;
                 while (j < template.length && template[j] !== 0x03) j++;
-                
+
                 if (j < template.length) {
-                    
+
                     j++;
                     while (j < template.length && (template[j] & 0x80)) j++;
                     j++;
-                    
-                    
+
+
                     if (j < template.length && template[j] === 0x00) {
                         j++;
-                        
-                        
+
+
                         if (j < template.length && template[j] === 0x04) {
                             console.log("Public key location found at index:", j);
-                            
-                            
+
+
                             for (let k = 0; k < newKey.length; k++) {
                                 if (j + k < template.length) {
                                     template[j + k] = newKey[k];
                                 }
                             }
-                            
+
                             console.log("Public key replaced");
                             return true;
                         }
@@ -5749,7 +5756,7 @@ function convertToPKCS8(privateKey, inner_cb) {
                 }
             }
         }
-        
+
         console.log("Warning: Public key location not found in template");
         return false;
     }
@@ -5825,9 +5832,9 @@ function convertToPKCS8(privateKey, inner_cb) {
 
 
 
-		
+
 		function convertPublicKeyToRaw(publicKey, inner_cb) {
-			
+
 			const xBytes = new Uint8Array(66);
 			let tempX = publicKey.x;
 			for (let i = xBytes.length - 1; i >= 0; i--) {
@@ -5835,7 +5842,7 @@ function convertToPKCS8(privateKey, inner_cb) {
 				tempX = tempX >> BigInt(8);
 			}
 
-			
+
 			const yBytes = new Uint8Array(66);
 			let tempY = publicKey.y;
 			for (let i = yBytes.length - 1; i >= 0; i--) {
@@ -5843,7 +5850,7 @@ function convertToPKCS8(privateKey, inner_cb) {
 				tempY = tempY >> BigInt(8);
 			}
 
-			
+
 			const rawPublicKey = new Uint8Array(133);
 			rawPublicKey[0] = 0x04;
 			rawPublicKey.set(xBytes, 1);
@@ -5858,12 +5865,12 @@ function convertToPKCS8(privateKey, inner_cb) {
 						namedCurve: "P-521"
 					},
 					true,
-					[]  
+					[]
 				).then(function(key){
 					inner_cb({ success: true, key, rawBuffer: rawPublicKey.buffer });
 				});
-				
-				
+
+
 			} catch (error) {
 				console.log("Public key import failed with length:", rawPublicKey.length);
 				console.log("Full bytes:", Array.from(rawPublicKey).map(b => b.toString(16).padStart(2, '0')).join(' '));
@@ -5879,7 +5886,7 @@ function convertToPKCS8(privateKey, inner_cb) {
 				});
 			});
 		})();
-		
+
 	}
 
 
