@@ -1,6 +1,6 @@
 # DELTARUNE (từ nơi đồng xanh thơm hương lúa)
 ## Về chúng mình
-Có thể nói, đây là lần đầu tiên nhóm mình bắt đầu hoạt động phiên dịch. Đây cũng là bản dịch đầu tay do chúng mình thực hiện
+Có thể nói, đây là lần đầu tiên nhóm mình bắt đầu hoạt động Việt hóa/phiên dịch. Đây cũng là bản dịch đầu tay do chúng mình thực hiện
 
 Tuy nhiên, dự án này có duy nhất mình đảm nhiệm, với nhiều lý do khá quan trọng
 > Thông thường, với kịch bản phức tạp của Undertale, phải có ít nhất hai dịch giả Anh-Nhật để phát hành kịp thời. Tuy nhiên, 8-4 đã chọn cách chậm lại và chỉ chọn một người. Điều này có nghĩa là trò chơi sẽ mất nhiều thời gian hơn và tốn nhiều tiền hơn để bản địa hóa, nhưng cũng mang lại lợi ích: 
@@ -19,9 +19,13 @@ Chúng mình không nhận ủng hộ công khai, nhưng nếu bạn có tâm th
 -->
 
 ## Tiến trình - Chương 1
+Vì lý do cá nhân, mình không thể dịch full time. Có thể mình không phải là người dịch nhanh nhất, nhưng mình là (một trong) người dịch sáng suốt nhất.
+
+Cảm ơn các bạn đã chờ đợi.
+
 <input type="checkbox" id="phase1" />
-<label for="phase1">Dịch game (25%)</label>
+<label for="phase1">Dịch game (45%)</label>
 <br>
 <input type="checkbox" id="phase2" value="on" />
-<label for="phase2">Playtest & proofread (sẽ mời 10 người tham gia)</label>
+<label for="phase2">Playtest & proofread</label>
 
