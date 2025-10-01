@@ -6,7 +6,7 @@
   "license": "MIT",
   "devDependencies": {
     "vitepress": "^1.6.4",
-    "vue": "^3.5.20"
+    "vue": "^3.5.22"
   },
   "scripts": {
     "dev": "vitepress dev",
