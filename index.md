@@ -14,3 +14,6 @@ hero:
     - theme: alt
       text: Credits
       link: https://www.youtube.com/watch?v=EOTAWLaDa58
+
+[MY](./deltarune/)
+[DELTARUNE](./deltarune/)

@@ -24,7 +24,7 @@ Vì lý do cá nhân, mình không thể dịch full time. Có thể mình khôn
 Cảm ơn các bạn đã chờ đợi.
 
 <input type="checkbox" id="phase1" />
-<label for="phase1">Dịch game (45%)</label>
+<label for="phase1">Dịch game (55%)</label>
 <br>
 <input type="checkbox" id="phase2" value="on" />
 <label for="phase2">Playtest & proofread</label>
