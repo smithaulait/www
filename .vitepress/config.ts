@@ -2,8 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "smithaulait",
-  description: 'The Team',
+  title: "Smith au Lait",
+  description: 'Chúng tôi chỉ biết dịch game. [[Number 1 Rated BOFU2015]]',
   lastUpdated: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -15,13 +15,7 @@ export default defineConfig({
     },
 
     sidebar: [
-      {
-        text: 'Wiki',
-        items: [
-          { text: 'Main Page', link: '/main-page' },
-          { text: 'Credits', link: 'https://www.youtube.com/watch?v=EOTAWLaDa58' }
-        ]
-      }
+
     ],
 
     socialLinks: [
