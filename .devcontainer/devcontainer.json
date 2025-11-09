@@ -1,0 +1,15 @@
+{
+    "name": "www",
+    "image": "mcr.microsoft.com/devcontainers/universal:latest",
+    "customizations": {
+        "codespaces": {
+            "repositories": {
+                "smithaulait/smithaulait.github.io": {
+                    "permissions": {
+                        "contents": "write"
+                    }
+                }
+            }
+        }
+    }
+}
