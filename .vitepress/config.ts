@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Smith au Lait",
   description: 'Chúng tôi chỉ biết dịch game. [[Number 1 Rated BOFU2015]]',
+  lang: "vi",
   lastUpdated: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
